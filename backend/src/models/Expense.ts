@@ -9,10 +9,13 @@ const ExpenseSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+
   type: {
-    type: typeof 'expense' || 'income',
+    type: String,
+    enum: ['expense', 'income'],
     required: true
   },
+
   amount: {
     type: Number,
     required: true
