@@ -1,20 +1,46 @@
 import { Request, Response } from 'express';
 import User from '../models/User';
 
-import * as bckrypt from 'bckrypt';
+import jwt from 'jsonwebtoken';
 
-import DecodeJWTToken from '../utils/DecodeJWTToken';
+const bckrypt = require('bcryptjs');
+
+import IUser from '../types/IUser';
 
 export default {
   async show(request: Request, response: Response) {
-    const _id = await DecodeJWTToken(request);
-    const user = await User.findById(_id);
+    const { email, password } = request.body;
 
-    return response.status(200).send(user);
+    const user = ((await User.findOne({ email })) as unknown) as IUser;
+
+    if (!user)
+      return response
+        .status(400)
+        .json({ message: 'Something went wrong with authentication' });
+
+    const validPassword = await bckrypt.compareSync(
+      password,
+      user.password_hash
+    );
+
+    if (!validPassword)
+      return response
+        .status(400)
+        .json({ message: 'Something went wrong with authentication' });
+
+    const token = jwt.sign(
+      { _id: user._id },
+      process.env.TOKEN_SECRET as string
+    );
+
+    response.status(200).json({
+      user,
+      token
+    });
   },
 
   async store(request: Request, response: Response) {
-    const { name, email, password, phone } = request.body;
+    const { name, email, password, phone, birth } = request.body;
 
     const salt = await bckrypt.genSaltSync(10);
     const password_hash = await bckrypt.hashSync(password, salt);
@@ -23,8 +49,9 @@ export default {
       const createdUser = await User.create({
         name,
         email,
-        password: password_hash,
-        phone
+        password_hash,
+        phone,
+        birth
       });
 
       return response.status(201).json(createdUser);

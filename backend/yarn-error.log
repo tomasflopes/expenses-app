@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/local/bin/yarn add @types/bckrypt -D
+  /usr/bin/node /usr/local/bin/yarn add @types/bckryptjs -D
 
 PATH: 
   /home/kappa/.zinit/polaris/sbin:/home/kappa/.zinit/polaris/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/kappa/Android/Sdk/emulator:/home/kappa/Android/Sdk/tools:/home/kappa/Android/Sdk/tools/bin:/home/kappa/Android/Sdk/platform-tools:/home/kappa/Android/Sdk/emulator:/home/kappa/Android/Sdk/tools:/home/kappa/Android/Sdk/tools/bin:/home/kappa/Android/Sdk/platform-tools
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fbckrypt: Not found
+  Error: https://registry.yarnpkg.com/@types%2fbckryptjs: Not found
       at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
       at Request.emit (events.js:198:13)
@@ -46,6 +46,7 @@ npm manifest:
       "typescript": "^4.0.3"
     },
     "dependencies": {
+      "bcryptjs": "^2.4.3",
       "cors": "^2.8.5",
       "express": "^4.17.1",
       "jsonwebtoken": "^8.5.1",
@@ -205,6 +206,11 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
     integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
+  
+  bcryptjs@^2.4.3:
+    version "2.4.3"
+    resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
+    integrity sha1-mrVie5PmBiH/fNrF2pczAn3x0Ms=
   
   binary-extensions@^2.0.0:
     version "2.1.0"

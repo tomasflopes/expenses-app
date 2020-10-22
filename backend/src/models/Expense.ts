@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import IExpense from '../types/IExpense';
 
 const ExpenseSchema = new mongoose.Schema({
   name: {
@@ -9,13 +10,11 @@ const ExpenseSchema = new mongoose.Schema({
     type: String,
     required: false
   },
-
   type: {
     type: String,
     enum: ['expense', 'income'],
     required: true
   },
-
   amount: {
     type: Number,
     required: true
@@ -23,7 +22,11 @@ const ExpenseSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  user: {
+    type: Object,
+    required: true
   }
 });
 
-export default mongoose.model('Expense', ExpenseSchema);
+export default mongoose.model<IExpense>('Expense', ExpenseSchema);

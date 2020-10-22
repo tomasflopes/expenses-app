@@ -18,10 +18,10 @@ mongoose.connect(process.env.DB_CONNECT as string, {
 
 const app = express();
 
-app.use(privateRoutes);
-
 app.use(cors());
 app.use(express.json());
+
+app.use(privateRoutes);
 
 app.use('/api/user', authRoutes);
 

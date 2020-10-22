@@ -6,7 +6,7 @@ interface TokenInterface {
 }
 
 export default async (request: Request) => {
-  const authHeader = request.headers.authorization as any;
+  const authHeader = request.headers.authorization as string;
 
   const [, token] = authHeader.split(' ');
 

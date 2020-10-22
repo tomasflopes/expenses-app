@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import ExpensesController from './controllers/ExpensesController';
-import BalanceController from './controllers/BalanceController';
+import ExpensesController from '../controllers/ExpensesController';
+import BalanceController from '../controllers/BalanceController';
 
 const routes = Router();
 
