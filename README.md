@@ -21,10 +21,17 @@ yarn
 
 ## Author
 
-👤 **Tomas Lopes**
+👤 **Tomás Lopes**
 
 * Twitter: [@tomas050302](https://twitter.com/tomas050302)
 * Github: [@tomas050302](https://github.com/tomas050302)
+
+## What I've learned
+
+* Offline first with RealmDB
+* Theme switching in React Native
+* Strongly typed models in MongoDB
+* Better design pattern in NodeJS with Typescript projects
 
 ## Show your support
 
