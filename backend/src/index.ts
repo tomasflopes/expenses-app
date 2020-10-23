@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/auth.routes';
 import privateRoutes from './routes/private.routes';
 
-import authMiddleware from './middlewares/verifyJWTToken';
+import authMiddleware from './middlewares/authMiddleware';
 
 require('dotenv').config();
 
@@ -21,10 +21,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(privateRoutes);
-
 app.use('/api/user', authRoutes);
 
 app.use(authMiddleware);
+
+app.use(privateRoutes);
 
 app.listen(process.env.PORT || 3333);

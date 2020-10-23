@@ -11,17 +11,24 @@ export default {
 
     const expenses = ((await Expense.find()) as unknown) as IExpense[];
 
-    const userExpenses = expenses.map(expense => expense.user._id);
+    const userExpenses = expenses.filter(expense => expense.user._id == id);
 
     return response.json(userExpenses);
   },
 
   async show(request: Request, response: Response) {
+    const userId = await DecodeJWTToken(request);
+
     const { id } = request.params;
 
-    const expenses = await Expense.findById(id);
+    const expense = await Expense.findById(id);
 
-    return response.json(expenses);
+    if (expense?.user._id != userId)
+      return response
+        .status(401)
+        .json({ error: 'User is not authorized to view expense' });
+
+    return response.json(expense);
   },
 
   async store(request: Request, response: Response) {
