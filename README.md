@@ -32,6 +32,7 @@ yarn
 * Theme switching in React Native
 * Strongly typed models in MongoDB
 * Better design pattern in NodeJS with Typescript projects
+* Testing with type checking with Jest
 
 ## Show your support
 
