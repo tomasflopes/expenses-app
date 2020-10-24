@@ -9,7 +9,7 @@ export default {
   async index(request: Request, response: Response) {
     const id = await DecodeJWTToken(request);
 
-    const expenses = ((await Expense.find()) as unknown) as IExpense[];
+    const expenses = await Expense.find();
 
     const userExpenses = expenses.filter(expense => expense.user._id == id);
 

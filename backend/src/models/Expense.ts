@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import IExpense from '../types/IExpense';
+import { IExpenseSchema } from '../types/IExpense';
+import IUser from '../types/IUser';
 
 const ExpenseSchema = new mongoose.Schema({
   name: {
@@ -24,9 +25,9 @@ const ExpenseSchema = new mongoose.Schema({
     default: Date.now
   },
   user: {
-    type: Object,
+    type: (Object as unknown) as IUser,
     required: true
   }
 });
 
-export default mongoose.model<IExpense>('Expense', ExpenseSchema);
+export default mongoose.model<IExpenseSchema>('Expense', ExpenseSchema);
