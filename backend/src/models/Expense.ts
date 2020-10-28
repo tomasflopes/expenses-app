@@ -20,6 +20,10 @@ const ExpenseSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  area: {
+    type: String,
+    default: 'undefined'
+  },
   createdAt: {
     type: Date,
     default: Date.now
