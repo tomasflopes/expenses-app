@@ -1,19 +1,6 @@
-import mongoose, { Document } from 'mongoose';
+import { Document } from 'mongoose';
 
-export default interface IUser {
-  _id: string;
-  name: string;
-  email: string;
-  password_hash: string;
-  birth: Date;
-  phone: string;
-  financeSettings: {
-    areas: string[];
-    currency: 'USD' | 'GBP' | 'EUR' | 'DKK' | 'JPY' | 'JPW';
-  };
-}
-
-export interface IUserSchema extends Document {
+export default interface IUser extends Document {
   _id: string;
   name: string;
   email: string;

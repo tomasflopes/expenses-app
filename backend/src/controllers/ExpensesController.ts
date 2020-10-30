@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import Expense from '../models/Expense';
 import User from '../models/User';
-import IExpense from '../types/IExpense';
+
+import { v4 as uuidv4 } from 'uuid';
 
 import DecodeJWTToken from '../utils/DecodeJWTToken';
 
@@ -37,8 +38,11 @@ export default {
 
     const user = await User.findById(id);
 
+    if (!user) return response.status(400).json({ error: 'No user found' });
+
     try {
       const newExpense = await Expense.create({
+        _id: uuidv4(),
         name,
         description,
         type,

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { IUserSchema } from '../types/IUser';
+import IUser from '../types/IUser';
 
 const UserSchema = new mongoose.Schema({
   _id: {
@@ -43,4 +43,4 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-export default mongoose.model<IUserSchema>('User', UserSchema);
+export default mongoose.model<IUser>('User', UserSchema);

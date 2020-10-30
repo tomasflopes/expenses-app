@@ -3,11 +3,9 @@ import User from '../models/User';
 
 import jwt from 'jsonwebtoken';
 
-import mongoose from 'mongoose';
-
 import { v4 as uuidv4 } from 'uuid';
 
-const bckrypt = require('bcryptjs');
+const bckrypt = require('bckryptjs');
 
 import IUser from '../types/IUser';
 
@@ -49,11 +47,9 @@ export default {
     const salt = await bckrypt.genSaltSync(10);
     const password_hash = await bckrypt.hashSync(password, salt);
 
-    const _id = (uuidv4() as unknown) as mongoose.Schema.Types.ObjectId;
-
     try {
       const createdUser = await User.create({
-        _id,
+        _id: uuidv4(),
         name,
         email,
         password_hash,

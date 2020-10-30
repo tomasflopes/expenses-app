@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { IExpenseSchema } from '../types/IExpense';
+import IExpense from '../types/IExpense';
 import IUser from '../types/IUser';
 
 const ExpenseSchema = new mongoose.Schema({
@@ -34,4 +34,4 @@ const ExpenseSchema = new mongoose.Schema({
   }
 });
 
-export default mongoose.model<IExpenseSchema>('Expense', ExpenseSchema);
+export default mongoose.model<IExpense>('Expense', ExpenseSchema);
