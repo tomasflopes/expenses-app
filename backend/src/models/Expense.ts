@@ -3,6 +3,10 @@ import IExpense from '../types/IExpense';
 import IUser from '../types/IUser';
 
 const ExpenseSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    required: true
+  },
   name: {
     type: String,
     required: true
@@ -16,7 +20,7 @@ const ExpenseSchema = new mongoose.Schema({
     enum: ['expense', 'income'],
     required: true
   },
-  amount: {
+  value: {
     type: Number,
     required: true
   },
@@ -24,9 +28,8 @@ const ExpenseSchema = new mongoose.Schema({
     type: String,
     default: 'undefined'
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  date: {
+    type: Date
   },
   user: {
     type: (Object as unknown) as IUser,

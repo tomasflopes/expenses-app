@@ -6,40 +6,47 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  name: {
+  firstName: {
     type: String,
     required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  occupation: {
+    type: String
   },
   email: {
     type: String,
     required: true
   },
-  password_hash: {
-    type: String,
-    required: true
-  },
   birth: {
-    type: Date,
-    required: true
+    type: Date
   },
   phone: {
     type: String
   },
+  password_hash: {
+    type: String,
+    required: true
+  },
   financeSettings: {
-    areas: [
-      {
-        type: String
-      }
-    ],
-    currency: {
+    defaultCurrency: {
       type: String,
       default: 'EUR'
     },
+    areas: [
+      {
+        type: String,
+        default: ['undefined']
+      }
+    ],
     required: false
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now()
   }
 });
 

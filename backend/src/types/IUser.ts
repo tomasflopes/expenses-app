@@ -2,13 +2,16 @@ import { Document } from 'mongoose';
 
 export default interface IUser extends Document {
   _id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
+  occupation?: string;
   email: string;
+  birth?: Date;
+  phone?: string;
   password_hash: string;
-  birth: Date;
-  phone: string;
-  financeSettings?: {
-    areas: string[] | ['undefined'];
-    currency: 'USD' | 'GBP' | 'EUR' | 'DKK' | 'JPY' | 'JPW';
+  financeSettings: {
+    areas: string[];
+    defaultCurrency: 'USD' | 'GBP' | 'EUR' | 'DKK' | 'JPY' | 'JPW';
   };
+  createdAt: Date;
 }

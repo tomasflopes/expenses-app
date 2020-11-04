@@ -1,10 +1,9 @@
 import { Request } from 'express';
 import jwt from 'jsonwebtoken';
 
-import mongoose from 'mongoose';
-
 interface TokenInterface {
   _id: string;
+  iat: number;
 }
 
 export default async (request: Request) => {
@@ -17,5 +16,5 @@ export default async (request: Request) => {
     process.env.TOKEN_SECRET as string
   )) as TokenInterface;
 
-  return (decoded._id as unknown) as mongoose.Schema.Types.ObjectId;
+  return decoded._id;
 };

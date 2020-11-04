@@ -5,7 +5,9 @@ import jwt from 'jsonwebtoken';
 
 import { v4 as uuidv4 } from 'uuid';
 
-const bckrypt = require('bckryptjs');
+import bckrypt from 'bcryptjs';
+
+import DecodeJWTToken from '../utils/DecodeJWTToken';
 
 import IUser from '../types/IUser';
 
@@ -42,7 +44,14 @@ export default {
   },
 
   async store(request: Request, response: Response) {
-    const { name, email, password, phone, birth } = request.body;
+    const { firstName, lastName, email, password } = request.body;
+
+    const users = await User.find();
+
+    users.forEach(user => {
+      if (user.email === email)
+        return response.status(400).json({ Error: 'Email already exists' });
+    });
 
     const salt = await bckrypt.genSaltSync(10);
     const password_hash = await bckrypt.hashSync(password, salt);
@@ -50,11 +59,11 @@ export default {
     try {
       const createdUser = await User.create({
         _id: uuidv4(),
-        name,
+        firstName,
+        lastName,
         email,
         password_hash,
-        phone,
-        birth
+        createdAt: new Date()
       });
 
       return response.status(201).json(createdUser);
@@ -63,5 +72,48 @@ export default {
     }
   },
 
-  async update(request: Request, response: Response) {}
+  async update(request: Request, response: Response) {
+    const {
+      firstName,
+      lastName,
+      occupation,
+      email,
+      birth,
+      phone,
+      financeSettings
+    } = request.body;
+
+    if (email) {
+      const users = await User.find();
+
+      users.forEach(user => {
+        if (user.email === email)
+          return response.status(400).json({ Error: 'Email already exists' });
+      });
+    }
+
+    const _id = await DecodeJWTToken(request);
+
+    const oldUserData = await User.findOne({ _id });
+
+    const user = await User.findOneAndUpdate(
+      { _id },
+      {
+        firstName: firstName || oldUserData?.firstName,
+        lastName: lastName || oldUserData?.lastName,
+        occupation: occupation || oldUserData?.occupation,
+        email: email || oldUserData?.email,
+        birth: birth || oldUserData?.birth,
+        phone: phone || oldUserData?.phone,
+        financeSettings: {
+          areas: [...oldUserData?.financeSettings.areas, financeSettings.areas],
+          defaultCurrency:
+            financeSettings.defaultCurrency ||
+            oldUserData?.financeSettings.defaultCurrency
+        }
+      }
+    );
+
+    return response.json(user);
+  }
 };
