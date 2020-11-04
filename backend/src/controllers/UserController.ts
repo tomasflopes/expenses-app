@@ -97,28 +97,46 @@ export default {
     const oldUserData = await User.findOne({ _id });
 
     //? This is a workaround for the TS error that the User finance settings areas array may be empty
-    const oldUserDataFinanceSettings =
-      oldUserData?.financeSettings ||
-      (([] as unknown) as { areas: string[]; defaultCurrency: string });
+    const oldUserDataFinanceSettings = oldUserData?.financeSettings || {
+      areas: ['undefined'],
+      defaultCurrency: 'EUR'
+    };
 
-    const user = await User.findOneAndUpdate(
-      { _id },
-      {
-        firstName: firstName || oldUserData?.firstName,
-        lastName: lastName || oldUserData?.lastName,
-        occupation: occupation || oldUserData?.occupation,
-        email: email || oldUserData?.email,
-        birth: birth || oldUserData?.birth,
-        phone: phone || oldUserData?.phone,
-        financeSettings: {
-          areas: [...oldUserDataFinanceSettings.areas, financeSettings.areas],
-          defaultCurrency:
-            financeSettings.defaultCurrency ||
-            oldUserDataFinanceSettings.defaultCurrency
+    const oldUserAreas = oldUserDataFinanceSettings.areas.map(area => area);
+
+    oldUserAreas.forEach(oldUserArea => {
+      if (financeSettings.areas.indexOf(oldUserArea) !== -1)
+        return response.status(400).json({
+          Error: 'The user already has this area in his profile settings'
+        });
+    });
+
+    try {
+      await User.findOneAndUpdate(
+        { _id },
+        {
+          firstName: firstName || oldUserData?.firstName,
+          lastName: lastName || oldUserData?.lastName,
+          occupation: occupation || oldUserData?.occupation,
+          email: email || oldUserData?.email,
+          birth: birth || oldUserData?.birth,
+          phone: phone || oldUserData?.phone,
+          financeSettings: {
+            areas: [
+              ...oldUserDataFinanceSettings.areas,
+              ...financeSettings.areas
+            ],
+            defaultCurrency:
+              financeSettings.defaultCurrency ||
+              oldUserDataFinanceSettings.defaultCurrency
+          }
         }
-      }
-    );
+      );
 
-    return response.json(user);
+      return response.status(204).send();
+    } catch (error) {
+      console.log(error);
+      return response.status(400).json(error);
+    }
   }
 };
