@@ -96,6 +96,11 @@ export default {
 
     const oldUserData = await User.findOne({ _id });
 
+    //? This is a workaround for the TS error that the User finance settings areas array may be empty
+    const oldUserDataFinanceSettings =
+      oldUserData?.financeSettings ||
+      (([] as unknown) as { areas: string[]; defaultCurrency: string });
+
     const user = await User.findOneAndUpdate(
       { _id },
       {
@@ -106,10 +111,10 @@ export default {
         birth: birth || oldUserData?.birth,
         phone: phone || oldUserData?.phone,
         financeSettings: {
-          areas: [...oldUserData?.financeSettings.areas, financeSettings.areas],
+          areas: [...oldUserDataFinanceSettings.areas, financeSettings.areas],
           defaultCurrency:
             financeSettings.defaultCurrency ||
-            oldUserData?.financeSettings.defaultCurrency
+            oldUserDataFinanceSettings.defaultCurrency
         }
       }
     );
