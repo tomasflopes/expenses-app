@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from 'uuid';
 import bckrypt from 'bcryptjs';
 
 import DecodeJWTToken from '../utils/DecodeJWTToken';
+import capitalizeFirstLetter from '../utils/capitalizeFirstLetter';
+import existsInArray from '../utils/existsInArray';
 
 import IUser from '../types/IUser';
 
@@ -98,18 +100,22 @@ export default {
 
     //? This is a workaround for the TS error that the User finance settings areas array may be empty
     const oldUserDataFinanceSettings = oldUserData?.financeSettings || {
-      areas: ['undefined'],
+      areas: ['Undefined'],
       defaultCurrency: 'EUR'
     };
 
-    const oldUserAreas = oldUserDataFinanceSettings.areas.map(area => area);
+    const oldUserAreas = oldUserDataFinanceSettings.areas.map(area =>
+      capitalizeFirstLetter(area)
+    );
 
-    oldUserAreas.forEach(oldUserArea => {
-      if (financeSettings.areas.indexOf(oldUserArea) !== -1)
-        return response.status(400).json({
-          Error: 'The user already has this area in his profile settings'
-        });
-    });
+    const newAreas = financeSettings.areas.map((area: string) =>
+      capitalizeFirstLetter(area)
+    );
+
+    if (existsInArray(newAreas, oldUserAreas))
+      return response.status(400).json({
+        Error: 'The user already has this area in his profile settings'
+      });
 
     try {
       await User.findOneAndUpdate(
@@ -122,10 +128,7 @@ export default {
           birth: birth || oldUserData?.birth,
           phone: phone || oldUserData?.phone,
           financeSettings: {
-            areas: [
-              ...oldUserDataFinanceSettings.areas,
-              ...financeSettings.areas
-            ],
+            areas: [...oldUserDataFinanceSettings.areas, ...newAreas],
             defaultCurrency:
               financeSettings.defaultCurrency ||
               oldUserDataFinanceSettings.defaultCurrency
@@ -135,7 +138,6 @@ export default {
 
       return response.status(204).send();
     } catch (error) {
-      console.log(error);
       return response.status(400).json(error);
     }
   }

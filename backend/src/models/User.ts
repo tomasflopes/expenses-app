@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema({
     areas: [
       {
         type: String,
-        default: ['undefined']
+        default: ['Undefined']
       }
     ],
     required: false
