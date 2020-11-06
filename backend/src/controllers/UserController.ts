@@ -65,6 +65,10 @@ export default {
         lastName,
         email,
         password_hash,
+        financeSettings: {
+          defaultCurrency: 'EUR',
+          areas: ['Undefined']
+        },
         createdAt: new Date()
       });
 
@@ -82,7 +86,7 @@ export default {
       email,
       birth,
       phone,
-      financeSettings
+      financeSettings: { defaultCurrency }
     } = request.body;
 
     if (email) {
@@ -98,40 +102,22 @@ export default {
 
     const oldUserData = await User.findOne({ _id });
 
-    //? This is a workaround for the TS error that the User finance settings areas array may be empty
-    const oldUserDataFinanceSettings = oldUserData?.financeSettings || {
-      areas: ['Undefined'],
-      defaultCurrency: 'EUR'
-    };
-
-    const oldUserAreas = oldUserDataFinanceSettings.areas.map(area =>
-      capitalizeFirstLetter(area)
-    );
-
-    const newAreas = financeSettings.areas.map((area: string) =>
-      capitalizeFirstLetter(area)
-    );
-
-    if (existsInArray(newAreas, oldUserAreas))
-      return response.status(400).json({
-        Error: 'The user already has this area in his profile settings'
-      });
+    if (!oldUserData)
+      return response.status(400).json({ Error: 'User not found' });
 
     try {
       await User.findOneAndUpdate(
         { _id },
         {
-          firstName: firstName || oldUserData?.firstName,
-          lastName: lastName || oldUserData?.lastName,
-          occupation: occupation || oldUserData?.occupation,
-          email: email || oldUserData?.email,
-          birth: birth || oldUserData?.birth,
-          phone: phone || oldUserData?.phone,
+          firstName: firstName || oldUserData.firstName,
+          lastName: lastName || oldUserData.lastName,
+          occupation: occupation || oldUserData.occupation,
+          email: email || oldUserData.email,
+          birth: birth || oldUserData.birth,
+          phone: phone || oldUserData.phone,
           financeSettings: {
-            areas: [...oldUserDataFinanceSettings.areas, ...newAreas],
             defaultCurrency:
-              financeSettings.defaultCurrency ||
-              oldUserDataFinanceSettings.defaultCurrency
+              defaultCurrency || oldUserData.financeSettings.defaultCurrency
           }
         }
       );

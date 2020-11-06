@@ -9,9 +9,9 @@ export default interface IUser extends Document {
   birth?: Date;
   phone?: string;
   password_hash: string;
-  financeSettings?: {
-    areas: string[];
-    defaultCurrency: 'USD' | 'GBP' | 'EUR' | 'DKK' | 'JPY' | 'JPW';
+  financeSettings: {
+    areas?: string[];
+    defaultCurrency?: 'USD' | 'GBP' | 'EUR' | 'DKK' | 'JPY' | 'JPW';
   };
   createdAt: Date;
 }
