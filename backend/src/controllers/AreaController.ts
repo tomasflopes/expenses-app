@@ -85,6 +85,37 @@ export default {
   },
 
   async delete(request: Request, response: Response) {
-    return response.json({ Message: 'Supz' });
+    const { index } = request.params;
+
+    const deletedAreaIndex = parseInt(index);
+
+    const _id = await DecodeJWTToken(request);
+
+    const user = await User.findOne({ _id });
+
+    if (!user) return response.status(400).json({ error: 'User not found' });
+
+    const userAreas = user.financeSettings.areas;
+
+    if (!userAreas)
+      return response.status(400).json({ error: 'User areas not found' });
+
+    if (deletedAreaIndex > userAreas.length - 1)
+      return response.status(400).json({ error: 'Index out of bounds' });
+
+    const newAreaArray = userAreas.filter(
+      (area, index) => index !== deletedAreaIndex
+    );
+
+    await User.findOneAndUpdate(
+      { _id },
+      {
+        financeSettings: {
+          areas: newAreaArray
+        }
+      }
+    ).catch(error => response.status(400).json(error));
+
+    return response.status(203).send();
   }
 };

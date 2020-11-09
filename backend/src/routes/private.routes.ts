@@ -18,6 +18,6 @@ routes.put('/user', UserController.update);
 routes.get('/areas', AreaController.index);
 routes.post('/areas', AreaController.store);
 routes.put('/areas/:oldArea', AreaController.update);
-routes.delete('/areas', AreaController.delete);
+routes.delete('/areas/:index', AreaController.delete);
 
 export default routes;
