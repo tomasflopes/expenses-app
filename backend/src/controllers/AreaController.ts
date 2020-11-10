@@ -116,6 +116,6 @@ export default {
       }
     ).catch(error => response.status(400).json(error));
 
-    return response.status(203).send();
+    return response.status(204).send();
   }
 };
