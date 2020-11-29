@@ -23,7 +23,7 @@ yarn
 
 👤 **Tomás Lopes**
 
-* Twitter: [@tomas050302](https://twitter.com/tomas050302)
+- Twitter: [@tomaslopes_dev](https://twitter.com/tomaslopes_dev)
 * Github: [@tomas050302](https://github.com/tomas050302)
 
 ## What I've learned
