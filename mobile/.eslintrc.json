@@ -29,6 +29,8 @@
   "rules": {
     "prettier/prettier": "error",
     "space-before-function-paren": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "on",
+    "react-hooks/exhaustive-deps": "on"
   }
 }

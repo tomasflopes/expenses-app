@@ -28,15 +28,10 @@ yarn
 
 ## What I've learned
 
-* Offline first with RealmDB
 * Theme switching in React Native
 * Strongly typed models in MongoDB
-* Better design pattern in NodeJS with Typescript projects
+* Better design pattern in NodeJS with Typescript
 * Testing with type checking with Jest
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

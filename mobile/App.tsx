@@ -1,12 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+
+import Routes from './src/routes';
+import OnboardingComponent from './src/screens/OnboardingComponent';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function App() {
+  const [firstTime, setFirstTime] = useState(true);
+
+  async function getData() {
+    const value = await AsyncStorage.getItem('firstTime');
+
+    value ? setFirstTime(true) : setFirstTime(false);
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
-    <View>
-      <Text>Hello World</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      {firstTime ? (
+        <OnboardingComponent />
+      ) : (
+        <>
+          <Routes />
+          <StatusBar style="auto" />
+        </>
+      )}
+    </>
   );
 }
