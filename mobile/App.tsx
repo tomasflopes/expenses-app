@@ -1,34 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import Routes from './src/routes';
-import OnboardingComponent from './src/screens/OnboardingComponent';
 
-import AsyncStorage from '@react-native-community/async-storage';
+import { AppLoading } from 'expo';
+
+import {
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  useFonts
+} from '@expo-google-fonts/poppins';
+
+import {
+  Archivo_400Regular,
+  Archivo_700Bold
+} from '@expo-google-fonts/archivo';
 
 export default function App() {
-  const [firstTime, setFirstTime] = useState(true);
+  let [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
+    Archivo_400Regular,
+    Archivo_700Bold
+  });
 
-  async function getData() {
-    const value = await AsyncStorage.getItem('firstTime');
-
-    value ? setFirstTime(true) : setFirstTime(false);
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <>
+        <Routes />
+        <StatusBar style="light" />
+      </>
+    );
   }
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  return (
-    <>
-      {firstTime ? (
-        <OnboardingComponent />
-      ) : (
-        <>
-          <Routes />
-          <StatusBar style="auto" />
-        </>
-      )}
-    </>
-  );
 }
