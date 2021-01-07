@@ -9,7 +9,12 @@ const Routes: React.FC = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          cardStyle: { backgroundColor: '#f2f3f5' }
+        }}
+      >
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
