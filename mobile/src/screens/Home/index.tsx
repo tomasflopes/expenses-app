@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
 import { Feather, Foundation } from '@expo/vector-icons';
 import styles from './styles';
@@ -8,6 +8,19 @@ import colors from '../../styles/colors';
 import Expense from '../../components/Expense';
 
 const Home: React.FC = () => {
+  const [hidden, setHidden] = useState(true);
+  const [avatarFocused, setAvatarFocused] = useState(false);
+
+  function toggleHidden() {
+    setHidden(state => !state);
+  }
+
+  function toggleAvatarFocus() {
+    setAvatarFocused(state => !state);
+
+    console.log(avatarFocused);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.deadZone}>
@@ -20,24 +33,52 @@ const Home: React.FC = () => {
             <Text style={styles.informationText}>Student</Text>
           </View>
 
-          <View style={styles.balanceRow}>
-            <View style={styles.balanceTextContainer}>
-              <Text style={styles.balanceText}>1276,50</Text>
-              <Text style={styles.currencyText}>EUR</Text>
+          {hidden ? (
+            <View style={styles.hiddenBalance}>
+              <TouchableOpacity onPress={toggleHidden}>
+                <Feather
+                  name="eye"
+                  size={22}
+                  color={colors.primaryDark}
+                  style={styles.hiddenEyeIcon}
+                />
+              </TouchableOpacity>
+              <Text style={styles.hiddenText}>Hidden Balance</Text>
             </View>
-            <Feather
-              name="eye-off"
-              size={22}
-              color={colors.primaryDark}
-              style={styles.eyeIcon}
-            />
-          </View>
+          ) : (
+            <View style={styles.balanceRow}>
+              <View style={styles.balanceTextContainer}>
+                <Text style={styles.balanceText}>1276,50</Text>
+                <Text style={styles.currencyText}>EUR</Text>
+              </View>
+              <TouchableOpacity onPress={toggleHidden}>
+                <Feather
+                  name="eye-off"
+                  size={22}
+                  color={colors.primaryDark}
+                  style={styles.eyeIcon}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
 
-        <Image
-          source={{ uri: 'http://www.github.com/tomas050302.png' }}
-          style={styles.avatar}
-        />
+        <TouchableOpacity
+          style={styles.avatarContainer}
+          onPress={toggleAvatarFocus}
+        >
+          <ImageBackground
+            source={{ uri: 'http://www.github.com/tomas050302.png' }}
+            style={styles.avatar}
+            imageStyle={styles.avatar}
+          >
+            {avatarFocused && (
+              <View style={styles.avatarOverlay}>
+                <Text style={styles.viewProfileText}>View Profile</Text>
+              </View>
+            )}
+          </ImageBackground>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.mainContainer}>

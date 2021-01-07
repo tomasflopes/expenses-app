@@ -77,12 +77,45 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
 
+  hiddenEyeIcon: {
+    marginBottom: -4
+  },
+
+  hiddenBalance: {
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  },
+
+  hiddenText: {
+    fontFamily: 'Poppins_300Light',
+    color: colors.primaryDark,
+    fontSize: 13
+  },
+
+  avatarContainer: {
+    position: 'absolute',
+    bottom: -120 / 2
+  },
+
   avatar: {
     width: 120,
     height: 120,
+    borderRadius: 120 / 2
+  },
+
+  avatarOverlay: {
+    width: 120,
+    height: 120,
     borderRadius: 120 / 2,
-    position: 'absolute',
-    bottom: -120 / 2
+    backgroundColor: 'rgba(0, 119, 194, 0.65)',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  viewProfileText: {
+    fontFamily: 'Poppins_700Bold',
+    textAlign: 'center',
+    color: colors.secondaryLight
   },
 
   mainContainer: {

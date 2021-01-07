@@ -6,6 +6,7 @@ import Routes from './src/routes';
 import { AppLoading } from 'expo';
 
 import {
+  Poppins_300Light,
   Poppins_400Regular,
   Poppins_500Medium,
   Poppins_600SemiBold,
@@ -20,6 +21,7 @@ import {
 
 export default function App() {
   let [fontsLoaded] = useFonts({
+    Poppins_300Light,
     Poppins_400Regular,
     Poppins_500Medium,
     Poppins_600SemiBold,
