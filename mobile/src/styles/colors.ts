@@ -5,6 +5,8 @@ const colors = {
   secondary: '#E0E0E0',
   secondaryLight: '#fff',
   secondaryDark: '#8D8D8D',
+  inputText: '#636363',
+  inputBackground: '#dfdfdf',
   background: '#F6F6FE',
   black: '#000',
   confirm: '#04D361',
