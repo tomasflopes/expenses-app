@@ -1,12 +1,18 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, Image } from 'react-native';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  TextInputProps,
+  TextInput
+} from 'react-native';
 
 import styles from './styles';
 
 const Login: React.FC = () => {
-  const input1Ref = useRef<TextInput>();
-  const input2Ref = useRef<TextInput>();
+  const input1Ref = useRef<TextInputProps>(null);
+  const input2Ref = useRef<TextInputProps>(null);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,11 +20,16 @@ const Login: React.FC = () => {
   const [buttonEnabled, setButtonEnabled] = useState(false);
 
   function checkButtonEnable() {
+    console.log(input1Ref.current?.value);
     if (email !== '' && password !== '') {
       setButtonEnabled(true);
     } else {
       setButtonEnabled(false);
     }
+  }
+
+  function submitForm() {
+    // TODO API call to login
   }
 
   return (
@@ -50,7 +61,8 @@ const Login: React.FC = () => {
               checkButtonEnable();
             }}
             onChange={checkButtonEnable}
-            onSubmitEditing={() => input2Ref.current.focus()}
+            onSubmitEditing={() => input2Ref.current?.focus()}
+            value={email}
           ></TextInput>
           <TextInput
             ref={input2Ref}
@@ -65,8 +77,8 @@ const Login: React.FC = () => {
               checkButtonEnable();
             }}
             onChange={checkButtonEnable}
-            onSubmitEditing={() => console.log('Next')}
-            /* TODO: Implement next step here */
+            onSubmitEditing={submitForm}
+            value={password}
           ></TextInput>
         </View>
 
@@ -76,7 +88,7 @@ const Login: React.FC = () => {
 
         <TouchableOpacity
           style={buttonEnabled ? styles.buttonDisabled : styles.button}
-          onPress={() => console.log(email, password)}
+          onPress={submitForm}
         >
           <Text
             style={
