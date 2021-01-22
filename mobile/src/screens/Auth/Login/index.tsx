@@ -1,27 +1,36 @@
 import React, { useRef, useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  TextInputProps,
-  TextInput
-} from 'react-native';
+import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 
 import styles from './styles';
 
 const Login: React.FC = () => {
-  const input1Ref = useRef<TextInputProps>(null);
-  const input2Ref = useRef<TextInputProps>(null);
+  const input1Ref = useRef<TextInput>(null);
+  const input2Ref = useRef<TextInput>(null);
+
+  const buttonRef = useRef<TouchableOpacity>(null);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [buttonEnabled, setButtonEnabled] = useState(false);
 
+  function validateEmail(email: string): Boolean {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    return re.test(String(email).toLowerCase());
+  }
+
+  function validatePassword(password: string): Boolean {
+    const minLength = 8;
+
+    return password.length >= minLength - 1;
+  }
+
   function checkButtonEnable() {
-    console.log(input1Ref.current?.value);
-    if (email !== '' && password !== '') {
+    const emailValid = validateEmail(email);
+    const passwordValid = validatePassword(password);
+
+    if (emailValid && passwordValid) {
       setButtonEnabled(true);
     } else {
       setButtonEnabled(false);
@@ -29,7 +38,8 @@ const Login: React.FC = () => {
   }
 
   function submitForm() {
-    // TODO API call to login
+    // TODO Save JWT to Local storage
+    console.log(email, password);
   }
 
   return (
@@ -56,11 +66,11 @@ const Login: React.FC = () => {
             keyboardType="email-address"
             returnKeyType="next"
             textContentType="emailAddress"
+            autoCapitalize="none"
             onChangeText={text => {
               setEmail(() => text);
               checkButtonEnable();
             }}
-            onChange={checkButtonEnable}
             onSubmitEditing={() => input2Ref.current?.focus()}
             value={email}
           ></TextInput>
@@ -69,6 +79,7 @@ const Login: React.FC = () => {
             style={[styles.input, styles.bottomInput]}
             placeholder="Password"
             autoCompleteType="password"
+            autoCapitalize="none"
             secureTextEntry={true}
             returnKeyType="done"
             textContentType="password"
@@ -76,7 +87,6 @@ const Login: React.FC = () => {
               setPassword(() => text);
               checkButtonEnable();
             }}
-            onChange={checkButtonEnable}
             onSubmitEditing={submitForm}
             value={password}
           ></TextInput>
@@ -88,6 +98,7 @@ const Login: React.FC = () => {
 
         <TouchableOpacity
           style={buttonEnabled ? styles.buttonDisabled : styles.button}
+          ref={buttonRef}
           onPress={submitForm}
         >
           <Text
