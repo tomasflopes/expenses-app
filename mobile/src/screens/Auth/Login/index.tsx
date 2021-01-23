@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -18,9 +18,9 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
 
   const [buttonEnabled, setButtonEnabled] = useState(false);
+  checkButtonEnable();
 
   function checkButtonEnable() {
-    console.log(input1Ref.current?.value);
     if (email !== '' && password !== '') {
       setButtonEnabled(true);
     } else {
@@ -31,6 +31,10 @@ const Login: React.FC = () => {
   function submitForm() {
     // TODO API call to login
   }
+
+  useEffect(() => {
+    checkButtonEnable();
+  }, [email, password]);
 
   return (
     <View style={styles.container}>
@@ -56,11 +60,7 @@ const Login: React.FC = () => {
             keyboardType="email-address"
             returnKeyType="next"
             textContentType="emailAddress"
-            onChangeText={text => {
-              setEmail(() => text);
-              checkButtonEnable();
-            }}
-            onChange={checkButtonEnable}
+            onChangeText={setEmail}
             onSubmitEditing={() => input2Ref.current?.focus()}
             value={email}
           ></TextInput>
@@ -72,11 +72,7 @@ const Login: React.FC = () => {
             secureTextEntry={true}
             returnKeyType="done"
             textContentType="password"
-            onChangeText={text => {
-              setPassword(() => text);
-              checkButtonEnable();
-            }}
-            onChange={checkButtonEnable}
+            onChangeText={setPassword}
             onSubmitEditing={submitForm}
             value={password}
           ></TextInput>
