@@ -45,7 +45,7 @@ const Login: React.FC = () => {
   }
 
   async function handleSubmitForm() {
-    const response = await api.post('/api/login', {
+    const response = await api.post('/api/user/login', {
       email,
       password
     });
@@ -56,7 +56,6 @@ const Login: React.FC = () => {
       await AsyncStorage.setItem('jwt', jwt);
       SignIn();
     }
-    console.log(email, password);
   }
 
   useEffect(() => {
