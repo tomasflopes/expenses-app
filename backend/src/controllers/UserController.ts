@@ -8,8 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 import bckrypt from 'bcryptjs';
 
 import DecodeJWTToken from '../utils/DecodeJWTToken';
-import capitalizeFirstLetter from '../utils/capitalizeFirstLetter';
-import existsInArray from '../utils/existsInArray';
 
 import IUser from '../types/IUser';
 

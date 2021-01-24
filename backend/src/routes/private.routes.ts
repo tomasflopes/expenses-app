@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import authMiddleware from '../middleware/authMiddleware';
+
 import ExpensesController from '../controllers/ExpensesController';
 import BalanceController from '../controllers/BalanceController';
 import UserController from '../controllers/UserController';
@@ -7,17 +9,17 @@ import AreaController from '../controllers/AreaController';
 
 const routes = Router();
 
-routes.get('/balance', BalanceController.index);
+routes.get('/balance', authMiddleware, BalanceController.index);
 
-routes.get('/expenses', ExpensesController.index);
-routes.get('/expenses/:id', ExpensesController.show); // Detail expense
-routes.post('/expenses', ExpensesController.store);
+routes.get('/expenses', authMiddleware, ExpensesController.index);
+routes.get('/expenses/:id', authMiddleware, ExpensesController.show); // Detail expense
+routes.post('/expenses', authMiddleware, ExpensesController.store);
 
-routes.put('/user', UserController.update);
+routes.put('/user', authMiddleware, UserController.update);
 
-routes.get('/areas', AreaController.index);
-routes.post('/areas', AreaController.store);
-routes.put('/areas/:oldArea', AreaController.update);
-routes.delete('/areas/:index', AreaController.delete);
+routes.get('/areas', authMiddleware, AreaController.index);
+routes.post('/areas', authMiddleware, AreaController.store);
+routes.put('/areas/:oldArea', authMiddleware, AreaController.update);
+routes.delete('/areas/:index', authMiddleware, AreaController.delete);
 
 export default routes;

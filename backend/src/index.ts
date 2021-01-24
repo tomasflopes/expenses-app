@@ -1,14 +1,9 @@
-import express from 'express';
+import app from './server';
 import mongoose from 'mongoose';
 
-import authRoutes from './routes/auth.routes';
-import privateRoutes from './routes/private.routes';
+import dotenv from 'dotenv';
 
-import authMiddleware from './middlewares/authMiddleware';
-
-require('dotenv').config();
-
-import cors from 'cors';
+dotenv.config();
 
 mongoose.connect(process.env.DB_CONNECT as string, {
   useNewUrlParser: true,
@@ -16,15 +11,6 @@ mongoose.connect(process.env.DB_CONNECT as string, {
   useFindAndModify: false
 });
 
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-app.use('/api/user', authRoutes);
-
-app.use(authMiddleware);
-
-app.use(privateRoutes);
-
-app.listen(process.env.PORT || 3333);
+app.listen(process.env.PORT || 3333, () => {
+  console.log(`App listening on port :${process.env.PORT || 3333}`);
+});
