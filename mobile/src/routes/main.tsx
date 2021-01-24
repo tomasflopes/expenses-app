@@ -2,9 +2,9 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import LoginScreen from '../screens/Auth/Login';
+import HomeScreen from '../screens/Home';
 
-const AuthRoutes = () => {
+const MainRoutes = () => {
   const Stack = createStackNavigator();
 
   return (
@@ -14,9 +14,9 @@ const AuthRoutes = () => {
         cardStyle: { backgroundColor: '#f2f3f5' }
       }}
     >
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   );
 };
 
-export default AuthRoutes;
+export default MainRoutes;

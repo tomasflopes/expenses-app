@@ -1,35 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from '../screens/Home';
-import LoginScreen from '../screens/Auth/Login';
+import AuthRoutes from './auth';
+import MainRoutes from './main';
+
+import AuthContext from '../context/auth';
 
 const Routes: React.FC = () => {
-  const Stack = createStackNavigator();
+  const { signed } = useContext(AuthContext);
 
-  /* return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-          cardStyle: { backgroundColor: '#f2f3f5' }
-        }}
-      >
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  ); */
+  const Stack = createStackNavigator();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-          cardStyle: { backgroundColor: '#f2f3f5' }
-        }}
-      >
-        <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Navigator>
+        {signed ? (
+          <Stack.Screen
+            name="Root"
+            children={MainRoutes}
+            options={{ headerShown: false }}
+          />
+        ) : (
+          <Stack.Screen
+            name="Auth"
+            children={AuthRoutes}
+            options={{ headerShown: false }}
+          />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

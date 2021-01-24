@@ -3,6 +3,8 @@ import React from 'react';
 
 import Routes from './src/routes';
 
+import { AuthProvider } from './src/context/auth';
+
 import { AppLoading } from 'expo';
 
 import {
@@ -35,8 +37,10 @@ export default function App() {
   } else {
     return (
       <>
-        <Routes />
         <StatusBar style="light" />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
       </>
     );
   }

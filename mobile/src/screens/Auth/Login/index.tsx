@@ -1,5 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
+
+import AsyncStorage from '@react-native-community/async-storage';
+import AuthContext from '../../../context/auth';
+
+import api from '../../../services/api';
 
 import styles from './styles';
 
@@ -13,6 +18,8 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
 
   const [buttonEnabled, setButtonEnabled] = useState(false);
+
+  const { SignIn } = useContext(AuthContext);
 
   function validateEmail(email: string): Boolean {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -37,8 +44,18 @@ const Login: React.FC = () => {
     }
   }
 
-  function submitForm() {
-    // TODO Save JWT to Local storage
+  async function handleSubmitForm() {
+    const response = await api.post('/api/login', {
+      email,
+      password
+    });
+
+    if (response) {
+      const jwt = response.data.token;
+
+      await AsyncStorage.setItem('jwt', jwt);
+      SignIn();
+    }
     console.log(email, password);
   }
 
@@ -65,6 +82,7 @@ const Login: React.FC = () => {
             ref={input1Ref}
             style={styles.input}
             placeholder="E-mail"
+            autoCapitalize="none"
             autoCompleteType="email"
             autoCorrect={false}
             keyboardType="email-address"
@@ -84,7 +102,7 @@ const Login: React.FC = () => {
             returnKeyType="done"
             textContentType="password"
             onChangeText={setPassword}
-            onSubmitEditing={submitForm}
+            onSubmitEditing={handleSubmitForm}
             value={password}
           ></TextInput>
         </View>
@@ -96,7 +114,7 @@ const Login: React.FC = () => {
         <TouchableOpacity
           style={buttonEnabled ? styles.buttonDisabled : styles.button}
           ref={buttonRef}
-          onPress={submitForm}
+          onPress={handleSubmitForm}
         >
           <Text
             style={
