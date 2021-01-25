@@ -1,204 +1,195 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
 import colors from '../../styles/colors';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
+export const Container = styled.View`
+  flex: 1;
+  background: ${colors.background};
+`;
 
-  deadZone: {
-    height: 235,
-    backgroundColor: colors.primary,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
+export const DeadZone = styled.View`
+  height: 235px;
+  background: ${colors.primary};
+  align-items: center;
+  justify-content: center;
+`;
 
-  profileInfoContainer: {
-    width: '90%',
-    backgroundColor: colors.background,
-    height: 72,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 24
-  },
+export const ProfileInfoContainer = styled.View`
+  width: 90%;
+  background: ${colors.background};
+  height: 72px;
+  border-radius: 8px;
+  align-items: 'center';
+  justify-content: 'center';
+  margin-bottom: 24px;
+`;
 
-  personalInfoRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
+export const PersonalInfoRow = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
 
-  informationText: {
-    fontFamily: 'Archivo_400Regular',
-    color: colors.primaryDark,
-    marginRight: 8,
-    fontSize: 14
-  },
+export const InformationText = styled.Text`
+  font-family: Archivo_400Regular;
+  color: ${colors.primaryDark};
+  margin-right: 8;
+  font-size: 14;
+`;
 
-  dot: {
-    height: 4,
-    width: 4,
-    borderRadius: 2,
-    backgroundColor: colors.primaryDark,
-    marginRight: 8
-  },
+export const Dot = styled.View`
+  height: 4px;
+  width: 4px;
+  border-radius: 2px;
+  background: ${colors.primaryDark};
+  margin-right: 8px;
+`;
 
-  balanceRow: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
+export const BalanceRow = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
 
-  balanceTextContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-end'
-  },
+export const BalanceTextContainer = styled.Text`
+  flex-direction: row;
+  align-items: flex-end;
+`;
 
-  balanceText: {
-    fontSize: 20,
-    top: 8,
-    fontFamily: 'Poppins_500Medium',
-    color: colors.primaryDark,
-    marginRight: 4
-  },
+export const BalanceText = styled.Text`
+  font-size: 20px;
+  top: 8px;
+  font-family: 'Poppins_500Medium';
+  color: ${colors.primaryDark};
+  margin-right: 4px;
+`;
 
-  currencyText: {
-    fontSize: 14,
-    fontFamily: 'Poppins_400Regular',
-    color: colors.primaryDark,
-    marginRight: 8,
-    fontWeight: 'bold'
-  },
+export const CurrencyText = styled.View`
+  font-size: 14px;
+  font-family: 'Poppins_400Regular';
+  color: ${colors.primaryDark};
+  margin-right: 8px;
+  font-weight: bold;
+`;
 
-  eyeIcon: {
-    marginTop: 8
-  },
+export const EyeIcon = styled.View`
+  margin-top: 8px;
+`;
 
-  hiddenEyeIcon: {
-    marginBottom: -4
-  },
+export const HiddenBalance = styled.View`
+  align-items: center;
+  justify-content: flex-start;
+`;
 
-  hiddenBalance: {
-    alignItems: 'center',
-    justifyContent: 'flex-start'
-  },
+export const HiddenText = styled.Text`
+  font-family: 'Poppins_300Light';
+  color: ${colors.primaryDark};
+  font-size: 13;
+`;
 
-  hiddenText: {
-    fontFamily: 'Poppins_300Light',
-    color: colors.primaryDark,
-    fontSize: 13
-  },
+export const AvatarContainer = styled.TouchableOpacity`
+  align-items: 'center';
+  justify-content: 'center';
+  position: 'absolute';
+  width: '100%';
+  flex: 1;
+  top: ${235 - 120 / 2}px;
+  border-radius: ${120 / 2}px;
+`;
 
-  avatarContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    width: '100%',
-    flex: 1,
-    top: 235 - 120 / 2,
-    borderRadius: 120 / 2
-  },
+export const Avatar = styled.ImageBackground`
+  height: 120px;
+  width: 120px;
+  border-radius: ${120 / 2}px;
+`;
 
-  avatar: {
-    height: 120,
-    width: 120,
-    borderRadius: 120 / 2
-  },
+export const AvatarOverlay = styled.View`
+  width: 120px;
+  height: 120px;
+  border-radius: ${120 / 2};
+  background: 'rgba(0, 119, 194, 0.65)';
+  align-items: center;
+  justify-content: center;
+`;
 
-  avatarOverlay: {
-    width: 120,
-    height: 120,
-    borderRadius: 120 / 2,
-    backgroundColor: 'rgba(0, 119, 194, 0.65)',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
+export const ViewProfileTextButton = styled.TouchableOpacity`
+  padding: 2px;
+`;
 
-  viewProfileTextButton: {
-    padding: 2
-  },
+export const ViewProfileText = styled.Text`
+  font-family: 'Poppins_700Bold';
+  text-align: 'center';
+  font-size: 13;
+  color: ${colors.secondaryLight};
+`;
 
-  viewProfileText: {
-    fontFamily: 'Poppins_700Bold',
-    textAlign: 'center',
-    fontSize: 13,
-    color: colors.secondaryLight
-  },
+export const MainContainer = styled.ScrollView`
+  flex: 3;
+  margin-top: 80;
+  padding: 32px 0;
+`;
 
-  mainContainer: {
-    flex: 3,
-    marginTop: 80,
-    paddingHorizontal: 32
-  },
+export const Header = styled.Text`
+  text-transform: capitalize;
+  color: ${colors.textHeaders};
+  font-family: 'Poppins_700Bold';
+  font-size: 16px;
+  margin-bottom: 24px;
+`;
 
-  header: {
-    textTransform: 'capitalize',
-    color: colors.textHeaders,
-    fontFamily: 'Poppins_700Bold',
-    fontSize: 16,
-    marginBottom: 24
-  },
+export const MoreButton = styled.TouchableOpacity`
+  align-self: center;
+  top: 8px;
+`;
 
-  moreButton: {
-    alignSelf: 'center',
-    top: 8
-  },
+export const MoreButtonText = styled.Text`
+  font-family: 'Poppins_700Bold';
+  font-size: 18px;
+  color: ${colors.primary};
+  margin-bottom: 24px;
+`;
 
-  moreButtonText: {
-    fontFamily: 'Poppins_700Bold',
-    fontSize: 18,
-    color: colors.primary,
-    marginBottom: 24
-  },
+export const ButtonsContainer = styled.View`
+  justify-content: space-between;
+`;
 
-  buttonsContainer: {
-    justifyContent: 'space-between'
-  },
+export const AddExpenseButton = styled.TouchableOpacity`
+  height: 60;
+  width: 100%;
+  flex-direction: row;
+  background: ${colors.confirm};
+  border-radius: 8;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+`;
 
-  addExpenseButton: {
-    height: 60,
-    width: '100%',
-    flexDirection: 'row',
-    backgroundColor: colors.confirm,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16
-  },
+export const ButtonText = styled.Text`
+  font-family: 'Poppins_600SemiBold';
+  color: ${colors.secondaryLight};
+  margin-left: 24px;
+  text-transform: capitalize;
+  font-size: 20px;
+  top: 1px;
+`;
 
-  buttonText: {
-    fontFamily: 'Poppins_600SemiBold',
-    color: colors.secondaryLight,
-    marginLeft: 24,
-    textTransform: 'capitalize',
-    fontSize: 20,
-    top: 1
-  },
+export const ManageActivityButton = styled.TouchableOpacity`
+  height: 60;
+  width: 100%;
+  flex-direction: row;
+  background: ${colors.primary};
+  border-radius: 8;
+  align-items: center;
+  justify-content: center;
+`;
 
-  manageActivityButton: {
-    height: 60,
-    width: '100%',
-    flexDirection: 'row',
-    backgroundColor: colors.primary,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
+export const TotalExpensesContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+`;
 
-  totalExpensesContainer: {
-    flex: 1,
-    justifyContent: 'flex-end'
-  },
-
-  totalExpensesText: {
-    fontSize: 12,
-    fontFamily: 'Archivo_400Regular',
-    color: colors.secondaryDark,
-    flex: 1,
-    marginVertical: 24
-  }
-});
-
-export default styles;
+export const TotalExpensesText = styled.Text`
+  font-size: 12px;
+  font-family: 'Archivo_400Regular';
+  color: ${colors.secondaryDark};
+  margin: 24px 0;
+`;

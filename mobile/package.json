@@ -25,7 +25,8 @@
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "~2.10.1",
-    "react-native-web": "~0.13.12"
+    "react-native-web": "~0.13.12",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
@@ -34,6 +35,8 @@
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
     "@types/react-native-onboarding-swiper": "^1.1.1",
+    "@types/styled-components": "^5.1.7",
+    "@types/styled-components-react-native": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "eslint": "^7.12.0",
