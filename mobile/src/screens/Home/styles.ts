@@ -19,8 +19,8 @@ export const ProfileInfoContainer = styled.View`
   background: ${colors.background};
   height: 72px;
   border-radius: 8px;
-  align-items: 'center';
-  justify-content: 'center';
+  align-items: center;
+  justify-content: center;
   margin-bottom: 24px;
 `;
 
@@ -33,8 +33,8 @@ export const PersonalInfoRow = styled.View`
 export const InformationText = styled.Text`
   font-family: Archivo_400Regular;
   color: ${colors.primaryDark};
-  margin-right: 8;
-  font-size: 14;
+  margin-right: 8px;
+  font-size: 14px;
 `;
 
 export const Dot = styled.View`
@@ -50,7 +50,7 @@ export const BalanceRow = styled.View`
   align-items: center;
 `;
 
-export const BalanceTextContainer = styled.Text`
+export const BalanceTextContainer = styled.View`
   flex-direction: row;
   align-items: flex-end;
 `;
@@ -63,7 +63,7 @@ export const BalanceText = styled.Text`
   margin-right: 4px;
 `;
 
-export const CurrencyText = styled.View`
+export const CurrencyText = styled.Text`
   font-size: 14px;
   font-family: 'Poppins_400Regular';
   color: ${colors.primaryDark};
@@ -83,14 +83,14 @@ export const HiddenBalance = styled.View`
 export const HiddenText = styled.Text`
   font-family: 'Poppins_300Light';
   color: ${colors.primaryDark};
-  font-size: 13;
+  font-size: 13px;
 `;
 
 export const AvatarContainer = styled.TouchableOpacity`
-  align-items: 'center';
-  justify-content: 'center';
-  position: 'absolute';
-  width: '100%';
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
   flex: 1;
   top: ${235 - 120 / 2}px;
   border-radius: ${120 / 2}px;
@@ -99,14 +99,13 @@ export const AvatarContainer = styled.TouchableOpacity`
 export const Avatar = styled.ImageBackground`
   height: 120px;
   width: 120px;
-  border-radius: ${120 / 2}px;
 `;
 
 export const AvatarOverlay = styled.View`
   width: 120px;
   height: 120px;
-  border-radius: ${120 / 2};
-  background: 'rgba(0, 119, 194, 0.65)';
+  border-radius: ${120 / 2}px;
+  background: rgba(0, 119, 194, 0.65);
   align-items: center;
   justify-content: center;
 `;
@@ -117,15 +116,15 @@ export const ViewProfileTextButton = styled.TouchableOpacity`
 
 export const ViewProfileText = styled.Text`
   font-family: 'Poppins_700Bold';
-  text-align: 'center';
-  font-size: 13;
+  text-align: center;
+  font-size: 13px;
   color: ${colors.secondaryLight};
 `;
 
 export const MainContainer = styled.ScrollView`
   flex: 3;
   margin-top: 80;
-  padding: 32px 0;
+  padding: 0 32px;
 `;
 
 export const Header = styled.Text`

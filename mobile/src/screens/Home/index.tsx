@@ -109,7 +109,10 @@ const Home: React.FC = () => {
       </DeadZone>
 
       <AvatarContainer onPress={toggleAvatarFocus}>
-        <Avatar source={{ uri: 'http://www.github.com/tomas050302.png' }}>
+        <Avatar
+          imageStyle={{ borderRadius: 120 / 2 }}
+          source={{ uri: 'http://www.github.com/tomas050302.png' }}
+        >
           {avatarFocused && (
             <AvatarOverlay>
               <ViewProfileTextButton onPress={navigateToProfile}>
