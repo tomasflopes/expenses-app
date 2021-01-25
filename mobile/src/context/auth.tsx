@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { createContext } from 'react';
+import React, { useState, createContext } from 'react';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 const AuthContext = createContext({
   signed: false,

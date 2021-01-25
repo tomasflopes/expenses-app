@@ -17,8 +17,6 @@ const Home: React.FC = () => {
 
   function toggleAvatarFocus() {
     setAvatarFocused(state => !state);
-
-    console.log(avatarFocused);
   }
 
   return (

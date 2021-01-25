@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect, useContext } from 'react';
 import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
+
 import AuthContext from '../../../context/auth';
 
 import api from '../../../services/api';
