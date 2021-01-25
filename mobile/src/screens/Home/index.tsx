@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import {
+  View,
+  ScrollView,
+  Text,
+  ImageBackground,
+  TouchableOpacity
+} from 'react-native';
+
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 import { Feather, Foundation } from '@expo/vector-icons';
 import styles from './styles';
@@ -11,12 +19,19 @@ const Home: React.FC = () => {
   const [hidden, setHidden] = useState(true);
   const [avatarFocused, setAvatarFocused] = useState(false);
 
+  const navigation = useNavigation();
+  const route = useRoute();
+
   function toggleHidden() {
     setHidden(state => !state);
   }
 
   function toggleAvatarFocus() {
     setAvatarFocused(state => !state);
+  }
+
+  function navigateToProfile() {
+    navigation.navigate('Profile');
   }
 
   return (
@@ -60,26 +75,31 @@ const Home: React.FC = () => {
             </View>
           )}
         </View>
-
-        <TouchableOpacity
-          style={styles.avatarContainer}
-          onPress={toggleAvatarFocus}
-        >
-          <ImageBackground
-            source={{ uri: 'http://www.github.com/tomas050302.png' }}
-            style={styles.avatar}
-            imageStyle={styles.avatar}
-          >
-            {avatarFocused && (
-              <View style={styles.avatarOverlay}>
-                <Text style={styles.viewProfileText}>View Profile</Text>
-              </View>
-            )}
-          </ImageBackground>
-        </TouchableOpacity>
       </View>
 
-      <View style={styles.mainContainer}>
+      <TouchableOpacity
+        style={styles.avatarContainer}
+        onPress={toggleAvatarFocus}
+      >
+        <ImageBackground
+          source={{ uri: 'http://www.github.com/tomas050302.png' }}
+          style={styles.avatar}
+          imageStyle={styles.avatar}
+        >
+          {avatarFocused && (
+            <View style={styles.avatarOverlay}>
+              <TouchableOpacity
+                style={styles.viewProfileTextButton}
+                onPress={navigateToProfile}
+              >
+                <Text style={styles.viewProfileText}>View Profile</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </ImageBackground>
+      </TouchableOpacity>
+
+      <ScrollView style={styles.mainContainer}>
         <Text style={styles.header}>your last expenses</Text>
 
         <Expense name="Salary" date="20/10/2020" amount={800.8} />
@@ -108,7 +128,7 @@ const Home: React.FC = () => {
             Total of 87 expenses registered.
           </Text>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
   },
 
   deadZone: {
-    flex: 1,
-    maxHeight: 235,
+    height: 235,
     backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center'
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    bottom: 24
+    marginBottom: 24
   },
 
   personalInfoRow: {
@@ -93,13 +92,18 @@ const styles = StyleSheet.create({
   },
 
   avatarContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
     position: 'absolute',
-    bottom: -120 / 2
+    width: '100%',
+    flex: 1,
+    top: 235 - 120 / 2,
+    borderRadius: 120 / 2
   },
 
   avatar: {
-    width: 120,
     height: 120,
+    width: 120,
     borderRadius: 120 / 2
   },
 
@@ -112,15 +116,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
+  viewProfileTextButton: {
+    padding: 2
+  },
+
   viewProfileText: {
     fontFamily: 'Poppins_700Bold',
     textAlign: 'center',
+    fontSize: 13,
     color: colors.secondaryLight
   },
 
   mainContainer: {
     flex: 3,
-    top: 80,
+    marginTop: 80,
     paddingHorizontal: 32
   },
 
@@ -141,7 +150,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_700Bold',
     fontSize: 18,
     color: colors.primary,
-    marginBottom: 32
+    marginBottom: 24
   },
 
   buttonsContainer: {
@@ -187,7 +196,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Archivo_400Regular',
     color: colors.secondaryDark,
-    marginBottom: 80 + 16
+    flex: 1,
+    marginVertical: 24
   }
 });
 
