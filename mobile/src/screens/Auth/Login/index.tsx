@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Image, TouchableOpacity, TextInput } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -7,7 +7,22 @@ import AuthContext from '../../../context/auth';
 
 import api from '../../../services/api';
 
-import styles from './styles';
+import {
+  Container,
+  DeadZone,
+  LogoContainer,
+  Slogan,
+  MainContainer,
+  FirstRow,
+  LoginHeader,
+  CreateAccountRedirect,
+  InputContainer,
+  Input,
+  ForgotPasswordContainer,
+  ForgotPassword,
+  Button,
+  ButtonText
+} from './styles';
 
 const Login: React.FC = () => {
   const input1Ref = useRef<TextInput>(null);
@@ -64,23 +79,22 @@ const Login: React.FC = () => {
   }, [email, password]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.deadZone}>
-        <View style={styles.logoContainer}>
+    <Container>
+      <DeadZone>
+        <LogoContainer>
           <Image source={require('../../../assets/logo.png')} />
-          <Text style={styles.slogan}>Saving is easy!</Text>
-        </View>
-      </View>
-      <View style={styles.mainContainer}>
-        <View style={styles.firstRow}>
-          <Text style={styles.loginHeader}>Login</Text>
-          <Text style={styles.createAccountRedirect}>Create an account</Text>
-        </View>
+          <Slogan>Saving is easy!</Slogan>
+        </LogoContainer>
+      </DeadZone>
+      <MainContainer>
+        <FirstRow>
+          <LoginHeader>Login</LoginHeader>
+          <CreateAccountRedirect>Create an account</CreateAccountRedirect>
+        </FirstRow>
 
-        <View style={styles.inputContainer}>
-          <TextInput
+        <InputContainer>
+          <Input
             ref={input1Ref}
-            style={styles.input}
             placeholder="E-mail"
             autoCapitalize="none"
             autoCompleteType="email"
@@ -91,10 +105,9 @@ const Login: React.FC = () => {
             onChangeText={setEmail}
             onSubmitEditing={() => input2Ref.current?.focus()}
             value={email}
-          ></TextInput>
-          <TextInput
+          ></Input>
+          <Input
             ref={input2Ref}
-            style={[styles.input, styles.bottomInput]}
             placeholder="Password"
             autoCompleteType="password"
             autoCapitalize="none"
@@ -104,28 +117,22 @@ const Login: React.FC = () => {
             onChangeText={setPassword}
             onSubmitEditing={handleSubmitForm}
             value={password}
-          ></TextInput>
-        </View>
+          ></Input>
+        </InputContainer>
 
-        <View style={styles.forgotPasswordContainer}>
-          <Text style={styles.forgotPassword}>I forgot my password</Text>
-        </View>
+        <ForgotPasswordContainer>
+          <ForgotPassword>I forgot my password</ForgotPassword>
+        </ForgotPasswordContainer>
 
-        <TouchableOpacity
-          style={buttonEnabled ? styles.buttonDisabled : styles.button}
+        <Button
+          active={buttonEnabled ? false : true}
           ref={buttonRef}
           onPress={handleSubmitForm}
         >
-          <Text
-            style={
-              buttonEnabled ? styles.buttonText : styles.buttonTextDisabled
-            }
-          >
-            Login
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+          <ButtonText active={buttonEnabled ? true : false}>Login</ButtonText>
+        </Button>
+      </MainContainer>
+    </Container>
   );
 };
 

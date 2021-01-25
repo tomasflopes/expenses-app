@@ -1,123 +1,111 @@
-import { StyleSheet } from 'react-native';
-import { color } from 'react-native-reanimated';
+import styled from 'styled-components/native';
 
 import colors from '../../../styles/colors';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
+export const Container = styled.View`
+  flex: 1;
+`;
 
-  deadZone: {
-    flex: 2,
-    backgroundColor: colors.primary,
-    alignItems: 'center'
-  },
+export const DeadZone = styled.View`
+  flex: 2;
+  background: ${colors.primary};
+  align-items: center;
+`;
 
-  logoContainer: {
-    width: 350,
-    height: 230,
-    position: 'relative'
-  },
+export const LogoContainer = styled.View`
+  width: 350px;
+  height: 230px;
+  position: relative;
+`;
 
-  slogan: {
-    fontFamily: 'Archivo_400Regular',
-    fontSize: 18,
-    color: colors.primaryLight,
-    position: 'absolute',
-    bottom: 0,
-    left: 85
-  },
+export const Slogan = styled.Text`
+  font-family: 'Archivo_400Regular';
+  font-size: 18px;
+  color: ${colors.primaryLight};
+  position: absolute;
+  bottom: 0;
+  left: 85px;
+`;
 
-  mainContainer: {
-    flex: 3,
-    backgroundColor: colors.background,
-    paddingHorizontal: 32
-  },
+export const MainContainer = styled.View`
+  flex: 3;
+  background: ${colors.background};
+  padding: 0 32px;
+`;
 
-  firstRow: {
-    marginTop: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
+export const FirstRow = styled.View`
+  margin-top: 40px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
 
-  loginHeader: {
-    fontFamily: 'Poppins_700Bold',
-    fontSize: 22,
-    color: colors.textHeaders
-  },
+export const LoginHeader = styled.Text`
+  font-family: 'Poppins_700Bold';
+  font-size: 22px;
+  color: ${colors.textHeaders};
+`;
 
-  createAccountRedirect: {
-    fontFamily: 'Archivo_400Regular',
-    color: colors.primary
-  },
+export const CreateAccountRedirect = styled.Text`
+  font-family: 'Archivo_400Regular';
+  color: ${colors.primary};
+`;
 
-  inputContainer: {
-    marginTop: 40
-  },
+export const InputContainer = styled.View`
+  margin-top: 40px;
+`;
 
-  input: {
-    fontFamily: 'Archivo_400Regular',
-    fontSize: 16,
-    backgroundColor: colors.inputBackground,
-    color: colors.inputText,
-    borderWidth: 1,
-    borderColor: colors.secondaryDark,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    paddingHorizontal: 24,
-    paddingVertical: 16
-  },
+export const Input = styled.TextInput`
+  font-family: 'Archivo_400Regular';
+  font-size: 16px;
+  background: ${colors.inputBackground};
+  color: ${colors.inputText};
+  border: 1px solid ${colors.secondaryDark};
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 16px 24px;
 
-  bottomInput: {
-    borderTopWidth: 0,
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-    borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4
-  },
-
-  forgotPasswordContainer: {
-    marginTop: 32,
-    width: '100%',
-    alignItems: 'flex-end',
-    justifyContent: 'center'
-  },
-
-  forgotPassword: {
-    color: colors.inputText
-  },
-
-  button: {
-    marginTop: 40,
-    backgroundColor: colors.secondary,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 65,
-    borderRadius: 8
-  },
-
-  buttonDisabled: {
-    marginTop: 40,
-    backgroundColor: colors.confirm,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 65,
-    borderRadius: 8
-  },
-
-  buttonText: {
-    color: colors.secondaryLight,
-    fontSize: 22,
-    fontFamily: 'Poppins_600SemiBold'
-  },
-
-  buttonTextDisabled: {
-    color: colors.secondaryDark,
-    fontSize: 22,
-    fontFamily: 'Poppins_600SemiBold'
+  & + & {
+    border: 1px solid ${colors.secondaryDark};
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-top-width: 0;
   }
-});
+`;
 
-export default styles;
+export const ForgotPasswordContainer = styled.View`
+  margin-top: 32px;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: center;
+`;
+
+export const ForgotPassword = styled.Text`
+  color: ${colors.inputText};
+`;
+
+interface ButtonProps {
+  active: boolean;
+}
+
+export const Button = styled.TouchableOpacity<ButtonProps>`
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+  height: 65px;
+  border-radius: 8px;
+
+  background: ${props => (props.active ? colors.confirm : colors.secondary)};
+`;
+
+export const ButtonText = styled.Text<ButtonProps>`
+  font-family: 'Poppins_600SemiBold';
+  color: ${props =>
+    props.active ? colors.secondaryDark : colors.secondaryLight};
+
+  font-size: 22px;
+`;

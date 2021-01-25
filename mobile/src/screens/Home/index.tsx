@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
-import {
-  View,
-  ScrollView,
-  Text,
-  ImageBackground,
-  TouchableOpacity
-} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-import { useRoute, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Feather, Foundation } from '@expo/vector-icons';
 import {
@@ -21,8 +15,6 @@ import {
   BalanceTextContainer,
   BalanceText,
   CurrencyText,
-  EyeIcon,
-  HiddenEyeIcon,
   HiddenBalance,
   HiddenText,
   AvatarContainer,
@@ -51,7 +43,6 @@ const Home: React.FC = () => {
   const [avatarFocused, setAvatarFocused] = useState(false);
 
   const navigation = useNavigation();
-  const route = useRoute();
 
   function toggleHidden() {
     setHidden(state => !state);
