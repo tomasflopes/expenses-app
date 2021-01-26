@@ -34,9 +34,9 @@ import {
   TotalExpensesText
 } from './styles';
 
-import colors from '../../styles/colors';
-
 import Expense from '../../components/Expense';
+
+import theme from '../../styles/theme';
 
 const Home: React.FC = () => {
   const [hidden, setHidden] = useState(true);
@@ -90,7 +90,7 @@ const Home: React.FC = () => {
                 <Feather
                   name="eye-off"
                   size={22}
-                  color={colors.primaryDark}
+                  color={theme.colors.primaryDark}
                   style={{ marginTop: 8 }}
                 />
               </TouchableOpacity>

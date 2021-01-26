@@ -1,14 +1,15 @@
+import { TouchableOpacityProps } from 'react-native';
 import styled from 'styled-components/native';
 
-import colors from '../../../styles/colors';
+import { CustomThemeProps } from '../../../styles/theme';
 
 export const Container = styled.View`
   flex: 1;
 `;
 
-export const DeadZone = styled.View`
+export const DeadZone = styled.View<CustomThemeProps>`
   flex: 2;
-  background: ${colors.primary};
+  background: ${props => props.theme.colors.primary};
   align-items: center;
 `;
 
@@ -18,18 +19,18 @@ export const LogoContainer = styled.View`
   position: relative;
 `;
 
-export const Slogan = styled.Text`
+export const Slogan = styled.Text<CustomThemeProps>`
   font-family: 'Archivo_400Regular';
   font-size: 18px;
-  color: ${colors.primaryLight};
+  color: ${props => props.theme.colors.primaryLight};
   position: absolute;
   bottom: 0;
   left: 85px;
 `;
 
-export const MainContainer = styled.View`
+export const MainContainer = styled.View<CustomThemeProps>`
   flex: 3;
-  background: ${colors.background};
+  background: ${props => props.theme.colors.background};
   padding: 0 32px;
 `;
 
@@ -40,27 +41,27 @@ export const FirstRow = styled.View`
   justify-content: space-between;
 `;
 
-export const LoginHeader = styled.Text`
+export const LoginHeader = styled.Text<CustomThemeProps>`
   font-family: 'Poppins_700Bold';
   font-size: 22px;
-  color: ${colors.textHeaders};
+  color: ${props => props.theme.colors.textHeaders};
 `;
 
-export const CreateAccountRedirect = styled.Text`
+export const CreateAccountRedirect = styled.Text<CustomThemeProps>`
   font-family: 'Archivo_400Regular';
-  color: ${colors.primary};
+  color: ${props => props.theme.colors.primary};
 `;
 
 export const InputContainer = styled.View`
   margin-top: 40px;
 `;
 
-export const Input = styled.TextInput`
+export const Input = styled.TextInput<CustomThemeProps>`
   font-family: 'Archivo_400Regular';
   font-size: 16px;
-  background: ${colors.inputBackground};
-  color: ${colors.inputText};
-  border: 1px solid ${colors.secondaryDark};
+  background: ${props => props.theme.colors.inputBackground};
+  color: ${props => props.theme.colors.inputText};
+  border: 1px solid ${props => props.theme.colors.secondaryDark};
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border-bottom-left-radius: 0;
@@ -68,13 +69,13 @@ export const Input = styled.TextInput`
   padding: 16px 24px;
 `;
 
-export const SecondInput = styled.TextInput`
+export const SecondInput = styled.TextInput<CustomThemeProps>`
   font-family: 'Archivo_400Regular';
   font-size: 16px;
-  background: ${colors.inputBackground};
-  color: ${colors.inputText};
+  background: ${props => props.theme.colors.inputBackground};
+  color: ${props => props.theme.colors.inputText};
 
-  border: 1px solid ${colors.secondaryDark};
+  border: 1px solid ${props => props.theme.colors.secondaryDark};
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-left-radius: 4px;
@@ -90,11 +91,11 @@ export const ForgotPasswordContainer = styled.View`
   justify-content: center;
 `;
 
-export const ForgotPassword = styled.Text`
-  color: ${colors.inputText};
+export const ForgotPassword = styled.Text<CustomThemeProps>`
+  color: ${props => props.theme.colors.inputText};
 `;
 
-interface ButtonProps {
+interface ButtonProps extends CustomThemeProps, TouchableOpacityProps {
   active: boolean;
 }
 
@@ -105,13 +106,16 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   height: 65px;
   border-radius: 8px;
 
-  background: ${props => (props.active ? colors.confirm : colors.secondary)};
+  background: ${props =>
+    props.active ? props.theme.colors.confirm : props.theme.colors.secondary};
 `;
 
 export const ButtonText = styled.Text<ButtonProps>`
   font-family: 'Poppins_600SemiBold';
   color: ${props =>
-    props.active ? colors.secondaryDark : colors.secondaryLight};
+    props.active
+      ? props.theme.colors.secondaryDark
+      : props.theme.colors.secondaryLight};
 
   font-size: 22px;
 `;
