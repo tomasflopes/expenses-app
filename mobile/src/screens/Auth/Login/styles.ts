@@ -66,15 +66,21 @@ export const Input = styled.TextInput`
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   padding: 16px 24px;
+`;
 
-  & + & {
-    border: 1px solid ${colors.secondaryDark};
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-width: 0;
-  }
+export const SecondInput = styled.TextInput`
+  font-family: 'Archivo_400Regular';
+  font-size: 16px;
+  background: ${colors.inputBackground};
+  color: ${colors.inputText};
+
+  border: 1px solid ${colors.secondaryDark};
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top-width: 0;
+  padding: 16px 24px;
 `;
 
 export const ForgotPasswordContainer = styled.View`

@@ -1,39 +1,35 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
 import colors from '../../styles/colors';
 
-const styles = StyleSheet.create({
-  expense: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 16
-  },
+export const Container = styled.View`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+`;
 
-  expenseTitle: {
-    color: colors.textHeaders,
-    fontSize: 15,
-    fontFamily: 'Archivo_400Regular'
-  },
+export const ExpenseTitle = styled.Text`
+  color: ${colors.textHeaders};
+  font-size: 15px;
+  font-family: 'Archivo_400Regular';
+`;
 
-  expenseDate: {
-    fontFamily: 'Archivo_400Regular',
-    color: colors.secondaryDark,
-    fontSize: 12
-  },
+export const ExpenseDate = styled.Text`
+  font-family: 'Archivo_400Regular';
+  color: ${colors.secondaryDark};
+  font-size: 12px;
+`;
 
-  incomeAmount: {
-    fontFamily: 'Poppins_700Bold',
-    color: colors.confirm,
-    fontSize: 14
-  },
+export const IncomeAmount = styled.Text`
+  font-family: 'Poppins_700Bold';
+  color: ${colors.confirm};
+  font-size: 14px;
+`;
 
-  expenseAmount: {
-    fontFamily: 'Poppins_700Bold',
-    color: colors.cancel,
-    fontSize: 14
-  }
-});
-
-export default styles;
+export const ExpenseAmount = styled.Text`
+  font-family: 'Poppins_700Bold';
+  color: ${colors.cancel};
+  font-size: 14px;
+`;

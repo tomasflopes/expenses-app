@@ -18,6 +18,7 @@ import {
   CreateAccountRedirect,
   InputContainer,
   Input,
+  SecondInput,
   ForgotPasswordContainer,
   ForgotPassword,
   Button,
@@ -50,6 +51,7 @@ const Login: React.FC = () => {
   }
 
   function checkButtonEnable() {
+    console.log(email, password);
     const emailValid = validateEmail(email);
     const passwordValid = validatePassword(password);
 
@@ -76,6 +78,8 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     checkButtonEnable();
+
+    console.log(buttonEnabled);
   }, [email, password]);
 
   return (
@@ -106,7 +110,7 @@ const Login: React.FC = () => {
             onSubmitEditing={() => input2Ref.current?.focus()}
             value={email}
           ></Input>
-          <Input
+          <SecondInput
             ref={input2Ref}
             placeholder="Password"
             autoCompleteType="password"
@@ -117,7 +121,7 @@ const Login: React.FC = () => {
             onChangeText={setPassword}
             onSubmitEditing={handleSubmitForm}
             value={password}
-          ></Input>
+          ></SecondInput>
         </InputContainer>
 
         <ForgotPasswordContainer>
@@ -125,11 +129,11 @@ const Login: React.FC = () => {
         </ForgotPasswordContainer>
 
         <Button
-          active={buttonEnabled ? false : true}
+          active={buttonEnabled ? true : false}
           ref={buttonRef}
           onPress={handleSubmitForm}
         >
-          <ButtonText active={buttonEnabled ? true : false}>Login</ButtonText>
+          <ButtonText active={buttonEnabled ? false : true}>Login</ButtonText>
         </Button>
       </MainContainer>
     </Container>
