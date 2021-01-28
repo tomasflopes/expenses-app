@@ -60,7 +60,7 @@ export const BalanceText = styled.Text<CustomThemeProps>`
   top: ${props => props.theme.units.margin.xsm}px;
   font-family: ${props => props.theme.fonts.Poppins.medium};
   color: ${props => props.theme.colors.primaryDark};
-  margin-right: ${props => props.theme.units.margin.tiny};
+  margin-right: ${props => props.theme.units.margin.tiny}px;
 `;
 
 export const CurrencyText = styled.Text<CustomThemeProps>`
