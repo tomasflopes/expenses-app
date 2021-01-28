@@ -9,7 +9,7 @@ import { AppLoading } from 'expo';
 
 import { ThemeProvider } from 'styled-components';
 
-import { light } from './src/styles/theme'; // TODO implement theme switcher
+import { light } from './src/styles/theme';
 
 import {
   Poppins_300Light,
