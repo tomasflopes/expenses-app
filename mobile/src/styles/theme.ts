@@ -1,4 +1,54 @@
+const generalProps = {
+  fonts: {
+    Poppins: {
+      light: 'Poppins_300Light',
+      regular: 'Poppins_400Regular',
+      medium: 'Poppins_500Medium',
+      semiBold: 'Poppins_600SemiBold',
+      bold: 'Poppins_700Bold'
+    },
+    Archivo: {
+      regular: 'Archivo_400Regular',
+      bold: 'Archivo_700Bold'
+    }
+  },
+  constants: {
+    DEADZONE_HEIGHT: 235,
+    AVATAR_WIDTH: 120,
+    BUTTON_HEIGHT: 64,
+    DOT_WIDTH: 4,
+    PROFILE_CONTAINER_HEIGHT: 72,
+    LOGO_WIDTH: 350,
+    LOGO_HEIGHT: 320
+  },
+  units: {
+    margin: {
+      tiny: 4,
+      xsm: 8,
+      sm: 16,
+      md: 24,
+      lg: 32,
+      xlg: 40,
+      xxl: 80
+    },
+    borderRadius: {
+      sm: 4,
+      md: 8
+    },
+    fontSize: {
+      xsm: 12,
+      sm: 13,
+      md: 14,
+      input: 16,
+      big: 18,
+      header: 20,
+      bigHeader: 22
+    }
+  }
+};
+
 export const dark = {
+  ...generalProps,
   // TODO: Choose dark theme color palete
   colors: {
     primary: '#000',
@@ -21,6 +71,7 @@ export const dark = {
 };
 
 export const light = {
+  ...generalProps,
   colors: {
     primary: '#42A5F5',
     primaryLight: '#9BE7FF',
@@ -44,39 +95,48 @@ export const light = {
 type Theme = {
   fonts: {
     Poppins: {
-      light: 'Poppins_300Light';
-      regular: 'Poppins_400Regular';
-      medium: 'Poppins_500Medium';
-      semiBold: 'Poppins_600SemiBold';
-      bold: 'Poppins_700Bold';
+      light: string;
+      regular: string;
+      medium: string;
+      semiBold: string;
+      bold: string;
     };
     Archivo: {
-      regular: 'Archivo_400Regular';
-      bold: 'Archivo_700Bold';
+      regular: string;
+      bold: string;
     };
   };
   constants: {
-    DEADZONE_HEIGHT: 235;
-    AVATAR_WIDTH: 120;
+    DEADZONE_HEIGHT: number;
+    AVATAR_WIDTH: number;
+    BUTTON_HEIGHT: number;
+    DOT_WIDTH: number;
+    PROFILE_CONTAINER_HEIGHT: number;
+    LOGO_WIDTH: number;
+    LOGO_HEIGHT: number;
   };
   units: {
     margin: {
-      tiny: 4;
-      xsm: 8;
-      sm: 16;
-      md: 24;
-      lg: 32;
-      xlg: 40;
+      tiny: number;
+      xsm: number;
+      sm: number;
+      md: number;
+      lg: number;
+      xlg: number;
+      xxl: number;
     };
     borderRadius: {
-      sm: 4;
-      md: 8;
+      sm: number;
+      md: number;
     };
     fontSize: {
-      xsm: 13;
-      sm: 14;
-      md: 14;
-      big: 20;
+      xsm: number;
+      sm: number;
+      md: number;
+      input: number;
+      big: number;
+      header: number;
+      bigHeader: number;
     };
   };
 

@@ -36,7 +36,7 @@ import {
 
 import Expense from '../../components/Expense';
 
-import theme from '../../styles/theme';
+import { light } from '../../styles/theme'; // TODO: Implement exception to theme changing
 
 const Home: React.FC = () => {
   const [hidden, setHidden] = useState(true);
@@ -74,7 +74,7 @@ const Home: React.FC = () => {
                 <Feather
                   name="eye"
                   size={22}
-                  color={colors.primaryDark}
+                  color={light.colors.primaryDark}
                   style={{ marginBottom: -4 }}
                 />
               </TouchableOpacity>
@@ -90,7 +90,7 @@ const Home: React.FC = () => {
                 <Feather
                   name="eye-off"
                   size={22}
-                  color={theme.colors.primaryDark}
+                  color={light.colors.primaryDark}
                   style={{ marginTop: 8 }}
                 />
               </TouchableOpacity>

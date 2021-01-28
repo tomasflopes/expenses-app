@@ -51,7 +51,6 @@ const Login: React.FC = () => {
   }
 
   function checkButtonEnable() {
-    console.log(email, password);
     const emailValid = validateEmail(email);
     const passwordValid = validatePassword(password);
 
@@ -78,8 +77,6 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     checkButtonEnable();
-
-    console.log(buttonEnabled);
   }, [email, password]);
 
   return (

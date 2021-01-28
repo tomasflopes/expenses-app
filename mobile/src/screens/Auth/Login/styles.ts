@@ -8,84 +8,85 @@ export const Container = styled.View`
 `;
 
 export const DeadZone = styled.View<CustomThemeProps>`
-  flex: 2;
+  height: ${props => props.theme.constants.DEADZONE_HEIGHT}px;
   background: ${props => props.theme.colors.primary};
   align-items: center;
 `;
 
-export const LogoContainer = styled.View`
-  width: 350px;
-  height: 230px;
-  position: relative;
+export const LogoContainer = styled.View<CustomThemeProps>`
+  align-items: flex-start;
+  justify-content: center;
 `;
 
 export const Slogan = styled.Text<CustomThemeProps>`
-  font-family: 'Archivo_400Regular';
-  font-size: 18px;
+  font-family: ${props => props.theme.fonts.Archivo.regular};
+  font-size: ${props => props.theme.units.fontSize.big}px;
   color: ${props => props.theme.colors.primaryLight};
   position: absolute;
-  bottom: 0;
-  left: 85px;
+  top: ${props => props.theme.constants.DEADZONE_HEIGHT - 64}px;
+  left: 24%;
 `;
 
 export const MainContainer = styled.View<CustomThemeProps>`
   flex: 3;
   background: ${props => props.theme.colors.background};
-  padding: 0 32px;
+  padding: 0 ${props => props.theme.units.margin.lg}px;
 `;
 
-export const FirstRow = styled.View`
-  margin-top: 40px;
+export const FirstRow = styled.View<CustomThemeProps>`
+  margin-top: ${props => props.theme.units.margin.xlg}px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 `;
 
 export const LoginHeader = styled.Text<CustomThemeProps>`
-  font-family: 'Poppins_700Bold';
-  font-size: 22px;
+  font-family: ${props => props.theme.fonts.Poppins.bold};
+  font-size: ${props => props.theme.units.fontSize.bigHeader}px;
   color: ${props => props.theme.colors.textHeaders};
 `;
 
 export const CreateAccountRedirect = styled.Text<CustomThemeProps>`
-  font-family: 'Archivo_400Regular';
+  font-family: ${props => props.theme.fonts.Archivo.regular};
   color: ${props => props.theme.colors.primary};
 `;
 
-export const InputContainer = styled.View`
-  margin-top: 40px;
+export const InputContainer = styled.View<CustomThemeProps>`
+  margin-top: ${props => props.theme.units.margin.xlg}px;
 `;
 
 export const Input = styled.TextInput<CustomThemeProps>`
-  font-family: 'Archivo_400Regular';
-  font-size: 16px;
+  font-family: ${props => props.theme.fonts.Archivo.regular};
+  font-size: ${props => props.theme.units.fontSize.input}px;
   background: ${props => props.theme.colors.inputBackground};
   color: ${props => props.theme.colors.inputText};
   border: 1px solid ${props => props.theme.colors.secondaryDark};
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-top-left-radius: ${props => props.theme.units.borderRadius.sm}px;
+  border-top-right-radius: ${props => props.theme.units.borderRadius.sm}px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  padding: 16px 24px;
+  padding: ${props => props.theme.units.margin.sm}px
+    ${props => props.theme.units.margin.md}px;
 `;
 
 export const SecondInput = styled.TextInput<CustomThemeProps>`
-  font-family: 'Archivo_400Regular';
-  font-size: 16px;
+  font-family: ${props => props.theme.fonts.Archivo.regular};
+  font-size: ${props => props.theme.units.fontSize.input}px;
   background: ${props => props.theme.colors.inputBackground};
   color: ${props => props.theme.colors.inputText};
 
   border: 1px solid ${props => props.theme.colors.secondaryDark};
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: ${props => props.theme.units.borderRadius.sm}px;
+  border-bottom-right-radius: ${props => props.theme.units.borderRadius.sm}px;
   border-top-width: 0;
-  padding: 16px 24px;
+  padding: ${props => props.theme.units.margin.sm}px
+    ${props => props.theme.units.margin.md}px;
 `;
 
-export const ForgotPasswordContainer = styled.View`
-  margin-top: 32px;
+export const ForgotPasswordContainer = styled.View<CustomThemeProps>`
+  margin-top: ${props => props.theme.units.margin.lg}px;
   width: 100%;
   align-items: flex-end;
   justify-content: center;
@@ -100,22 +101,22 @@ interface ButtonProps extends CustomThemeProps, TouchableOpacityProps {
 }
 
 export const Button = styled.TouchableOpacity<ButtonProps>`
-  margin-top: 40px;
+  margin-top: ${props => props.theme.units.margin.xlg}px;
   align-items: center;
   justify-content: center;
-  height: 65px;
-  border-radius: 8px;
+  height: ${props => props.theme.constants.BUTTON_HEIGHT}px;
+  border-radius: ${props => props.theme.units.borderRadius.md}px;
 
   background: ${props =>
     props.active ? props.theme.colors.confirm : props.theme.colors.secondary};
 `;
 
 export const ButtonText = styled.Text<ButtonProps>`
-  font-family: 'Poppins_600SemiBold';
+  font-family: ${props => props.theme.fonts.Poppins.semiBold};
   color: ${props =>
     props.active
       ? props.theme.colors.secondaryDark
       : props.theme.colors.secondaryLight};
 
-  font-size: 22px;
+  font-size: ${props => props.theme.units.fontSize.bigHeader}px;
 `;
