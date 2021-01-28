@@ -7,29 +7,29 @@ export const Container = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: ${props => props.theme.units.margin.sm}px;
 `;
 
 export const ExpenseTitle = styled.Text<CustomThemeProps>`
   color: ${props => props.theme.colors.textHeaders};
-  font-size: 15px;
-  font-family: 'Archivo_400Regular';
+  font-size: ${props => props.theme.units.fontSize.md}px;
+  font-family: ${props => props.theme.fonts.Archivo.regular};
 `;
 
 export const ExpenseDate = styled.Text<CustomThemeProps>`
-  font-family: 'Archivo_400Regular';
+  font-family: ${props => props.theme.fonts.Archivo.regular};
   color: ${props => props.theme.colors.secondaryDark};
-  font-size: 12px;
+  font-size: ${props => props.theme.units.fontSize.xsm}px;
 `;
 
 export const IncomeAmount = styled.Text<CustomThemeProps>`
-  font-family: 'Poppins_700Bold';
+  font-family: ${props => props.theme.fonts.Poppins.bold};
   color: ${props => props.theme.colors.confirm};
-  font-size: 14px;
+  font-size:  ${props => props.theme.units.fontSize.md}px;
 `;
 
 export const ExpenseAmount = styled.Text<CustomThemeProps>`
-  font-family: 'Poppins_700Bold';
+  font-family: ${props => props.theme.fonts.Poppins.bold};
   color: ${props => props.theme.colors.cancel};
-  font-size: 14px;
+  font-size: ${props => props.theme.units.fontSize.md}px;
 `;
