@@ -119,7 +119,7 @@ export const ViewProfileText = styled.Text<CustomThemeProps>`
 
 export const MainContainer = styled.ScrollView<CustomThemeProps>`
   flex: 3;
-  margin-top: ${props => props.theme.units.margin.xxl};
+  margin-top: ${props => props.theme.units.margin.xxl}px;
   padding: 0 ${props => props.theme.units.margin.lg}px;
 `;
 
