@@ -23,7 +23,7 @@ const MainRoutes = () => {
         component={ProfileScreen}
         options={{
           headerShown: true,
-          header: () => <Header title="Orphanage" />
+          header: () => <Header title="Profile" />
         }}
       />
     </Stack.Navigator>

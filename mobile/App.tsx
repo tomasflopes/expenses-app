@@ -38,17 +38,17 @@ export default function App() {
 
   if (!fontsLoaded) {
     return <AppLoading />;
-  } else {
-    return (
-      <>
-        <StatusBar style="light" />
-
-        <AuthProvider>
-          <ThemeProvider theme={light}>
-            <Routes />
-          </ThemeProvider>
-        </AuthProvider>
-      </>
-    );
   }
+
+  return (
+    <>
+      <StatusBar style="light" />
+
+      <AuthProvider>
+        <ThemeProvider theme={light}>
+          <Routes />
+        </ThemeProvider>
+      </AuthProvider>
+    </>
+  );
 }
