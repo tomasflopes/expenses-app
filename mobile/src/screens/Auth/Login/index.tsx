@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import { Image, TouchableOpacity, TextInput } from 'react-native';
+import { Image, TouchableOpacity, TextInput, Keyboard } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -33,6 +33,8 @@ const Login: React.FC = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
 
   const [buttonEnabled, setButtonEnabled] = useState(false);
 
@@ -79,14 +81,34 @@ const Login: React.FC = () => {
     checkButtonEnable();
   }, [email, password]);
 
+  useEffect(() => {
+    Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardOpen(true);
+    });
+    Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardOpen(false);
+    });
+
+    return () => {
+      Keyboard.removeListener('keyboardDidShow', () => {
+        setKeyboardOpen(true);
+      });
+      Keyboard.removeListener('keyboardDidHide', () => {
+        setKeyboardOpen(false);
+      });
+    };
+  }, []);
+
   return (
     <Container>
-      <DeadZone>
-        <LogoContainer>
-          <Image source={require('../../../assets/logo.png')} />
-          <Slogan>Saving is easy!</Slogan>
-        </LogoContainer>
-      </DeadZone>
+      {!keyboardOpen && (
+        <DeadZone>
+          <LogoContainer>
+            <Image source={require('../../../assets/logo.png')} />
+            <Slogan>Saving is easy!</Slogan>
+          </LogoContainer>
+        </DeadZone>
+      )}
       <MainContainer>
         <FirstRow>
           <LoginHeader>Login</LoginHeader>
@@ -115,6 +137,7 @@ const Login: React.FC = () => {
             secureTextEntry={true}
             returnKeyType="done"
             textContentType="password"
+            onChange={() => setKeyboardOpen(true)}
             onChangeText={setPassword}
             onSubmitEditing={handleSubmitForm}
             value={password}

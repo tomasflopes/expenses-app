@@ -95,48 +95,48 @@ export const light = {
 type Theme = {
   fonts: {
     Poppins: {
-      light: string;
-      regular: string;
-      medium: string;
-      semiBold: string;
-      bold: string;
+      light: 'Poppins_300Light';
+      regular: 'Poppins_400Regular';
+      medium: 'Poppins_500Medium';
+      semiBold: 'Poppins_600SemiBold';
+      bold: 'Poppins_700Bold';
     };
     Archivo: {
-      regular: string;
-      bold: string;
+      regular: 'Archivo_400Regular';
+      bold: 'Archivo_700Bold';
     };
   };
   constants: {
-    DEADZONE_HEIGHT: number;
-    AVATAR_WIDTH: number;
-    BUTTON_HEIGHT: number;
-    DOT_WIDTH: number;
-    PROFILE_CONTAINER_HEIGHT: number;
-    LOGO_WIDTH: number;
-    LOGO_HEIGHT: number;
+    DEADZONE_HEIGHT: 235;
+    AVATAR_WIDTH: 120;
+    BUTTON_HEIGHT: 64;
+    DOT_WIDTH: 4;
+    PROFILE_CONTAINER_HEIGHT: 72;
+    LOGO_WIDTH: 350;
+    LOGO_HEIGHT: 320;
   };
   units: {
     margin: {
-      tiny: number;
-      xsm: number;
-      sm: number;
-      md: number;
-      lg: number;
-      xlg: number;
-      xxl: number;
+      tiny: 4;
+      xsm: 8;
+      sm: 16;
+      md: 24;
+      lg: 32;
+      xlg: 40;
+      xxl: 80;
     };
     borderRadius: {
-      sm: number;
-      md: number;
+      sm: 4;
+      md: 8;
     };
     fontSize: {
-      xsm: number;
-      sm: number;
-      md: number;
-      input: number;
-      big: number;
-      header: number;
-      bigHeader: number;
+      xsm: 12;
+      sm: 13;
+      md: 14;
+      input: 16;
+      big: 18;
+      header: 20;
+      bigHeader: 22;
     };
   };
 
