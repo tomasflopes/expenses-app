@@ -1,7 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 
-import styles from './styles';
+import {
+  Container,
+  ExpenseTitle,
+  ExpenseDate,
+  IncomeAmount,
+  ExpenseAmount
+} from './styles';
 
 interface Props {
   name: string;
@@ -11,15 +16,15 @@ interface Props {
 
 const Expense: React.FC<Props> = ({ name, date, amount }) => {
   return (
-    <View style={styles.expense}>
-      <Text style={styles.expenseTitle}>{name}</Text>
-      <Text style={styles.expenseDate}>{date}</Text>
+    <Container>
+      <ExpenseTitle>{name}</ExpenseTitle>
+      <ExpenseDate>{date}</ExpenseDate>
       {amount > 0 ? (
-        <Text style={styles.incomeAmount}>+{amount.toFixed(2)}€</Text>
+        <IncomeAmount>+{amount.toFixed(2)}€</IncomeAmount>
       ) : (
-        <Text style={styles.expenseAmount}>{amount.toFixed(2)}€</Text>
+        <ExpenseAmount>{amount.toFixed(2)}€</ExpenseAmount>
       )}
-    </View>
+    </Container>
   );
 };
 

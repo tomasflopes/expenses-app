@@ -1,39 +1,35 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
-import colors from '../../styles/colors';
+import { CustomThemeProps } from '../../styles/theme';
 
-const styles = StyleSheet.create({
-  expense: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 16
-  },
+export const Container = styled.View`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: ${props => props.theme.units.margin.sm}px;
+`;
 
-  expenseTitle: {
-    color: colors.textHeaders,
-    fontSize: 15,
-    fontFamily: 'Archivo_400Regular'
-  },
+export const ExpenseTitle = styled.Text<CustomThemeProps>`
+  color: ${props => props.theme.colors.textHeaders};
+  font-size: ${props => props.theme.units.fontSize.md}px;
+  font-family: ${props => props.theme.fonts.Archivo.regular};
+`;
 
-  expenseDate: {
-    fontFamily: 'Archivo_400Regular',
-    color: colors.secondaryDark,
-    fontSize: 12
-  },
+export const ExpenseDate = styled.Text<CustomThemeProps>`
+  font-family: ${props => props.theme.fonts.Archivo.regular};
+  color: ${props => props.theme.colors.secondaryDark};
+  font-size: ${props => props.theme.units.fontSize.xsm}px;
+`;
 
-  incomeAmount: {
-    fontFamily: 'Poppins_700Bold',
-    color: colors.confirm,
-    fontSize: 14
-  },
+export const IncomeAmount = styled.Text<CustomThemeProps>`
+  font-family: ${props => props.theme.fonts.Poppins.bold};
+  color: ${props => props.theme.colors.confirm};
+  font-size:  ${props => props.theme.units.fontSize.md}px;
+`;
 
-  expenseAmount: {
-    fontFamily: 'Poppins_700Bold',
-    color: colors.cancel,
-    fontSize: 14
-  }
-});
-
-export default styles;
+export const ExpenseAmount = styled.Text<CustomThemeProps>`
+  font-family: ${props => props.theme.fonts.Poppins.bold};
+  color: ${props => props.theme.colors.cancel};
+  font-size: ${props => props.theme.units.fontSize.md}px;
+`;

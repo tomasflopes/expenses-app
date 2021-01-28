@@ -1,123 +1,122 @@
-import { StyleSheet } from 'react-native';
-import { color } from 'react-native-reanimated';
+import { TouchableOpacityProps } from 'react-native';
+import styled from 'styled-components/native';
 
-import colors from '../../../styles/colors';
+import { CustomThemeProps } from '../../../styles/theme';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
+export const Container = styled.View`
+  flex: 1;
+`;
 
-  deadZone: {
-    flex: 2,
-    backgroundColor: colors.primary,
-    alignItems: 'center'
-  },
+export const DeadZone = styled.View<CustomThemeProps>`
+  height: ${props => props.theme.constants.DEADZONE_HEIGHT}px;
+  background: ${props => props.theme.colors.primary};
+  align-items: center;
+`;
 
-  logoContainer: {
-    width: 350,
-    height: 230,
-    position: 'relative'
-  },
+export const LogoContainer = styled.View<CustomThemeProps>`
+  align-items: flex-start;
+  justify-content: center;
+`;
 
-  slogan: {
-    fontFamily: 'Archivo_400Regular',
-    fontSize: 18,
-    color: colors.primaryLight,
-    position: 'absolute',
-    bottom: 0,
-    left: 85
-  },
+export const Slogan = styled.Text<CustomThemeProps>`
+  font-family: ${props => props.theme.fonts.Archivo.regular};
+  font-size: ${props => props.theme.units.fontSize.big}px;
+  color: ${props => props.theme.colors.primaryLight};
+  position: absolute;
+  top: ${props => props.theme.constants.DEADZONE_HEIGHT - 64}px;
+  left: 24%;
+`;
 
-  mainContainer: {
-    flex: 3,
-    backgroundColor: colors.background,
-    paddingHorizontal: 32
-  },
+export const MainContainer = styled.View<CustomThemeProps>`
+  flex: 3;
+  background: ${props => props.theme.colors.background};
+  padding: 0 ${props => props.theme.units.margin.lg}px;
+`;
 
-  firstRow: {
-    marginTop: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
+export const FirstRow = styled.View<CustomThemeProps>`
+  margin-top: ${props => props.theme.units.margin.xlg}px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
 
-  loginHeader: {
-    fontFamily: 'Poppins_700Bold',
-    fontSize: 22,
-    color: colors.textHeaders
-  },
+export const LoginHeader = styled.Text<CustomThemeProps>`
+  font-family: ${props => props.theme.fonts.Poppins.bold};
+  font-size: ${props => props.theme.units.fontSize.bigHeader}px;
+  color: ${props => props.theme.colors.textHeaders};
+`;
 
-  createAccountRedirect: {
-    fontFamily: 'Archivo_400Regular',
-    color: colors.primary
-  },
+export const CreateAccountRedirect = styled.Text<CustomThemeProps>`
+  font-family: ${props => props.theme.fonts.Archivo.regular};
+  color: ${props => props.theme.colors.primary};
+`;
 
-  inputContainer: {
-    marginTop: 40
-  },
+export const InputContainer = styled.View<CustomThemeProps>`
+  margin-top: ${props => props.theme.units.margin.xlg}px;
+`;
 
-  input: {
-    fontFamily: 'Archivo_400Regular',
-    fontSize: 16,
-    backgroundColor: colors.inputBackground,
-    color: colors.inputText,
-    borderWidth: 1,
-    borderColor: colors.secondaryDark,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    paddingHorizontal: 24,
-    paddingVertical: 16
-  },
+export const Input = styled.TextInput<CustomThemeProps>`
+  font-family: ${props => props.theme.fonts.Archivo.regular};
+  font-size: ${props => props.theme.units.fontSize.input}px;
+  background: ${props => props.theme.colors.inputBackground};
+  color: ${props => props.theme.colors.inputText};
+  border: 1px solid ${props => props.theme.colors.secondaryDark};
+  border-top-left-radius: ${props => props.theme.units.borderRadius.sm}px;
+  border-top-right-radius: ${props => props.theme.units.borderRadius.sm}px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: ${props => props.theme.units.margin.sm}px
+    ${props => props.theme.units.margin.md}px;
+`;
 
-  bottomInput: {
-    borderTopWidth: 0,
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-    borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4
-  },
+export const SecondInput = styled.TextInput<CustomThemeProps>`
+  font-family: ${props => props.theme.fonts.Archivo.regular};
+  font-size: ${props => props.theme.units.fontSize.input}px;
+  background: ${props => props.theme.colors.inputBackground};
+  color: ${props => props.theme.colors.inputText};
 
-  forgotPasswordContainer: {
-    marginTop: 32,
-    width: '100%',
-    alignItems: 'flex-end',
-    justifyContent: 'center'
-  },
+  border: 1px solid ${props => props.theme.colors.secondaryDark};
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: ${props => props.theme.units.borderRadius.sm}px;
+  border-bottom-right-radius: ${props => props.theme.units.borderRadius.sm}px;
+  border-top-width: 0;
+  padding: ${props => props.theme.units.margin.sm}px
+    ${props => props.theme.units.margin.md}px;
+`;
 
-  forgotPassword: {
-    color: colors.inputText
-  },
+export const ForgotPasswordContainer = styled.View<CustomThemeProps>`
+  margin-top: ${props => props.theme.units.margin.lg}px;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: center;
+`;
 
-  button: {
-    marginTop: 40,
-    backgroundColor: colors.secondary,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 65,
-    borderRadius: 8
-  },
+export const ForgotPassword = styled.Text<CustomThemeProps>`
+  color: ${props => props.theme.colors.inputText};
+`;
 
-  buttonDisabled: {
-    marginTop: 40,
-    backgroundColor: colors.confirm,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 65,
-    borderRadius: 8
-  },
+interface ButtonProps extends CustomThemeProps, TouchableOpacityProps {
+  active: boolean;
+}
 
-  buttonText: {
-    color: colors.secondaryLight,
-    fontSize: 22,
-    fontFamily: 'Poppins_600SemiBold'
-  },
+export const Button = styled.TouchableOpacity<ButtonProps>`
+  margin-top: ${props => props.theme.units.margin.xlg}px;
+  align-items: center;
+  justify-content: center;
+  height: ${props => props.theme.constants.BUTTON_HEIGHT}px;
+  border-radius: ${props => props.theme.units.borderRadius.md}px;
 
-  buttonTextDisabled: {
-    color: colors.secondaryDark,
-    fontSize: 22,
-    fontFamily: 'Poppins_600SemiBold'
-  }
-});
+  background: ${props =>
+    props.active ? props.theme.colors.confirm : props.theme.colors.secondary};
+`;
 
-export default styles;
+export const ButtonText = styled.Text<ButtonProps>`
+  font-family: ${props => props.theme.fonts.Poppins.semiBold};
+  color: ${props =>
+    props.active
+      ? props.theme.colors.secondaryDark
+      : props.theme.colors.secondaryLight};
+
+  font-size: ${props => props.theme.units.fontSize.bigHeader}px;
+`;

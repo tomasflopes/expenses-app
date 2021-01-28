@@ -22,7 +22,12 @@ const Routes: React.FC = () => {
     }
   }
 
+  async function clearStorage() {
+    await AsyncStorage.clear();
+  }
+
   useEffect(() => {
+    clearStorage();
     checkLogin();
   }, []);
 
