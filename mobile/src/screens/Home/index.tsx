@@ -18,6 +18,7 @@ import {
   HiddenBalance,
   HiddenText,
   AvatarContainer,
+  AvatarButton,
   Avatar,
   AvatarOverlay,
   ViewProfileTextButton,
@@ -99,19 +100,21 @@ const Home: React.FC = () => {
         </ProfileInfoContainer>
       </DeadZone>
 
-      <AvatarContainer onPress={toggleAvatarFocus}>
-        <Avatar
-          imageStyle={{ borderRadius: 120 / 2 }}
-          source={{ uri: 'http://www.github.com/tomas050302.png' }}
-        >
-          {avatarFocused && (
-            <AvatarOverlay>
-              <ViewProfileTextButton onPress={navigateToProfile}>
-                <ViewProfileText>View Profile</ViewProfileText>
-              </ViewProfileTextButton>
-            </AvatarOverlay>
-          )}
-        </Avatar>
+      <AvatarContainer>
+        <AvatarButton onPress={toggleAvatarFocus}>
+          <Avatar
+            imageStyle={{ borderRadius: 120 / 2 }}
+            source={{ uri: 'http://www.github.com/tomas050302.png' }}
+          >
+            {avatarFocused && (
+              <AvatarOverlay>
+                <ViewProfileTextButton onPress={navigateToProfile}>
+                  <ViewProfileText>View Profile</ViewProfileText>
+                </ViewProfileTextButton>
+              </AvatarOverlay>
+            )}
+          </Avatar>
+        </AvatarButton>
       </AvatarContainer>
 
       <MainContainer>

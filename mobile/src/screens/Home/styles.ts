@@ -81,14 +81,22 @@ export const HiddenText = styled.Text<CustomThemeProps>`
   font-size: ${props => props.theme.units.fontSize.xsm}px;
 `;
 
-export const AvatarContainer = styled.TouchableOpacity<CustomThemeProps>`
+export const AvatarContainer = styled.View<CustomThemeProps>`
   align-items: center;
   justify-content: center;
-  position: absolute;
   width: 100%;
+
+  position: absolute;
+
   top: ${props =>
     props.theme.constants.DEADZONE_HEIGHT -
     props.theme.constants.AVATAR_WIDTH / 2}px;
+`;
+
+export const AvatarButton = styled.TouchableOpacity<CustomThemeProps>`
+  height: ${props => props.theme.constants.AVATAR_WIDTH}px;
+  width: ${props => props.theme.constants.AVATAR_WIDTH}px;
+
   border-radius: ${props => props.theme.constants.AVATAR_WIDTH / 2}px;
 `;
 
