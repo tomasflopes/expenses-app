@@ -11,7 +11,7 @@ import { Container, Title } from './styles';
 import { light } from '../../styles/theme'; // TODO: Implement custom theme
 
 interface Props {
-  title: string;
+  title?: string;
 }
 
 const Header: React.FC<Props> = ({ title }) => {
@@ -27,7 +27,7 @@ const Header: React.FC<Props> = ({ title }) => {
         />
       </BorderlessButton>
 
-      <Title>{title}</Title>
+      {title ? <Title>{title}</Title> : <View />}
 
       <View />
     </Container>
