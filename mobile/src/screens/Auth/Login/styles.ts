@@ -7,26 +7,6 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-export const DeadZone = styled.View<CustomThemeProps>`
-  height: ${props => props.theme.constants.DEADZONE_HEIGHT}px;
-  background: ${props => props.theme.colors.primary};
-  align-items: center;
-`;
-
-export const LogoContainer = styled.View<CustomThemeProps>`
-  align-items: flex-start;
-  justify-content: center;
-`;
-
-export const Slogan = styled.Text<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-  font-size: ${props => props.theme.units.fontSize.big}px;
-  color: ${props => props.theme.colors.primaryLight};
-  position: absolute;
-  top: ${props => props.theme.constants.DEADZONE_HEIGHT - 64}px;
-  left: 24%;
-`;
-
 export const MainContainer = styled.View<CustomThemeProps>`
   flex: 3;
   background: ${props => props.theme.colors.background};
@@ -85,7 +65,7 @@ export const SecondInput = styled.TextInput<CustomThemeProps>`
     ${props => props.theme.units.margin.md}px;
 `;
 
-export const ForgotPasswordContainer = styled.View<CustomThemeProps>`
+export const ForgotPasswordButton = styled.TouchableOpacity<CustomThemeProps>`
   margin-top: ${props => props.theme.units.margin.lg}px;
   width: 100%;
   align-items: flex-end;

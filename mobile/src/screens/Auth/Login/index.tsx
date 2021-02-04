@@ -1,17 +1,20 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import { Image, TouchableOpacity, TextInput, Keyboard } from 'react-native';
+import { TouchableOpacity, TextInput } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
 import AuthContext from '../../../context/auth';
 
+import useOpenKeyboard from '../../../hooks/useOpenKeyboard';
+
 import api from '../../../services/api';
+
+import DeadZone from '../../../components/DeadZone';
 
 import {
   Container,
-  DeadZone,
-  LogoContainer,
-  Slogan,
   MainContainer,
   FirstRow,
   LoginHeader,
@@ -19,7 +22,7 @@ import {
   InputContainer,
   Input,
   SecondInput,
-  ForgotPasswordContainer,
+  ForgotPasswordButton,
   ForgotPassword,
   Button,
   ButtonText
@@ -34,11 +37,13 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [keyboardOpen, setKeyboardOpen] = useState(false);
-
   const [buttonEnabled, setButtonEnabled] = useState(false);
 
+  const keyboardOpen = useOpenKeyboard();
+
   const { SignIn } = useContext(AuthContext);
+
+  const navigation = useNavigation();
 
   function validateEmail(email: string): Boolean {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -81,34 +86,13 @@ const Login: React.FC = () => {
     checkButtonEnable();
   }, [email, password]);
 
-  useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', () => {
-      setKeyboardOpen(true);
-    });
-    Keyboard.addListener('keyboardDidHide', () => {
-      setKeyboardOpen(false);
-    });
-
-    return () => {
-      Keyboard.removeListener('keyboardDidShow', () => {
-        setKeyboardOpen(true);
-      });
-      Keyboard.removeListener('keyboardDidHide', () => {
-        setKeyboardOpen(false);
-      });
-    };
-  }, []);
+  function handleForgotPasswordNavigation() {
+    navigation.navigate('ForgotPasswordForm');
+  }
 
   return (
     <Container>
-      {!keyboardOpen && (
-        <DeadZone>
-          <LogoContainer>
-            <Image source={require('../../../assets/logo.png')} />
-            <Slogan>Saving is easy!</Slogan>
-          </LogoContainer>
-        </DeadZone>
-      )}
+      {!keyboardOpen && <DeadZone />}
       <MainContainer>
         <FirstRow>
           <LoginHeader>Login</LoginHeader>
@@ -144,9 +128,9 @@ const Login: React.FC = () => {
           ></SecondInput>
         </InputContainer>
 
-        <ForgotPasswordContainer>
+        <ForgotPasswordButton onPress={handleForgotPasswordNavigation}>
           <ForgotPassword>I forgot my password</ForgotPassword>
-        </ForgotPasswordContainer>
+        </ForgotPasswordButton>
 
         <Button
           active={buttonEnabled ? true : false}
