@@ -121,7 +121,6 @@ const Login: React.FC = () => {
             secureTextEntry={true}
             returnKeyType="done"
             textContentType="password"
-            onChange={() => setKeyboardOpen(true)}
             onChangeText={setPassword}
             onSubmitEditing={handleSubmitForm}
             value={password}
