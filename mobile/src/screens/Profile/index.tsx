@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Text } from 'react-native';
+import EditableInput from '../../components/EditableInput';
+import Header from '../../components/Header';
+
+import useOpenKeyboard from '../../hooks/useOpenKeyboard';
 
 import {
   Container,
@@ -10,34 +13,39 @@ import {
   Username,
   Occupation,
   PersonalInfoContainer,
-  Header,
+  HeaderText,
   InputContainer,
-  Label,
-  Input
+  Label
 } from './styles';
 
 const Profile: React.FC = () => {
+  const [firstName, setFirstName] = useState('');
+
+  const keyboardOpen = useOpenKeyboard();
+
   return (
     <Container>
-      <DeadZone>
-        <Avatar
-          imageStyle={{ borderRadius: 120 / 2 }}
-          source={{ uri: 'http://www.github.com/tomas050302.png' }}
-        />
-        <UserInformationContainer>
-          <Username>Tomás Lopes</Username>
-          <Occupation>Student</Occupation>
-        </UserInformationContainer>
+      {!keyboardOpen && (
+        <DeadZone>
+          <Avatar source={{ uri: 'http://www.github.com/tomas050302.png' }} />
+          <UserInformationContainer>
+            <Username>Tomás Lopes</Username>
+            <Occupation>Student</Occupation>
+          </UserInformationContainer>
+        </DeadZone>
+      )}
+      <PersonalInfoContainer>
+        <HeaderText>Personal Info</HeaderText>
 
-        <PersonalInfoContainer>
-          <Header>Personal Info</Header>
-
-          <InputContainer>
-            <Label>First Name</Label>
-            <Input value={'Tomás'} />
-          </InputContainer>
-        </PersonalInfoContainer>
-      </DeadZone>
+        <InputContainer>
+          <Label>First Name</Label>
+          <EditableInput
+            placeholder="First Name"
+            onChangeText={setFirstName}
+            value={firstName}
+          />
+        </InputContainer>
+      </PersonalInfoContainer>
     </Container>
   );
 };
