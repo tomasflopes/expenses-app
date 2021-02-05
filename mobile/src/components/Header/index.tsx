@@ -1,12 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
-import { BorderlessButton } from 'react-native-gesture-handler';
 
 import { Feather } from '@expo/vector-icons';
 
 import { useNavigation } from '@react-navigation/native';
 
-import { Container, Title } from './styles';
+import { Container, BackArrowButton, Title, EmptySpace } from './styles';
 
 import { light } from '../../styles/theme'; // TODO: Implement custom theme
 
@@ -19,17 +17,17 @@ const Header: React.FC<Props> = ({ title }) => {
 
   return (
     <Container>
-      <BorderlessButton onPress={navigation.goBack}>
+      <BackArrowButton onPress={navigation.goBack}>
         <Feather
           name="arrow-left"
           size={24}
           color={light.colors.secondaryLight}
         />
-      </BorderlessButton>
+      </BackArrowButton>
 
-      {title ? <Title>{title}</Title> : <View />}
+      {title ? <Title>{title}</Title> : <EmptySpace />}
 
-      <View />
+      <EmptySpace />
     </Container>
   );
 };
