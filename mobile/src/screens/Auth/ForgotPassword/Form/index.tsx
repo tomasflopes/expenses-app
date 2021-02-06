@@ -1,21 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-
-import Header from '../../../../components/Header';
 import DeadZone from '../../../../components/DeadZone';
+import Header from '../../../../components/Header';
+import SwitchableButton from '../../../../components/SwitchableButton';
 
 import useOpenKeyboard from '../../../../hooks/useOpenKeyboard';
+import { validateEmail } from '../../../../utils/validations';
 
-import {
-  Container,
-  Content,
-  HeaderText,
-  Paragraph,
-  Input,
-  Button,
-  ButtonText
-} from './styles';
+import styles from './styles';
 
 const Form: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -26,26 +19,22 @@ const Form: React.FC = () => {
 
   const keyboardOpen = useOpenKeyboard();
 
-  function validateEmail(email: string): Boolean {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    return re.test(email.toLowerCase());
-  }
-
   function checkButtonEnable() {
     const emailValid = validateEmail(email);
 
     emailValid ? setButtonEnabled(true) : setButtonEnabled(false);
   }
 
-  function handleSubmit() {}
+  async function handleSubmit() {
+    return await Promise.resolve();
+  }
 
   useEffect(() => {
     checkButtonEnable();
   }, [email]);
 
   return (
-    <Container>
+    <View style={styles.container}>
       {keyboardOpen ? (
         <Header title="Forgot My Password" />
       ) : (
@@ -54,15 +43,16 @@ const Form: React.FC = () => {
           <DeadZone />
         </>
       )}
-      <Content>
-        <HeaderText>forgot your password?</HeaderText>
-        <Paragraph>
+      <View style={styles.content}>
+        <Text style={styles.headerText}>forgot your password?</Text>
+        <Text style={styles.paragraph}>
           No problem, we’ll handle it, just let us know the email you used to
           create your account.
-        </Paragraph>
+        </Text>
 
-        <Input
+        <TextInput
           ref={inputRef}
+          style={styles.input}
           placeholder="E-mail"
           autoCapitalize="none"
           autoCompleteType="email"
@@ -73,19 +63,17 @@ const Form: React.FC = () => {
           onChangeText={setEmail}
           onSubmitEditing={handleSubmit}
           value={email}
-        ></Input>
+        ></TextInput>
 
-        <Button
-          active={buttonEnabled ? true : false}
-          ref={buttonRef}
-          onPress={handleSubmit}
+        <SwitchableButton
+          active={buttonEnabled}
+          buttonRef={buttonRef}
+          handleSubmit={handleSubmit}
         >
-          <ButtonText active={buttonEnabled ? false : true}>
-            send email
-          </ButtonText>
-        </Button>
-      </Content>
-    </Container>
+          send email
+        </SwitchableButton>
+      </View>
+    </View>
   );
 };
 

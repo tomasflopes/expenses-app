@@ -1,40 +1,44 @@
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
-import { CustomThemeProps } from '../../styles/theme';
+import theme from '../../styles';
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: theme.units.margin.sm
+  },
 
-export const Container = styled.View<CustomThemeProps>`
-  margin-bottom: ${props => props.theme.units.margin.sm}px;
-`;
+  label: {
+    fontFamily: theme.fonts.Archivo.regular,
+    fontSize: theme.units.fontSize.md,
+    color: theme.colors.secondaryDark,
 
-export const Label = styled.Text<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-  font-size: ${props => props.theme.units.fontSize.md}px;
-  color: ${props => props.theme.colors.secondaryDark};
+    marginBottom: theme.units.margin.xsm
+  },
 
-  margin-bottom: ${props => props.theme.units.margin.xsm}px;
-`;
+  inputContainer: {
+    backgroundColor: theme.colors.inputBackground,
+    borderWidth: 1,
+    borderColor: theme.colors.secondaryDark,
+    borderRadius: theme.units.borderRadius.sm,
+    paddingVertical: theme.units.margin.sm,
+    paddingHorizontal: theme.units.margin.md
+  },
 
-export const InputContainer = styled.View<CustomThemeProps>`
-  background: ${props => props.theme.colors.inputBackground};
-  border: 1px solid ${props => props.theme.colors.secondaryDark};
-  border-radius: ${props => props.theme.units.borderRadius.sm}px;
-  padding: ${props => props.theme.units.margin.sm}px
-    ${props => props.theme.units.margin.md}px;
-`;
+  input: {
+    fontFamily: theme.fonts.Archivo.regular,
+    fontSize: theme.units.fontSize.big,
+    color: theme.colors.textBase,
+    backgroundColor: theme.colors.inputBackground,
+    borderWidth: 1,
+    borderColor: theme.colors.secondaryDark,
+    paddingVertical: theme.units.margin.sm,
+    paddingHorizontal: theme.units.margin.md
+  },
 
-export const Input = styled.TextInput<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-  font-size: ${props => props.theme.units.fontSize.big}px;
-  background: ${props => props.theme.colors.inputBackground};
-  color: ${props => props.theme.colors.textBase};
-  border: 1px solid ${props => props.theme.colors.secondaryDark};
-  border-radius: ${props => props.theme.units.borderRadius.sm}px;
-  padding: ${props => props.theme.units.margin.sm}px
-    ${props => props.theme.units.margin.md}px;
-`;
+  disabledPlaceholder: {
+    fontFamily: theme.fonts.Archivo.regular,
+    fontSize: theme.units.fontSize.input,
+    color: theme.colors.inputText
+  }
+});
 
-export const DisabledPlaceholder = styled.Text<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-  font-size: ${props => props.theme.units.fontSize.input}px;
-  color: ${props => props.theme.colors.inputText};
-`;
+export default styles;

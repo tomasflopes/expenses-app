@@ -1,32 +1,19 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
-import { TouchableOpacity, TextInput } from 'react-native';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
-
 import AsyncStorage from '@react-native-community/async-storage';
 
+import SwitchableButton from '../../../components/SwitchableButton';
+import DeadZone from '../../../components/DeadZone';
+
 import AuthContext from '../../../context/auth';
+import api from '../../../services/api';
+import { validateEmail, validatePassword } from '../../../utils/validations';
 
 import useOpenKeyboard from '../../../hooks/useOpenKeyboard';
 
-import api from '../../../services/api';
-
-import DeadZone from '../../../components/DeadZone';
-
-import {
-  Container,
-  MainContainer,
-  FirstRow,
-  LoginHeader,
-  CreateAccountRedirect,
-  InputContainer,
-  Input,
-  SecondInput,
-  ForgotPasswordButton,
-  ForgotPassword,
-  Button,
-  ButtonText
-} from './styles';
+import styles from './styles';
 
 const Login: React.FC = () => {
   const input1Ref = useRef<TextInput>(null);
@@ -39,23 +26,11 @@ const Login: React.FC = () => {
 
   const [buttonEnabled, setButtonEnabled] = useState(false);
 
-  const keyboardOpen = useOpenKeyboard();
+  const navigation = useNavigation();
 
   const { SignIn } = useContext(AuthContext);
 
-  const navigation = useNavigation();
-
-  function validateEmail(email: string): Boolean {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    return re.test(email.toLowerCase());
-  }
-
-  function validatePassword(password: string): Boolean {
-    const minLength = 8;
-
-    return password.length >= minLength;
-  }
+  const keyboardOpen = useOpenKeyboard();
 
   function checkButtonEnable() {
     const emailValid = validateEmail(email);
@@ -82,25 +57,26 @@ const Login: React.FC = () => {
     }
   }
 
-  useEffect(() => {
-    checkButtonEnable();
-  }, [email, password]);
-
   function handleForgotPasswordNavigation() {
     navigation.navigate('ForgotPasswordForm');
   }
 
-  return (
-    <Container>
-      {!keyboardOpen && <DeadZone />}
-      <MainContainer>
-        <FirstRow>
-          <LoginHeader>Login</LoginHeader>
-          <CreateAccountRedirect>Create an account</CreateAccountRedirect>
-        </FirstRow>
+  useEffect(() => {
+    checkButtonEnable();
+  }, [email, password]);
 
-        <InputContainer>
-          <Input
+  return (
+    <View style={styles.container}>
+      {!keyboardOpen && <DeadZone />}
+      <View style={styles.mainContainer}>
+        <View style={styles.firstRow}>
+          <Text style={styles.loginHeader}>Login</Text>
+          <Text style={styles.createAccountRedirect}>Create an account</Text>
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
             ref={input1Ref}
             placeholder="E-mail"
             autoCapitalize="none"
@@ -112,8 +88,9 @@ const Login: React.FC = () => {
             onChangeText={setEmail}
             onSubmitEditing={() => input2Ref.current?.focus()}
             value={email}
-          ></Input>
-          <SecondInput
+          ></TextInput>
+          <TextInput
+            style={[styles.input, styles.secondInput]}
             ref={input2Ref}
             placeholder="Password"
             autoCompleteType="password"
@@ -124,22 +101,25 @@ const Login: React.FC = () => {
             onChangeText={setPassword}
             onSubmitEditing={handleSubmitForm}
             value={password}
-          ></SecondInput>
-        </InputContainer>
+          ></TextInput>
+        </View>
 
-        <ForgotPasswordButton onPress={handleForgotPasswordNavigation}>
-          <ForgotPassword>I forgot my password</ForgotPassword>
-        </ForgotPasswordButton>
-
-        <Button
-          active={buttonEnabled ? true : false}
-          ref={buttonRef}
-          onPress={handleSubmitForm}
+        <TouchableOpacity
+          style={styles.forgotPasswordButton}
+          onPress={handleForgotPasswordNavigation}
         >
-          <ButtonText active={buttonEnabled ? false : true}>Login</ButtonText>
-        </Button>
-      </MainContainer>
-    </Container>
+          <Text style={styles.forgotPassword}>I forgot my password</Text>
+        </TouchableOpacity>
+
+        <SwitchableButton
+          active={buttonEnabled}
+          buttonRef={buttonRef}
+          handleSubmit={handleSubmitForm}
+        >
+          login
+        </SwitchableButton>
+      </View>
+    </View>
   );
 };
 

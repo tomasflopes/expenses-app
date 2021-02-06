@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { CustomThemeProps } from '../../styles/theme';
+import { CustomThemeProps } from '../../styles/colors';
 
 export const Container = styled.View<CustomThemeProps>`
   flex: 1;

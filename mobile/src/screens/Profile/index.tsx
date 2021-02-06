@@ -17,7 +17,7 @@ import {
   Spacer
 } from './styles';
 
-import { light } from '../../styles/theme';
+import { light } from '../../styles/colors';
 
 const Profile: React.FC = () => {
   const [firstName, setFirstName] = useState('');

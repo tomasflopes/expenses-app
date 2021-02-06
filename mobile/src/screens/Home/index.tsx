@@ -1,43 +1,11 @@
 import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-
-import { useNavigation } from '@react-navigation/native';
-
 import { Feather, Foundation } from '@expo/vector-icons';
-import {
-  Container,
-  DeadZone,
-  ProfileInfoContainer,
-  PersonalInfoRow,
-  InformationText,
-  Dot,
-  BalanceRow,
-  BalanceTextContainer,
-  BalanceText,
-  CurrencyText,
-  HiddenBalance,
-  HiddenText,
-  AvatarContainer,
-  AvatarButton,
-  Avatar,
-  AvatarOverlay,
-  ViewProfileTextButton,
-  ViewProfileText,
-  MainContainer,
-  Header,
-  MoreButton,
-  MoreButtonText,
-  ButtonsContainer,
-  AddExpenseButton,
-  ButtonText,
-  ManageActivityButton,
-  TotalExpensesContainer,
-  TotalExpensesText
-} from './styles';
 
 import Expense from '../../components/Expense';
+import { useNavigation } from '@react-navigation/native';
 
-import { light } from '../../styles/theme'; // TODO: Implement exception to theme changing
+import styles from './styles';
 
 const Home: React.FC = () => {
   const [hidden, setHidden] = useState(true);
@@ -58,8 +26,8 @@ const Home: React.FC = () => {
   }
 
   return (
-    <Container>
-      <DeadZone>
+    <View style={styles.container}>
+      <View style={styles.deadZone}>
         <ProfileInfoContainer>
           <PersonalInfoRow>
             <InformationText>Tomás Lopes</InformationText>
@@ -98,7 +66,7 @@ const Home: React.FC = () => {
             </BalanceRow>
           )}
         </ProfileInfoContainer>
-      </DeadZone>
+      </View>
 
       <AvatarContainer>
         <AvatarButton onPress={toggleAvatarFocus}>
@@ -147,7 +115,7 @@ const Home: React.FC = () => {
           </TotalExpensesText>
         </TotalExpensesContainer>
       </MainContainer>
-    </Container>
+    </View>
   );
 };
 

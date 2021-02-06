@@ -1,17 +1,17 @@
 import React from 'react';
 
-import { Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
-import { Container, LogoContainer, Slogan } from './styles';
+import styles from './styles';
 
 const DeadZone: React.FC = () => {
   return (
-    <Container>
-      <LogoContainer>
+    <View style={styles.container}>
+      <View style={styles.logoContainer}>
         <Image source={require('../../assets/logo.png')} />
-        <Slogan>Saving is easy!</Slogan>
-      </LogoContainer>
-    </Container>
+        <Text style={styles.slogan}>Saving is easy!</Text>
+      </View>
+    </View>
   );
 };
 

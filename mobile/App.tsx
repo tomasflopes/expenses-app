@@ -9,7 +9,7 @@ import { AppLoading } from 'expo';
 
 import { ThemeProvider } from 'styled-components';
 
-import { light } from './src/styles/theme';
+import { light } from './src/styles/colors';
 
 import {
   Poppins_300Light,

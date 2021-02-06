@@ -1,102 +1,72 @@
-import { TouchableOpacityProps } from 'react-native';
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
-import { CustomThemeProps } from '../../../styles/theme';
+import theme from '../../../styles';
 
-export const Container = styled.View`
-  flex: 1;
-`;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
 
-export const MainContainer = styled.View<CustomThemeProps>`
-  flex: 3;
-  background: ${props => props.theme.colors.background};
-  padding: 0 ${props => props.theme.units.margin.lg}px;
-`;
+  mainContainer: {
+    flex: 3,
+    backgroundColor: theme.colors.background,
+    paddingHorizontal: theme.units.margin.lg
+  },
 
-export const FirstRow = styled.View<CustomThemeProps>`
-  margin-top: ${props => props.theme.units.margin.xlg}px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
+  firstRow: {
+    marginTop: theme.units.margin.xlg,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
 
-export const LoginHeader = styled.Text<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Poppins.bold};
-  font-size: ${props => props.theme.units.fontSize.bigHeader}px;
-  color: ${props => props.theme.colors.textHeaders};
-`;
+  loginHeader: {
+    fontFamily: theme.fonts.Poppins.bold,
+    fontSize: theme.units.fontSize.bigHeader,
+    color: theme.colors.textHeaders
+  },
 
-export const CreateAccountRedirect = styled.Text<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-  color: ${props => props.theme.colors.primary};
-`;
+  createAccountRedirect: {
+    fontFamily: theme.fonts.Archivo.regular,
+    color: theme.colors.primary
+  },
 
-export const InputContainer = styled.View<CustomThemeProps>`
-  margin-top: ${props => props.theme.units.margin.xlg}px;
-`;
+  inputContainer: {
+    marginTop: theme.units.margin.xlg
+  },
 
-export const Input = styled.TextInput<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-  font-size: ${props => props.theme.units.fontSize.input}px;
-  background: ${props => props.theme.colors.inputBackground};
-  color: ${props => props.theme.colors.inputText};
-  border: 1px solid ${props => props.theme.colors.secondaryDark};
-  border-top-left-radius: ${props => props.theme.units.borderRadius.sm}px;
-  border-top-right-radius: ${props => props.theme.units.borderRadius.sm}px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  padding: ${props => props.theme.units.margin.sm}px
-    ${props => props.theme.units.margin.md}px;
-`;
+  input: {
+    fontFamily: theme.fonts.Archivo.regular,
+    fontSize: theme.units.fontSize.input,
+    background: theme.colors.inputBackground,
+    color: theme.colors.inputText,
+    borderWidth: 1,
+    borderColor: theme.colors.secondaryDark,
+    borderTopLeftRadius: theme.units.borderRadius.sm,
+    borderTopRightRadius: theme.units.borderRadius.sm,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    paddingVertical: theme.units.margin.sm,
+    paddingHorizontal: theme.units.margin.md
+  },
 
-export const SecondInput = styled.TextInput<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-  font-size: ${props => props.theme.units.fontSize.input}px;
-  background: ${props => props.theme.colors.inputBackground};
-  color: ${props => props.theme.colors.inputText};
+  secondInput: {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: theme.units.borderRadius.sm,
+    borderBottomRightRadius: theme.units.borderRadius.sm
+  },
 
-  border: 1px solid ${props => props.theme.colors.secondaryDark};
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: ${props => props.theme.units.borderRadius.sm}px;
-  border-bottom-right-radius: ${props => props.theme.units.borderRadius.sm}px;
-  border-top-width: 0;
-  padding: ${props => props.theme.units.margin.sm}px
-    ${props => props.theme.units.margin.md}px;
-`;
+  forgotPasswordButton: {
+    marginTop: theme.units.margin.lg,
+    width: '100%',
+    alignItems: 'flex-end',
+    justifyContent: 'center'
+  },
 
-export const ForgotPasswordButton = styled.TouchableOpacity<CustomThemeProps>`
-  margin-top: ${props => props.theme.units.margin.lg}px;
-  width: 100%;
-  align-items: flex-end;
-  justify-content: center;
-`;
+  forgotPassword: {
+    color: theme.colors.inputText
+  }
+});
 
-export const ForgotPassword = styled.Text<CustomThemeProps>`
-  color: ${props => props.theme.colors.inputText};
-`;
-
-interface ButtonProps extends CustomThemeProps, TouchableOpacityProps {
-  active: boolean;
-}
-
-export const Button = styled.TouchableOpacity<ButtonProps>`
-  margin-top: ${props => props.theme.units.margin.xlg}px;
-  align-items: center;
-  justify-content: center;
-  height: ${props => props.theme.constants.BUTTON_HEIGHT}px;
-  border-radius: ${props => props.theme.units.borderRadius.md}px;
-
-  background: ${props =>
-    props.active ? props.theme.colors.confirm : props.theme.colors.secondary};
-`;
-
-export const ButtonText = styled.Text<ButtonProps>`
-  font-family: ${props => props.theme.fonts.Poppins.semiBold};
-  color: ${props =>
-    props.active
-      ? props.theme.colors.secondaryDark
-      : props.theme.colors.secondaryLight};
-
-  font-size: ${props => props.theme.units.fontSize.bigHeader}px;
-`;
+export default styles;
