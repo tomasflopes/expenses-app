@@ -7,23 +7,6 @@ export const Container = styled.View`
   align-items: center;
 `;
 
-export const DeadZone = styled.View<CustomThemeProps>`
-  width: 100%;
-  height: ${props => props.theme.constants.DEADZONE_HEIGHT}px;
-  background: ${props => props.theme.colors.primary};
-
-  padding-bottom: 20px;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const Avatar = styled.Image<CustomThemeProps>`
-  width: ${props => props.theme.constants.AVATAR_WIDTH}px;
-  height: ${props => props.theme.constants.AVATAR_WIDTH}px;
-
-  border-radius: ${props => props.theme.constants.AVATAR_WIDTH / 2}px;
-`;
-
 export const UserInformationContainer = styled.View<CustomThemeProps>`
   align-items: center;
   justify-content: flex-start;
@@ -48,7 +31,7 @@ export const Occupation = styled.Text<CustomThemeProps>`
 export const PersonalInfoContainer = styled.ScrollView<CustomThemeProps>`
   width: 80%;
 
-  top: -20px;
+  margin-top: -20px;
 
   background: ${props => props.theme.colors.secondaryLight};
   border-radius: ${props => props.theme.units.borderRadius.md}px;
@@ -69,8 +52,10 @@ export const HeaderText = styled.Text<CustomThemeProps>`
   border-bottom-color: ${props => props.theme.colors.secondary};
 `;
 
-export const InputContainer = styled.View``;
+export const Spacer = styled.View<CustomThemeProps>`
+  height: ${props => props.theme.units.margin.lg}px;
+`;
 
-export const Label = styled.Text``;
-
-export const Input = styled.View``;
+export const InputContainer = styled.View<CustomThemeProps>`
+  margin-top: ${props => props.theme.units.margin.sm}px;
+`;

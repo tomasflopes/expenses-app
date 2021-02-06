@@ -1857,14 +1857,6 @@
   dependencies:
     "@types/react" "^16"
 
-"@types/react-native-keyboard-spacer@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@types/react-native-keyboard-spacer/-/react-native-keyboard-spacer-0.4.1.tgz#2bc5bf42df1c99ddd99bd5be0f0815df3f28e938"
-  integrity sha512-TEWvZjKiHDNFJ2zw+WGmrR84lIEaUw0WLj/Ory7zamFuMGK/Bqz7R+/u/H/ZgNJklw2svm/v7bJFdMvZhqefVA==
-  dependencies:
-    "@types/react" "*"
-    "@types/react-native" "*"
-
 "@types/react-native-onboarding-swiper@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/react-native-onboarding-swiper/-/react-native-onboarding-swiper-1.1.1.tgz#72c07c21be009bbabd4394d6608e37988fd339ee"
@@ -2038,6 +2030,11 @@ abort-controller@^3.0.0:
   integrity sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==
   dependencies:
     event-target-shim "^5.0.0"
+
+abs-svg-path@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/abs-svg-path/-/abs-svg-path-0.1.1.tgz#df601c8e8d2ba10d4a76d625e236a9a39c2723bf"
+  integrity sha1-32Acjo0roQ1KdtYl4japo5wnI78=
 
 absolute-path@^0.0.0:
   version "0.0.0"
@@ -5705,6 +5702,13 @@ normalize-path@^2.1.1:
   dependencies:
     remove-trailing-separator "^1.0.1"
 
+normalize-svg-path@^1.0.1:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/normalize-svg-path/-/normalize-svg-path-1.1.0.tgz#0e614eca23c39f0cffe821d6be6cd17e569a766c"
+  integrity sha512-r9KHKG2UUeB5LoTouwDzBy2VxXlHsiM6fyLQvnJa0S5hrhzqElH/CH7TUGhT1fVvIYBIKf3OpY4YJ4CK+iaqHg==
+  dependencies:
+    svg-arc-to-cubic-bezier "^3.0.0"
+
 npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
@@ -6010,6 +6014,11 @@ parse-png@^2.1.0:
   integrity sha512-Nt/a5SfCLiTnQAjx3fHlqp8hRgTL3z7kTQZzvIMS9uCAepnCyjpdEc6M/sz69WqMBdaDBw9sF1F1UaHROYzGkQ==
   dependencies:
     pngjs "^3.3.0"
+
+parse-svg-path@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/parse-svg-path/-/parse-svg-path-0.1.2.tgz#7a7ec0d1eb06fa5325c7d3e009b859a09b5d49eb"
+  integrity sha1-en7A0esG+lMlx9PgCbhZoJtdSes=
 
 parseurl@~1.3.3:
   version "1.3.3"
@@ -6331,11 +6340,6 @@ react-native-iphone-x-helper@^1.3.0:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==
 
-react-native-keyboard-spacer@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/react-native-keyboard-spacer/-/react-native-keyboard-spacer-0.4.1.tgz#46f18a320432098a25ea9fa89f5143dd254d332d"
-  integrity sha1-RvGKMgQyCYol6p+on1FD3SVNMy0=
-
 react-native-onboarding-swiper@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/react-native-onboarding-swiper/-/react-native-onboarding-swiper-1.1.4.tgz#cb2d97c769542228d3904a9da13e02359ed6e3f5"
@@ -6349,6 +6353,15 @@ react-native-reanimated@~1.13.0:
   integrity sha512-O+WhgxSjOIzcVdAAvx+h2DY331Ek1knKlaq+jsNLpC1fhRy9XTdOObovgob/aF2ve9uJfPEawCx8381g/tUJZQ==
   dependencies:
     fbjs "^1.0.0"
+
+react-native-redash@^16.0.8:
+  version "16.0.8"
+  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-16.0.8.tgz#734b016f17dc747560891502b6c5db5e04a17850"
+  integrity sha512-2Opu4ls31HRGQnz11iq4cnJhCz0GnasnnZgihAlCsVFc9ofa9+47hbc1xo/WkN0OZ5X5KKo869soyfYQgIxy+w==
+  dependencies:
+    abs-svg-path "^0.1.1"
+    normalize-svg-path "^1.0.1"
+    parse-svg-path "^0.1.2"
 
 react-native-safe-area-context@3.1.4:
   version "3.1.4"
@@ -7195,6 +7208,11 @@ supports-color@^7.1.0:
   integrity sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
   dependencies:
     has-flag "^4.0.0"
+
+svg-arc-to-cubic-bezier@^3.0.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/svg-arc-to-cubic-bezier/-/svg-arc-to-cubic-bezier-3.2.0.tgz#390c450035ae1c4a0104d90650304c3bc814abe6"
+  integrity sha512-djbJ/vZKZO+gPoSDThGNpKDO+o+bAeA4XQKovvkNCqnIS2t+S4qnLAGQhyyrulhCFRl1WWzAp0wUDV8PpTVU3g==
 
 symbol-observable@1.0.1:
   version "1.0.1"
