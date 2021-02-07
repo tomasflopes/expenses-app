@@ -1,14 +1,8 @@
 import React from 'react';
 
-import { TextInputProps } from 'react-native';
+import { View, Text, TextInput, TextInputProps } from 'react-native';
 
-import {
-  Container,
-  Label,
-  Input,
-  InputContainer,
-  DisabledPlaceholder
-} from './styles';
+import styles from './styles';
 
 interface Props extends TextInputProps {
   placeholder: string;
@@ -17,16 +11,20 @@ interface Props extends TextInputProps {
 
 const EditableInput: React.FC<Props> = ({ placeholder, editable, ...rest }) => {
   return (
-    <Container>
-      <Label>{placeholder}</Label>
+    <View style={styles.container}>
+      <Text style={styles.label}>{placeholder}</Text>
       {editable ? (
-        <Input placeholder={placeholder} {...rest}></Input>
+        <TextInput
+          style={styles.input}
+          placeholder={placeholder}
+          {...rest}
+        ></TextInput>
       ) : (
-        <InputContainer>
-          <DisabledPlaceholder>{placeholder}</DisabledPlaceholder>
-        </InputContainer>
+        <View style={styles.inputContainer}>
+          <Text style={styles.disabledPlaceholder}>{placeholder}</Text>
+        </View>
       )}
-    </Container>
+    </View>
   );
 };
 

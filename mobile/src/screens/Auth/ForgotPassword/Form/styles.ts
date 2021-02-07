@@ -1,74 +1,48 @@
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
-import { TouchableOpacityProps } from 'react-native';
+import theme from '../../../../styles';
 
-import { CustomThemeProps } from '../../../../styles/theme';
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
 
-export const Container = styled.View`
-  flex: 1;
-`;
+  content: {
+    paddingHorizontal: theme.units.margin.xlg
+  },
 
-export const Content = styled.View<CustomThemeProps>`
-  padding: 0 ${props => props.theme.units.margin.xlg}px;
-`;
+  headerText: {
+    color: theme.colors.textHeaders,
+    fontSize: theme.units.fontSize.bigHeader,
 
-export const HeaderText = styled.Text<CustomThemeProps>`
-  color: ${props => props.theme.colors.textHeaders};
-  font-size: ${props => props.theme.units.fontSize.bigHeader}px;
+    fontFamily: theme.fonts.Poppins.bold,
 
-  font-family: ${props => props.theme.fonts.Poppins.bold};
+    textTransform: 'capitalize',
 
-  text-transform: capitalize;
+    marginTop: theme.units.margin.md
+  },
 
-  margin-top: ${props => props.theme.units.margin.md}px;
-`;
+  paragraph: {
+    marginTop: theme.units.margin.md,
+    fontSize: theme.units.fontSize.md,
 
-export const Paragraph = styled.Text<CustomThemeProps>`
-  margin-top: ${props => props.theme.units.margin.md}px;
+    color: theme.colors.black,
 
-  font-size: ${props => props.theme.units.fontSize.md}px;
+    fontFamily: theme.fonts.Archivo.regular
+  },
 
-  color: ${props => props.theme.colors.black};
+  input: {
+    fontFamily: theme.fonts.Archivo.regular,
+    fontSize: theme.units.fontSize.input,
+    backgroundColor: theme.colors.inputBackground,
+    color: theme.colors.inputText,
+    borderWidth: 1,
+    borderColor: theme.colors.secondaryDark,
+    borderRadius: theme.units.borderRadius.sm,
+    paddingVertical: theme.units.margin.sm,
+    paddingHorizontal: theme.units.margin.md,
+    marginTop: theme.units.margin.xlg
+  }
+});
 
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-`;
-
-export const Input = styled.TextInput<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-  font-size: ${props => props.theme.units.fontSize.input}px;
-  background: ${props => props.theme.colors.inputBackground};
-  color: ${props => props.theme.colors.inputText};
-  border: 1px solid ${props => props.theme.colors.secondaryDark};
-  border-radius: ${props => props.theme.units.borderRadius.sm}px;
-  padding: ${props => props.theme.units.margin.sm}px
-    ${props => props.theme.units.margin.md}px;
-
-  margin-top: ${props => props.theme.units.margin.xlg}px;
-`;
-
-interface ButtonProps extends CustomThemeProps, TouchableOpacityProps {
-  active: boolean;
-}
-
-export const Button = styled.TouchableOpacity<ButtonProps>`
-  margin-top: ${props => props.theme.units.margin.xlg}px;
-  align-items: center;
-  justify-content: center;
-  height: ${props => props.theme.constants.BUTTON_HEIGHT}px;
-  border-radius: ${props => props.theme.units.borderRadius.md}px;
-
-  background: ${props =>
-    props.active ? props.theme.colors.confirm : props.theme.colors.secondary};
-`;
-
-export const ButtonText = styled.Text<ButtonProps>`
-  font-family: ${props => props.theme.fonts.Poppins.semiBold};
-  color: ${props =>
-    props.active
-      ? props.theme.colors.secondaryDark
-      : props.theme.colors.secondaryLight};
-
-  font-size: ${props => props.theme.units.fontSize.bigHeader}px;
-
-  text-transform: capitalize;
-`;
+export default styles;

@@ -1,23 +1,27 @@
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
-import { CustomThemeProps } from '../../styles/theme';
+import theme from '../../styles';
 
-export const Container = styled.View<CustomThemeProps>`
-  height: ${props => props.theme.constants.DEADZONE_HEIGHT}px;
-  background: ${props => props.theme.colors.primary};
-  align-items: center;
-`;
+const styles = StyleSheet.create({
+  container: {
+    height: theme.constants.DEADZONE_HEIGHT,
+    backgroundColor: theme.colors.primary,
+    alignItems: 'center'
+  },
 
-export const LogoContainer = styled.View<CustomThemeProps>`
-  align-items: flex-start;
-  justify-content: center;
-`;
+  logoContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'center'
+  },
 
-export const Slogan = styled.Text<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-  font-size: ${props => props.theme.units.fontSize.big}px;
-  color: ${props => props.theme.colors.primaryLight};
-  position: absolute;
-  top: ${props => props.theme.constants.DEADZONE_HEIGHT - 64}px;
-  left: 24%;
-`;
+  slogan: {
+    fontFamily: theme.fonts.Archivo.regular,
+    fontSize: theme.units.fontSize.big,
+    color: theme.colors.primaryLight,
+    position: 'absolute',
+    top: theme.constants.DEADZONE_HEIGHT - 64,
+    left: '24%'
+  }
+});
+
+export default styles;

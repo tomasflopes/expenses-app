@@ -1,33 +1,41 @@
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
-import { CustomThemeProps } from '../../styles/theme';
+import theme from '../../styles';
 
-export const Container = styled.View<CustomThemeProps>`
-  width: 100%;
-  padding: ${props => props.theme.units.margin.xlg}px
-    ${props => props.theme.units.margin.md}px
-    ${props => props.theme.units.margin.md}px;
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    padding: theme.units.margin.md,
+    paddingTop: theme.units.margin.xlg,
 
-  background: ${props => props.theme.colors.primary};
+    backgroundColor: theme.colors.primary,
 
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
 
-export const BackArrowButton = styled.TouchableOpacity`
-  flex: 1;
-`;
+  backArrowButton: {
+    flex: 1
+  },
 
-export const Title = styled.Text<CustomThemeProps>`
-  text-align: center;
-  overflow: hidden;
-  font-family: ${props => props.theme.fonts.Poppins.semiBold};
-  color: ${props => props.theme.colors.secondaryLight};
-  font-size: ${props => props.theme.units.fontSize.sm}px;
-  width: 80%;
-`;
+  arrowIcon: {
+    fontSize: 24,
+    color: theme.colors.secondaryLight
+  },
 
-export const EmptySpace = styled.View`
-  flex: 1;
-`;
+  title: {
+    textAlign: 'center',
+    overflow: 'hidden',
+    fontFamily: theme.fonts.Poppins.semiBold,
+    color: theme.colors.secondaryLight,
+    fontSize: theme.units.fontSize.sm,
+    width: '80%'
+  },
+
+  emptySpace: {
+    flex: 1
+  }
+});
+
+export default styles;

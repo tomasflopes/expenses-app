@@ -1,43 +1,17 @@
 import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
-
-import { useNavigation } from '@react-navigation/native';
+import {
+  ImageBackground,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 
 import { Feather, Foundation } from '@expo/vector-icons';
-import {
-  Container,
-  DeadZone,
-  ProfileInfoContainer,
-  PersonalInfoRow,
-  InformationText,
-  Dot,
-  BalanceRow,
-  BalanceTextContainer,
-  BalanceText,
-  CurrencyText,
-  HiddenBalance,
-  HiddenText,
-  AvatarContainer,
-  AvatarButton,
-  Avatar,
-  AvatarOverlay,
-  ViewProfileTextButton,
-  ViewProfileText,
-  MainContainer,
-  Header,
-  MoreButton,
-  MoreButtonText,
-  ButtonsContainer,
-  AddExpenseButton,
-  ButtonText,
-  ManageActivityButton,
-  TotalExpensesContainer,
-  TotalExpensesText
-} from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 import Expense from '../../components/Expense';
-
-import { light } from '../../styles/theme'; // TODO: Implement exception to theme changing
+import styles from './styles';
 
 const Home: React.FC = () => {
   const [hidden, setHidden] = useState(true);
@@ -58,96 +32,93 @@ const Home: React.FC = () => {
   }
 
   return (
-    <Container>
-      <DeadZone>
-        <ProfileInfoContainer>
-          <PersonalInfoRow>
-            <InformationText>Tomás Lopes</InformationText>
-            <Dot />
-            <InformationText>18 years</InformationText>
-            <Dot />
-            <InformationText>Student</InformationText>
-          </PersonalInfoRow>
+    <View style={styles.container}>
+      <View style={styles.deadZone}>
+        <View style={styles.profileInfoContainer}>
+          <View style={styles.personalInfoRow}>
+            <Text style={styles.informationText}>Tomás Lopes</Text>
+            <View style={styles.dot} />
+            <Text style={styles.informationText}>18 years</Text>
+            <View style={styles.dot} />
+            <Text style={styles.informationText}>Student</Text>
+          </View>
 
           {hidden ? (
-            <HiddenBalance>
+            <View style={styles.hiddenBalance}>
               <TouchableOpacity onPress={toggleHidden}>
-                <Feather
-                  name="eye"
-                  size={22}
-                  color={light.colors.primaryDark}
-                  style={{ marginBottom: -4 }}
-                />
+                <Feather name="eye" style={styles.eyeOnIcon} />
               </TouchableOpacity>
-              <HiddenText>Hidden Balance</HiddenText>
-            </HiddenBalance>
+              <Text style={styles.hiddenText}>Hidden Balance</Text>
+            </View>
           ) : (
-            <BalanceRow>
-              <BalanceTextContainer>
-                <BalanceText>1276,50</BalanceText>
-                <CurrencyText>EUR</CurrencyText>
-              </BalanceTextContainer>
+            <View style={styles.balanceRow}>
+              <View style={styles.balanceTextContainer}>
+                <Text style={styles.balanceText}>1276,50</Text>
+                <Text style={styles.currencyText}>EUR</Text>
+              </View>
               <TouchableOpacity onPress={toggleHidden}>
-                <Feather
-                  name="eye-off"
-                  size={22}
-                  color={light.colors.primaryDark}
-                  style={{ marginTop: 8 }}
-                />
+                <Feather name="eye-off" style={styles.eyeOffIcon} />
               </TouchableOpacity>
-            </BalanceRow>
+            </View>
           )}
-        </ProfileInfoContainer>
-      </DeadZone>
+        </View>
+      </View>
 
-      <AvatarContainer>
-        <AvatarButton onPress={toggleAvatarFocus}>
-          <Avatar
+      <View style={styles.avatarContainer}>
+        <TouchableOpacity
+          style={styles.avatarButton}
+          onPress={toggleAvatarFocus}
+        >
+          <ImageBackground
+            style={styles.avatar}
             imageStyle={{ borderRadius: 120 / 2 }}
             source={{ uri: 'http://www.github.com/tomas050302.png' }}
           >
             {avatarFocused && (
-              <AvatarOverlay>
-                <ViewProfileTextButton onPress={navigateToProfile}>
-                  <ViewProfileText>View Profile</ViewProfileText>
-                </ViewProfileTextButton>
-              </AvatarOverlay>
+              <View style={styles.avatarOverlay}>
+                <TouchableOpacity
+                  style={styles.viewProfileTextButton}
+                  onPress={navigateToProfile}
+                >
+                  <Text style={styles.viewProfileText}>View Profile</Text>
+                </TouchableOpacity>
+              </View>
             )}
-          </Avatar>
-        </AvatarButton>
-      </AvatarContainer>
+          </ImageBackground>
+        </TouchableOpacity>
+      </View>
 
-      <MainContainer>
-        <Header>your last expenses</Header>
+      <ScrollView style={styles.mainContainer}>
+        <Text style={styles.header}>your last expenses</Text>
 
         <Expense name="Salary" date="20/10/2020" amount={800.8} />
         <Expense name="Salary" date="20/10/2020" amount={-500.8} />
         <Expense name="Salary" date="20/10/2020" amount={800} />
         <Expense name="Salary" date="20/10/2020" amount={800.8} />
 
-        <MoreButton>
-          <MoreButtonText>+ More</MoreButtonText>
-        </MoreButton>
+        <TouchableOpacity style={styles.moreButton}>
+          <Text style={styles.moreButtonText}>+ More</Text>
+        </TouchableOpacity>
 
-        <ButtonsContainer>
-          <AddExpenseButton>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.addExpenseButton}>
             <Foundation name="euro" size={32} color="white" />
-            <ButtonText>add an expense</ButtonText>
-          </AddExpenseButton>
+            <Text style={styles.buttonText}>add an expense</Text>
+          </View>
 
-          <ManageActivityButton>
+          <View style={styles.manageActivityButton}>
             <Feather name="activity" size={18} />
-            <ButtonText>manage activity</ButtonText>
-          </ManageActivityButton>
-        </ButtonsContainer>
+            <Text style={styles.buttonText}>manage activity</Text>
+          </View>
+        </View>
 
-        <TotalExpensesContainer>
-          <TotalExpensesText>
+        <View style={styles.totalExpensesContainer}>
+          <Text style={styles.totalExpensesText}>
             Total of 87 expenses registered.
-          </TotalExpensesText>
-        </TotalExpensesContainer>
-      </MainContainer>
-    </Container>
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

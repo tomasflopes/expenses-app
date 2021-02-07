@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { Text, View, TouchableOpacity } from 'react-native';
+
 import { Feather } from '@expo/vector-icons';
 
 import { useNavigation } from '@react-navigation/native';
 
-import { Container, BackArrowButton, Title, EmptySpace } from './styles';
+import styles from './styles';
 
-import { light } from '../../styles/theme'; // TODO: Implement custom theme
+import { light } from '../../styles/colors'; // TODO: Implement custom theme
 
 interface Props {
   title?: string;
@@ -16,19 +18,22 @@ const Header: React.FC<Props> = ({ title }) => {
   const navigation = useNavigation();
 
   return (
-    <Container>
-      <BackArrowButton onPress={navigation.goBack}>
-        <Feather
-          name="arrow-left"
-          size={24}
-          color={light.colors.secondaryLight}
-        />
-      </BackArrowButton>
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.backArrowButton}
+        onPress={navigation.goBack}
+      >
+        <Feather name="arrow-left" style={styles.arrowIcon} />
+      </TouchableOpacity>
 
-      {title ? <Title>{title}</Title> : <EmptySpace />}
+      {title ? (
+        <Text style={styles.title}>{title}</Text>
+      ) : (
+        <View style={styles.emptySpace} />
+      )}
 
-      <EmptySpace />
-    </Container>
+      <View style={styles.emptySpace} />
+    </View>
   );
 };
 

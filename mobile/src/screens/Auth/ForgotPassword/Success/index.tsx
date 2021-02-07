@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { Text } from 'react-native';
+import { View, Text } from 'react-native';
 
-import { Container } from './styles';
+import styles from './styles';
 
 const Success: React.FC = () => {
   return (
-    <Container>
+    <View style={styles.container}>
       <Text>Success</Text>
-    </Container>
+    </View>
   );
 };
 
