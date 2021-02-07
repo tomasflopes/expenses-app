@@ -42,10 +42,17 @@ const Login: React.FC = () => {
   }
 
   async function handleSubmitForm() {
-    const response = await api.post('/api/user/login', {
-      email,
-      password
-    });
+    const response = await api
+      .post('/api/user/login', {
+        email,
+        password
+      })
+      .catch(() => {
+        alert('Something went wrong with the authentication...');
+        input1Ref.current?.clear();
+        input2Ref.current?.clear();
+        input1Ref.current?.focus();
+      });
 
     if (response) {
       const jwt = response.data.token;
