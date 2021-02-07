@@ -6,9 +6,11 @@ import { Feather } from '@expo/vector-icons';
 
 import { useNavigation } from '@react-navigation/native';
 
-import styles from './styles';
+import { LinearGradient } from 'expo-linear-gradient';
 
-import { light } from '../../styles/colors'; // TODO: Implement custom theme
+import theme from '../../styles';
+
+import styles from './styles';
 
 interface Props {
   title?: string;
@@ -18,7 +20,11 @@ const Header: React.FC<Props> = ({ title }) => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={['rgba(0,0,0,0.3)', 'transparent']}
+      locations={[0.05, 1]}
+      style={styles.container}
+    >
       <TouchableOpacity
         style={styles.backArrowButton}
         onPress={navigation.goBack}
@@ -33,7 +39,7 @@ const Header: React.FC<Props> = ({ title }) => {
       )}
 
       <View style={styles.emptySpace} />
-    </View>
+    </LinearGradient>
   );
 };
 

@@ -5,6 +5,8 @@ import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
 
 import EditableInput from '../../components/EditableInput';
 
+import { LinearGradient } from 'expo-linear-gradient';
+
 import useOpenKeyboard from '../../hooks/useOpenKeyboard';
 
 import styles from './styles';
@@ -44,7 +46,7 @@ const Profile: React.FC = () => {
         contentContainerStyle={{ alignItems: 'center' }}
       >
         {!keyboardOpen && (
-          <Animated.View style={styles.scrollContent}>
+          <View style={styles.scrollContent}>
             <Animated.Image
               source={{ uri: 'http://www.github.com/tomas050302.png' }}
               style={[
@@ -76,7 +78,7 @@ const Profile: React.FC = () => {
                 Student
               </Animated.Text>
             </View>
-          </Animated.View>
+          </View>
         )}
 
         <View style={styles.personalInfoContainer}>
