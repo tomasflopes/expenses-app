@@ -7,10 +7,6 @@ import { AuthProvider } from './src/context/auth';
 
 import { AppLoading } from 'expo';
 
-import { ThemeProvider } from 'styled-components';
-
-import { light } from './src/styles/colors';
-
 import {
   Poppins_300Light,
   Poppins_400Regular,
@@ -45,9 +41,7 @@ export default function App() {
       <StatusBar style="light" />
 
       <AuthProvider>
-        <ThemeProvider theme={light}>
-          <Routes />
-        </ThemeProvider>
+        <Routes />
       </AuthProvider>
     </>
   );
