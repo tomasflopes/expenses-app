@@ -25,9 +25,14 @@ const SwitchableButton: React.FC<Props> = ({
     <TouchableOpacity
       ref={buttonRef}
       onPress={handleSubmit}
-      style={active ? styles.activeButton : styles.button}
+      style={[styles.button, active ? styles.activeButton : styles.button]}
     >
-      <Text style={active ? styles.activeButtonText : styles.buttonText}>
+      <Text
+        style={[
+          styles.buttonText,
+          active ? styles.activeButtonText : styles.buttonText
+        ]}
+      >
         {children}
       </Text>
     </TouchableOpacity>

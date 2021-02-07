@@ -1,197 +1,211 @@
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
-import { CustomThemeProps } from '../../styles/colors';
+import theme from '../../styles';
 
-export const Container = styled.View<CustomThemeProps>`
-  flex: 1;
-  background: ${props => props.theme.colors.background};
-`;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background
+  },
 
-export const DeadZone = styled.View<CustomThemeProps>`
-  height: ${props => props.theme.constants.DEADZONE_HEIGHT}px;
-  background: ${props => props.theme.colors.primary};
-  align-items: center;
-  justify-content: center;
-`;
+  deadZone: {
+    height: theme.constants.DEADZONE_HEIGHT,
+    backgroundColor: theme.colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 
-export const ProfileInfoContainer = styled.View<CustomThemeProps>`
-  width: 90%;
-  background: ${props => props.theme.colors.background};
-  height: ${props => props.theme.constants.PROFILE_CONTAINER_HEIGHT}px;
-  border-radius: ${props => props.theme.units.borderRadius.md}px;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: ${props => props.theme.units.margin.md}px;
-`;
+  profileInfoContainer: {
+    width: '90%',
+    backgroundColor: theme.colors.background,
+    height: theme.constants.PROFILE_CONTAINER_HEIGHT,
+    borderRadius: theme.units.borderRadius.md,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: theme.units.margin.md
+  },
 
-export const PersonalInfoRow = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
+  personalInfoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
 
-export const InformationText = styled.Text<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-  color: ${props => props.theme.colors.primaryDark};
-  margin-right: ${props => props.theme.units.margin.xsm}px;
-  font-size: ${props => props.theme.units.fontSize.sm}px;
-`;
+  informationText: {
+    fontFamily: theme.fonts.Archivo.regular,
+    color: theme.colors.primaryDark,
+    marginRight: theme.units.margin.xsm,
+    fontSize: theme.units.fontSize.sm
+  },
 
-export const Dot = styled.View<CustomThemeProps>`
-  height: ${props => props.theme.constants.DOT_WIDTH}px;
-  width: ${props => props.theme.constants.DOT_WIDTH}px;
-  border-radius: ${props => props.theme.constants.DOT_WIDTH / 2}px;
-  background: ${props => props.theme.colors.primaryDark};
-  margin-right: ${props => props.theme.units.margin.xsm}px;
-`;
+  dot: {
+    height: theme.constants.DOT_WIDTH,
+    width: theme.constants.DOT_WIDTH,
+    borderRadius: theme.constants.DOT_WIDTH / 2,
+    backgroundColor: theme.colors.primaryDark,
+    marginRight: theme.units.margin.xsm
+  },
 
-export const BalanceRow = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
+  balanceRow: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
 
-export const BalanceTextContainer = styled.View`
-  flex-direction: row;
-  align-items: flex-end;
-`;
+  balanceTextContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
 
-export const BalanceText = styled.Text<CustomThemeProps>`
-  font-size: ${props => props.theme.units.fontSize.header}px;
-  top: ${props => props.theme.units.margin.xsm}px;
-  font-family: ${props => props.theme.fonts.Poppins.medium};
-  color: ${props => props.theme.colors.primaryDark};
-  margin-right: ${props => props.theme.units.margin.tiny}px;
-`;
+  balanceText: {
+    fontSize: theme.units.fontSize.header,
+    top: theme.units.margin.xsm,
+    fontFamily: theme.fonts.Poppins.medium,
+    color: theme.colors.primaryDark,
+    marginRight: theme.units.margin.tiny
+  },
 
-export const CurrencyText = styled.Text<CustomThemeProps>`
-  font-size: ${props => props.theme.units.fontSize.sm}px;
-  font-family: ${props => props.theme.fonts.Poppins.regular};
-  color: ${props => props.theme.colors.primaryDark};
-  margin-right: ${props => props.theme.units.margin.xsm}px;
-`;
+  currencyText: {
+    fontSize: theme.units.fontSize.sm,
+    fontFamily: theme.fonts.Poppins.regular,
+    color: theme.colors.primaryDark,
+    marginRight: theme.units.margin.xsm
+  },
 
-export const HiddenBalance = styled.View`
-  align-items: center;
-  justify-content: flex-start;
-`;
+  hiddenBalance: {
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  },
 
-export const HiddenText = styled.Text<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Poppins.light};
-  color: ${props => props.theme.colors.primaryDark};
-  font-size: ${props => props.theme.units.fontSize.xsm}px;
-`;
+  hiddenText: {
+    fontFamily: theme.fonts.Poppins.light,
+    color: theme.colors.primaryDark,
+    fontSize: theme.units.fontSize.xsm
+  },
 
-export const AvatarContainer = styled.View<CustomThemeProps>`
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  eyeOnIcon: {
+    fontSize: 22,
+    color: theme.colors.primaryDark,
+    marginBottom: -4
+  },
 
-  position: absolute;
+  eyeOffIcon: {
+    marginTop: 8,
 
-  top: ${props =>
-    props.theme.constants.DEADZONE_HEIGHT -
-    props.theme.constants.AVATAR_WIDTH / 2}px;
-`;
+    color: theme.colors.primaryDark,
+    fontSize: 22
+  },
 
-export const AvatarButton = styled.TouchableOpacity<CustomThemeProps>`
-  height: ${props => props.theme.constants.AVATAR_WIDTH}px;
-  width: ${props => props.theme.constants.AVATAR_WIDTH}px;
+  avatarContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
 
-  border-radius: ${props => props.theme.constants.AVATAR_WIDTH / 2}px;
-`;
+    position: 'absolute',
 
-export const Avatar = styled.ImageBackground<CustomThemeProps>`
-  height: ${props => props.theme.constants.AVATAR_WIDTH}px;
-  width: ${props => props.theme.constants.AVATAR_WIDTH}px;
-`;
+    top: theme.constants.DEADZONE_HEIGHT - theme.constants.AVATAR_WIDTH / 2
+  },
 
-export const AvatarOverlay = styled.View<CustomThemeProps>`
-  width: ${props => props.theme.constants.AVATAR_WIDTH}px;
-  height: ${props => props.theme.constants.AVATAR_WIDTH}px;
-  border-radius: ${props => props.theme.constants.AVATAR_WIDTH / 2}px;
-  background: ${props => props.theme.colors.avatarOverlay};
-  align-items: center;
-  justify-content: center;
-`;
+  avatarButton: {
+    height: theme.constants.AVATAR_WIDTH,
+    width: theme.constants.AVATAR_WIDTH,
 
-export const ViewProfileTextButton = styled.TouchableOpacity`
-  padding: 2px;
-`;
+    borderRadius: theme.constants.AVATAR_WIDTH / 2
+  },
 
-export const ViewProfileText = styled.Text<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Poppins.bold};
-  text-align: center;
-  font-size: ${props => props.theme.units.fontSize.xsm}px;
-  color: ${props => props.theme.colors.secondaryLight};
-`;
+  avatar: {
+    height: theme.constants.AVATAR_WIDTH,
+    width: theme.constants.AVATAR_WIDTH
+  },
+  avatarOverlay: {
+    width: theme.constants.AVATAR_WIDTH,
+    height: theme.constants.AVATAR_WIDTH,
+    borderRadius: theme.constants.AVATAR_WIDTH / 2,
+    backgroundColor: theme.colors.avatarOverlay,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 
-export const MainContainer = styled.ScrollView<CustomThemeProps>`
-  flex: 3;
-  margin-top: ${props => props.theme.units.margin.xxl}px;
-  padding: 0 ${props => props.theme.units.margin.lg}px;
-`;
+  viewProfileTextButton: {
+    padding: 2
+  },
 
-export const Header = styled.Text<CustomThemeProps>`
-  text-transform: capitalize;
-  color: ${props => props.theme.colors.textHeaders};
-  font-family: ${props => props.theme.fonts.Poppins.bold};
-  font-size: ${props => props.theme.units.fontSize.md}px;
-  margin-bottom: ${props => props.theme.units.margin.md}px;
-`;
+  viewProfileText: {
+    fontFamily: theme.fonts.Poppins.bold,
+    textAlign: 'center',
+    fontSize: theme.units.fontSize.xsm,
+    color: theme.colors.secondaryLight
+  },
 
-export const MoreButton = styled.TouchableOpacity<CustomThemeProps>`
-  align-self: center;
-  top: ${props => props.theme.units.margin.xsm}px;
-`;
+  mainContainer: {
+    flex: 3,
+    marginTop: theme.units.margin.xxl,
+    paddingHorizontal: theme.units.margin.lg
+  },
 
-export const MoreButtonText = styled.Text<CustomThemeProps>`
-  font-family: ${props => props.theme.fonts.Poppins.bold};
-  font-size: ${props => props.theme.units.fontSize.big}px;
-  color: ${props => props.theme.colors.primary};
-  margin-bottom: ${props => props.theme.units.margin.md}px;
-`;
+  header: {
+    textTransform: 'capitalize',
+    color: theme.colors.textHeaders,
+    fontFamily: theme.fonts.Poppins.bold,
+    fontSize: theme.units.fontSize.md,
+    marginBottom: theme.units.margin.md
+  },
 
-export const ButtonsContainer = styled.View`
-  justify-content: space-between;
-`;
+  moreButton: {
+    alignSelf: 'center',
+    top: theme.units.margin.xsm
+  },
 
-export const AddExpenseButton = styled.TouchableOpacity<CustomThemeProps>`
-  height: ${props => props.theme.constants.BUTTON_HEIGHT}px;
-  width: 100%;
-  flex-direction: row;
-  background: ${props => props.theme.colors.confirm};
-  border-radius: ${props => props.theme.units.borderRadius.md}px;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: ${props => props.theme.units.margin.sm}px;
-`;
+  moreButtonText: {
+    fontFamily: theme.fonts.Poppins.bold,
+    fontSize: theme.units.fontSize.big,
+    color: theme.colors.primary,
+    marginBottom: theme.units.margin.md
+  },
 
-export const ButtonText = styled.Text<CustomThemeProps>`
-  font-family: 'Poppins_600SemiBold';
-  color: ${props => props.theme.colors.secondaryLight};
-  margin-left: ${props => props.theme.units.margin.md}px;
-  text-transform: capitalize;
-  font-size: ${props => props.theme.units.fontSize.header}px;
-`;
+  buttonsContainer: {
+    justifyContent: 'space-between'
+  },
 
-export const ManageActivityButton = styled.TouchableOpacity<CustomThemeProps>`
-  height: ${props => props.theme.constants.BUTTON_HEIGHT}px;
-  width: 100%;
-  flex-direction: row;
-  background: ${props => props.theme.colors.primary};
-  border-radius: ${props => props.theme.units.borderRadius.md}px;
-  align-items: center;
-  justify-content: center;
-`;
+  addExpenseButton: {
+    height: theme.constants.BUTTON_HEIGHT,
+    width: '100%',
+    flexDirection: 'row',
+    backgroundColor: theme.colors.confirm,
+    borderRadius: theme.units.borderRadius.md,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: theme.units.margin.sm
+  },
 
-export const TotalExpensesContainer = styled.View`
-  flex: 1;
-  justify-content: flex-end;
-`;
+  buttonText: {
+    fontFamily: theme.fonts.Poppins.semiBold,
+    color: theme.colors.secondaryLight,
+    marginLeft: theme.units.margin.md,
+    textTransform: 'capitalize',
+    fontSize: theme.units.fontSize.header
+  },
 
-export const TotalExpensesText = styled.Text<CustomThemeProps>`
-  font-size: ${props => props.theme.units.fontSize.xsm}px;
-  font-family: 'Archivo_400Regular';
-  color: ${props => props.theme.colors.secondaryDark};
-  margin: ${props => props.theme.units.margin.md}px 0;
-`;
+  manageActivityButton: {
+    height: theme.constants.BUTTON_HEIGHT,
+    width: '100%',
+    flexDirection: 'row',
+    backgroundColor: theme.colors.primary,
+    borderRadius: theme.units.borderRadius.md,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  totalExpensesContainer: {
+    flex: 1,
+    justifyContent: 'flex-end'
+  },
+
+  totalExpensesText: {
+    fontSize: theme.units.fontSize.xsm,
+    fontFamily: theme.fonts.Archivo.regular,
+    color: theme.colors.secondaryDark,
+    marginVertical: theme.units.margin.md
+  }
+});
+
+export default styles;

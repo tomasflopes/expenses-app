@@ -7,17 +7,9 @@ import EditableInput from '../../components/EditableInput';
 
 import useOpenKeyboard from '../../hooks/useOpenKeyboard';
 
-import {
-  Container,
-  UserInformationContainer,
-  Username,
-  Occupation,
-  PersonalInfoContainer,
-  HeaderText,
-  Spacer
-} from './styles';
+import styles from './styles';
 
-import { light } from '../../styles/colors';
+import theme from '../../styles';
 
 const Profile: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -30,86 +22,67 @@ const Profile: React.FC = () => {
   });
 
   const scale: any = interpolate(y, {
-    inputRange: [0, light.constants.DEADZONE_HEIGHT],
+    inputRange: [0, theme.constants.DEADZONE_HEIGHT],
     outputRange: [1, 0],
     extrapolateRight: Extrapolate.CLAMP
   });
 
   const translate: any = interpolate(y, {
-    inputRange: [0, light.constants.DEADZONE_HEIGHT],
-    outputRange: [0, -light.constants.DEADZONE_HEIGHT / 2],
+    inputRange: [0, theme.constants.DEADZONE_HEIGHT],
+    outputRange: [0, -theme.constants.DEADZONE_HEIGHT / 2],
     extrapolateRight: Extrapolate.CLAMP
   });
 
   return (
-    <Container>
+    <View style={styles.container}>
       <Animated.ScrollView
         onScroll={onScroll}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
         overScrollMode="never"
-        style={{
-          flex: 1,
-          width: '100%'
-        }}
+        style={styles.mainScroll}
         contentContainerStyle={{ alignItems: 'center' }}
       >
         {!keyboardOpen && (
-          <Animated.View
-            style={{
-              width: '100%',
-              backgroundColor: light.colors.primary,
-
-              paddingBottom: 36,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
+          <Animated.View style={styles.scrollContent}>
             <Animated.Image
               source={{ uri: 'http://www.github.com/tomas050302.png' }}
-              style={{
-                opacity: scale,
-                transform: [{ scale }],
-                height: 120,
-                width: 120,
-                borderRadius: 120 / 2
-              }}
+              style={[
+                styles.avatar,
+                { opacity: scale, transform: [{ scale }] }
+              ]}
             />
-            <UserInformationContainer>
+            <View style={styles.userInformationContainer}>
               <Animated.Text
-                style={{
-                  opacity: scale,
-                  transform: [{ scale, translateY: translate }]
-                }}
+                style={[
+                  styles.username,
+                  {
+                    opacity: scale,
+                    transform: [{ scale, translateY: translate }]
+                  }
+                ]}
               >
                 Tomás Lopes
               </Animated.Text>
               <Animated.Text
-                style={{
-                  opacity: scale,
-                  transform: [{ scale, translateY: translate }]
-                }}
+                style={[
+                  styles.occupation,
+                  {
+                    opacity: scale,
+                    transform: [{ scale, translateY: translate }]
+                  }
+                ]}
               >
                 Student
               </Animated.Text>
-            </UserInformationContainer>
+            </View>
           </Animated.View>
         )}
 
-        <View
-          style={{
-            width: '80%',
-            top: -20,
-            backgroundColor: '#fff',
-            borderRadius: 8,
+        <View style={styles.personalInfoContainer}>
+          <Text style={styles.headerText}>Personal Info</Text>
 
-            paddingHorizontal: 16,
-            paddingVertical: 40
-          }}
-        >
-          <HeaderText>Personal Info</HeaderText>
-
-          <Spacer />
+          <View style={styles.spacer} />
 
           <EditableInput
             placeholder="First Name"
@@ -138,7 +111,7 @@ const Profile: React.FC = () => {
           />
         </View>
       </Animated.ScrollView>
-    </Container>
+    </View>
   );
 };
 

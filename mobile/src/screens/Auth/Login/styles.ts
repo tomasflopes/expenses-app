@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   input: {
     fontFamily: theme.fonts.Archivo.regular,
     fontSize: theme.units.fontSize.input,
-    background: theme.colors.inputBackground,
+    backgroundColor: theme.colors.inputBackground,
     color: theme.colors.inputText,
     borderWidth: 1,
     borderColor: theme.colors.secondaryDark,
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   },
 
   secondInput: {
+    borderTopWidth: 0,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     borderBottomLeftRadius: theme.units.borderRadius.sm,

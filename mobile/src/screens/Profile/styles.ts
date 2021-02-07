@@ -1,61 +1,86 @@
-import styled from 'styled-components/native';
-import { CustomThemeProps } from '../../styles/colors';
+import { StyleSheet } from 'react-native';
 
-export const Container = styled.View`
-  flex: 1;
+import theme from '../../styles';
 
-  align-items: center;
-`;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
 
-export const UserInformationContainer = styled.View<CustomThemeProps>`
-  align-items: center;
-  justify-content: flex-start;
+    alignItems: 'center'
+  },
 
-  margin-top: ${props => props.theme.units.margin.sm}px;
-`;
+  mainScroll: {
+    width: '100%',
+    flex: 1
+  },
 
-export const Username = styled.Text<CustomThemeProps>`
-  color: ${props => props.theme.colors.secondaryLight};
+  scrollContent: {
+    width: '100%',
+    backgroundColor: theme.colors.primary,
 
-  font-size: ${props => props.theme.units.fontSize.md}px;
-  font-family: ${props => props.theme.fonts.Poppins.bold};
-`;
+    paddingBottom: theme.units.margin.lg,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 
-export const Occupation = styled.Text<CustomThemeProps>`
-  color: ${props => props.theme.colors.secondaryLight};
+  avatar: {
+    height: theme.constants.AVATAR_WIDTH,
+    width: theme.constants.AVATAR_WIDTH,
+    borderRadius: theme.constants.AVATAR_WIDTH / 2
+  },
 
-  font-size: ${props => props.theme.units.fontSize.sm}px;
-  font-family: ${props => props.theme.fonts.Archivo.regular};
-`;
+  userInformationContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-start',
 
-export const PersonalInfoContainer = styled.ScrollView<CustomThemeProps>`
-  width: 80%;
+    marginTop: theme.units.margin.sm
+  },
 
-  margin-top: -20px;
+  username: {
+    color: theme.colors.secondaryLight,
 
-  background: ${props => props.theme.colors.secondaryLight};
-  border-radius: ${props => props.theme.units.borderRadius.md}px;
+    fontSize: theme.units.fontSize.md,
+    fontFamily: theme.fonts.Poppins.bold
+  },
 
-  padding: ${props => props.theme.units.margin.lg}px
-    ${props => props.theme.units.margin.sm}px;
-`;
+  occupation: {
+    color: theme.colors.secondaryLight,
 
-export const HeaderText = styled.Text<CustomThemeProps>`
-  color: ${props => props.theme.colors.textHeaders};
+    fontSize: theme.units.fontSize.sm,
+    fontFamily: theme.fonts.Archivo.regular
+  },
 
-  font-family: ${props => props.theme.fonts.Poppins.bold};
-  font-size: ${props => props.theme.units.fontSize.big}px;
+  personalInfoContainer: {
+    width: '80%',
 
-  padding-bottom: ${props => props.theme.units.margin.sm}px;
+    marginTop: -20,
 
-  border-bottom-width: 1px;
-  border-bottom-color: ${props => props.theme.colors.secondary};
-`;
+    backgroundColor: theme.colors.secondaryLight,
+    borderRadius: theme.units.borderRadius.md,
 
-export const Spacer = styled.View<CustomThemeProps>`
-  height: ${props => props.theme.units.margin.lg}px;
-`;
+    paddingVertical: theme.units.margin.lg,
+    paddingHorizontal: theme.units.margin.sm
+  },
 
-export const InputContainer = styled.View<CustomThemeProps>`
-  margin-top: ${props => props.theme.units.margin.sm}px;
-`;
+  headerText: {
+    color: theme.colors.textHeaders,
+
+    fontFamily: theme.fonts.Poppins.bold,
+    fontSize: theme.units.fontSize.big,
+
+    paddingBottom: theme.units.margin.sm,
+
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.secondary
+  },
+
+  spacer: {
+    height: theme.units.margin.lg
+  },
+
+  inputContainer: {
+    marginTop: theme.units.margin.sm
+  }
+});
+
+export default styles;

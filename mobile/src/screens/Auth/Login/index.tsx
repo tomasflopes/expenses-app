@@ -1,17 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
-import SwitchableButton from '../../../components/SwitchableButton';
 import DeadZone from '../../../components/DeadZone';
-
+import SwitchableButton from '../../../components/SwitchableButton';
 import AuthContext from '../../../context/auth';
+import useOpenKeyboard from '../../../hooks/useOpenKeyboard';
 import api from '../../../services/api';
 import { validateEmail, validatePassword } from '../../../utils/validations';
-
-import useOpenKeyboard from '../../../hooks/useOpenKeyboard';
 
 import styles from './styles';
 
