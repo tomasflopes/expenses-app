@@ -20,6 +20,7 @@ export type UnitsType = {
     big: 18;
     header: 20;
     bigHeader: 22;
+    onBoardingTitle: 24;
   };
 };
 
@@ -44,6 +45,7 @@ export default {
     input: 16,
     big: 18,
     header: 20,
-    bigHeader: 22
+    bigHeader: 22,
+    onBoardingTitle: 24
   }
 };

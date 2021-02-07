@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
-import {
-  ImageBackground,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 
 import { Feather, Foundation } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -31,6 +26,8 @@ const Home: React.FC = () => {
     navigation.navigate('Profile');
   }
 
+  const opacity = hidden ? 0 : 1;
+
   return (
     <View style={styles.container}>
       <View style={styles.deadZone}>
@@ -53,8 +50,16 @@ const Home: React.FC = () => {
           ) : (
             <View style={styles.balanceRow}>
               <View style={styles.balanceTextContainer}>
-                <Text style={styles.balanceText}>1276,50</Text>
-                <Text style={styles.currencyText}>EUR</Text>
+                <Animated.Text
+                  style={[styles.balanceText, { opacity: opacity }]}
+                >
+                  1276,50
+                </Animated.Text>
+                <Animated.Text
+                  style={[styles.currencyText, { opacity: opacity }]}
+                >
+                  EUR
+                </Animated.Text>
               </View>
               <TouchableOpacity onPress={toggleHidden}>
                 <Feather name="eye-off" style={styles.eyeOffIcon} />

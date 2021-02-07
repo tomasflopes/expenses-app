@@ -12,8 +12,7 @@ const AuthRoutes = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
-        cardStyle: { backgroundColor: '#f2f3f5' }
+        headerShown: false
       }}
     >
       <Stack.Screen name="Login" component={LoginScreen} />

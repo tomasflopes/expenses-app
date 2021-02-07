@@ -49,9 +49,13 @@ const Login: React.FC = () => {
       })
       .catch(() => {
         alert('Something went wrong with the authentication...');
+
         input1Ref.current?.clear();
         input2Ref.current?.clear();
         input1Ref.current?.focus();
+
+        setEmail('');
+        setPassword('');
       });
 
     if (response) {

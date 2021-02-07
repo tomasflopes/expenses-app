@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -7,9 +7,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 import AuthRoutes from './auth';
 import MainRoutes from './main';
 
+import OnBoardingScreen from '../screens/Onboarding';
+
 import AuthContext from '../context/auth';
 
 const Routes: React.FC = () => {
+  const [firstTime, setFirstTime] = useState(true);
+
   const { signed, SignIn } = useContext(AuthContext);
 
   const Stack = createStackNavigator();
@@ -26,8 +30,17 @@ const Routes: React.FC = () => {
     await AsyncStorage.clear();
   }
 
+  async function checkFirstTime() {
+    const token = await AsyncStorage.getItem('firstT');
+
+    if (token) {
+      setFirstTime(false);
+    }
+  }
+
   useEffect(() => {
     //clearStorage();
+    checkFirstTime();
     checkLogin();
   }, []);
 
@@ -35,11 +48,21 @@ const Routes: React.FC = () => {
     <NavigationContainer>
       <Stack.Navigator>
         {signed ? (
-          <Stack.Screen
-            name="Root"
-            children={MainRoutes}
-            options={{ headerShown: false }}
-          />
+          <>
+            {firstTime ? (
+              <Stack.Screen
+                name="Onboarding"
+                component={OnBoardingScreen}
+                options={{ headerShown: false }}
+              />
+            ) : (
+              <Stack.Screen
+                name="Root"
+                children={MainRoutes}
+                options={{ headerShown: false }}
+              />
+            )}
+          </>
         ) : (
           <Stack.Screen
             name="Auth"
