@@ -4,8 +4,10 @@ import theme from '../../styles';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
-    alignItems: 'center'
+    flex: 1,
+    alignItems: 'center',
+
+    paddingTop: theme.units.margin.md
   },
 
   paginator: {
@@ -16,9 +18,29 @@ const styles = StyleSheet.create({
   dot: {
     height: 10,
     borderRadius: 10 / 2,
-    backgroundColor: theme.colors.secondaryDark,
 
     marginHorizontal: theme.units.margin.xsm
+  },
+
+  nextIconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    marginBottom: theme.units.margin.xlg,
+
+    width: 80,
+    height: 80,
+    borderRadius: 80 / 2
+  },
+
+  animatedCircle: {
+    position: 'absolute',
+    bottom: 0
+  },
+
+  icon: {
+    fontSize: 40,
+    color: theme.colors.primary
   }
 });
 

@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    flex: 6,
+    flex: 7,
     justifyContent: 'center'
   },
 
   textContainer: {
-    flex: 4
+    flex: 3
   },
 
   title: {
