@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 
 import {
   Animated,
@@ -10,7 +10,9 @@ import {
 
 import { Feather } from '@expo/vector-icons';
 import { Extrapolate } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-community/async-storage';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { useNavigation } from '@react-navigation/native';
 
 import OnboardingItem from '../../components/OnboardingItem';
 
@@ -20,6 +22,8 @@ import theme from '../../styles';
 import styles from './styles';
 
 const Onboarding: React.FC = () => {
+  const navigation = useNavigation();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
 
@@ -33,8 +37,13 @@ const Onboarding: React.FC = () => {
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
-  function nextStep() {
-    slidesRef.current?.scrollToIndex({ index: currentIndex + 1 });
+  async function nextStep() {
+    if (currentIndex == onboardingData.length - 1) {
+      await AsyncStorage.setItem('firstTime', 'no');
+      navigation.navigate('Root');
+    } else {
+      slidesRef.current?.scrollToIndex({ index: currentIndex + 1 });
+    }
   }
 
   return (
@@ -70,7 +79,11 @@ const Onboarding: React.FC = () => {
         />
 
         <TouchableWithoutFeedback onPress={nextStep}>
-          <Feather name="arrow-right" style={styles.icon} />
+          {currentIndex == 2 ? (
+            <Feather name="check" style={styles.icon} />
+          ) : (
+            <Feather name="arrow-right" style={styles.icon} />
+          )}
         </TouchableWithoutFeedback>
       </View>
 

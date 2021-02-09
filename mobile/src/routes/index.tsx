@@ -26,16 +26,16 @@ const Routes: React.FC = () => {
     }
   }
 
-  async function clearStorage() {
-    await AsyncStorage.clear();
-  }
-
   async function checkFirstTime() {
-    const token = await AsyncStorage.getItem('firstT');
+    const token = await AsyncStorage.getItem('firstTime');
 
     if (token) {
       setFirstTime(false);
     }
+  }
+
+  async function clearStorage() {
+    await AsyncStorage.clear();
   }
 
   useEffect(() => {
@@ -49,19 +49,18 @@ const Routes: React.FC = () => {
       <Stack.Navigator>
         {signed ? (
           <>
-            {firstTime ? (
+            {firstTime && (
               <Stack.Screen
                 name="Onboarding"
                 component={OnBoardingScreen}
                 options={{ headerShown: false }}
               />
-            ) : (
-              <Stack.Screen
-                name="Root"
-                children={MainRoutes}
-                options={{ headerShown: false }}
-              />
             )}
+            <Stack.Screen
+              name="Root"
+              children={MainRoutes}
+              options={{ headerShown: false }}
+            />
           </>
         ) : (
           <Stack.Screen

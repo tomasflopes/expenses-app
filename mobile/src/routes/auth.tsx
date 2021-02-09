@@ -2,6 +2,8 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
+import Header from '../components/Header';
+
 import LoginScreen from '../screens/Auth/Login';
 import ForgotPasswordFormScreen from '../screens/Auth/ForgotPassword/Form';
 import ForgotPasswordSuccessScreen from '../screens/Auth/ForgotPassword/Success';
@@ -15,7 +17,14 @@ const AuthRoutes = () => {
         headerShown: false
       }}
     >
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          headerShown: true,
+          header: () => <Header title="Profile" />
+        }}
+      />
       <Stack.Screen
         name="ForgotPasswordForm"
         component={ForgotPasswordFormScreen}

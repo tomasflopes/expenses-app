@@ -18,7 +18,7 @@ const OnboardingItem: React.FC<Props> = ({ item }) => {
     <View style={[styles.container, { width }]}>
       <Image
         source={item.image}
-        style={[styles.image, { width: width - 80, resizeMode: 'contain' }]}
+        style={[styles.image, { width: width - 120, resizeMode: 'contain' }]}
       />
 
       <View style={styles.textContainer}>
