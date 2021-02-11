@@ -5,7 +5,8 @@ import {
   FlatList,
   TouchableWithoutFeedback,
   useWindowDimensions,
-  View
+  View,
+  ViewToken
 } from 'react-native';
 
 import { Feather } from '@expo/vector-icons';
@@ -24,16 +25,19 @@ import styles from './styles';
 const Onboarding: React.FC = () => {
   const navigation = useNavigation();
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const { width } = useWindowDimensions();
 
   const slidesRef = useRef<FlatList>(null);
 
-  const viewableItemsChanged = useRef(({ viewableItems }) => {
-    setCurrentIndex(viewableItems[0].index);
-  }).current;
+  const viewableItemsChanged = useRef(
+    (info: { viewableItems: ViewToken[] }) => {
+      if (info.viewableItems[0].index)
+        setCurrentIndex(info.viewableItems[0].index);
+    }
+  ).current;
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
@@ -41,9 +45,7 @@ const Onboarding: React.FC = () => {
     if (currentIndex == onboardingData.length - 1) {
       await AsyncStorage.setItem('firstTime', 'no');
       navigation.navigate('Root');
-    } else {
-      slidesRef.current?.scrollToIndex({ index: currentIndex + 1 });
-    }
+    } else slidesRef.current?.scrollToIndex({ index: currentIndex + 1 });
   }
 
   return (
