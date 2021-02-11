@@ -15,6 +15,7 @@ routes.get('/expenses', authMiddleware, ExpensesController.index);
 routes.get('/expenses/:id', authMiddleware, ExpensesController.show); // Detail expense
 routes.post('/expenses', authMiddleware, ExpensesController.store);
 
+routes.get('/user', authMiddleware, UserController.index);
 routes.put('/user', authMiddleware, UserController.update);
 
 routes.get('/areas', authMiddleware, AreaController.index);

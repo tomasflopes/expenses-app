@@ -12,6 +12,18 @@ import DecodeJWTToken from '../utils/DecodeJWTToken';
 import IUser from '../types/IUser';
 
 export default {
+  async index(request: Request, response: Response) {
+    const _id = await DecodeJWTToken(request);
+
+    try {
+      const user = await User.findOne({ _id });
+
+      return response.json(user);
+    } catch (err) {
+      return response.status(400).json(err);
+    }
+  },
+
   async show(request: Request, response: Response) {
     const { email, password } = request.body;
 
