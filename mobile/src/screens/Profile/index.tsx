@@ -5,16 +5,24 @@ import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
 
 import EditableInput from '../../components/EditableInput';
 
-import { LinearGradient } from 'expo-linear-gradient';
-
 import useOpenKeyboard from '../../hooks/useOpenKeyboard';
 
 import styles from './styles';
 
 import theme from '../../styles';
+import api from '../../services/api';
+import generateHeaders from '../../utils/generateAuthHeader';
+import IUser from '../../types/IUser';
 
 const Profile: React.FC = () => {
   const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [occupation, setOccupation] = useState<string | undefined>('');
+  const [birth, setBirth] = useState<string | undefined>('');
+  const [phone, setPhone] = useState<string | undefined>('');
+  const [defaultCurrency, setDefaultCurrency] = useState<string | undefined>(
+    ''
+  );
 
   const keyboardOpen = useOpenKeyboard();
 
@@ -29,12 +37,28 @@ const Profile: React.FC = () => {
     extrapolateRight: Extrapolate.CLAMP
   });
 
-  const translate: any = interpolate(y, {
+  const translate = interpolate(y, {
     inputRange: [0, theme.constants.DEADZONE_HEIGHT],
     outputRange: [0, -theme.constants.DEADZONE_HEIGHT / 2],
     extrapolateRight: Extrapolate.CLAMP
   });
 
+  async function getUserInfo() {
+    const headers = await generateHeaders();
+    const response = await api.get('/user', headers);
+
+    const data: IUser = response.data;
+
+    setFirstName(data.firstName);
+    setLastName(data.lastName);
+    setOccupation(data.occupation);
+    setBirth(data.birth?.toString());
+    setPhone(data.phone);
+    setDefaultCurrency(data.financeSettings.defaultCurrency);
+  }
+  useEffect(() => {
+    getUserInfo();
+  }, []);
   return (
     <View style={styles.container}>
       <Animated.ScrollView
@@ -92,24 +116,34 @@ const Profile: React.FC = () => {
             value={firstName}
           />
           <EditableInput
-            placeholder="First Name"
-            onChangeText={setFirstName}
-            value={firstName}
+            placeholder="Last Name"
+            onChangeText={setLastName}
+            value={lastName}
           />
           <EditableInput
-            placeholder="First Name"
-            onChangeText={setFirstName}
-            value={firstName}
+            placeholder="Occupation"
+            onChangeText={setOccupation}
+            value={occupation}
           />
           <EditableInput
-            placeholder="First Name"
-            onChangeText={setFirstName}
-            value={firstName}
+            placeholder="Birth"
+            onChangeText={setBirth}
+            value={birth}
           />
           <EditableInput
-            placeholder="First Name"
-            onChangeText={setFirstName}
-            value={firstName}
+            placeholder="Phone"
+            onChangeText={setPhone}
+            value={phone}
+          />
+
+          <Text style={styles.headerText}>Finance Settings</Text>
+
+          <View style={styles.spacer} />
+
+          <EditableInput
+            placeholder="Default Currency"
+            onChangeText={setDefaultCurrency}
+            value={defaultCurrency}
           />
         </View>
       </Animated.ScrollView>

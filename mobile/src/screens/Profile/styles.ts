@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.secondaryLight,
     borderRadius: theme.units.borderRadius.md,
 
-    paddingVertical: theme.units.margin.lg,
+    paddingBottom: theme.units.margin.lg,
     paddingHorizontal: theme.units.margin.sm
   },
 
@@ -73,7 +73,9 @@ const styles = StyleSheet.create({
     paddingBottom: theme.units.margin.sm,
 
     borderBottomWidth: 1,
-    borderBottomColor: theme.colors.secondary
+    borderBottomColor: theme.colors.secondary,
+
+    marginTop: theme.units.margin.lg
   },
 
   spacer: {

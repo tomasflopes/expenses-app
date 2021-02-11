@@ -15,12 +15,11 @@ const styles = StyleSheet.create({
   },
 
   inputContainer: {
-    backgroundColor: theme.colors.inputBackground,
+    backgroundColor: theme.colors.disabledInputBackground,
     borderWidth: 1,
     borderColor: theme.colors.secondaryDark,
     borderRadius: theme.units.borderRadius.sm,
-    paddingVertical: theme.units.margin.sm,
-    paddingHorizontal: theme.units.margin.md
+    padding: theme.units.margin.sm
   },
 
   input: {
@@ -37,7 +36,7 @@ const styles = StyleSheet.create({
   disabledPlaceholder: {
     fontFamily: theme.fonts.Archivo.regular,
     fontSize: theme.units.fontSize.input,
-    color: theme.colors.inputText
+    color: theme.colors.textBase
   }
 });
 

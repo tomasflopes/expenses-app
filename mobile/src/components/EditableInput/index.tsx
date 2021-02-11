@@ -7,9 +7,15 @@ import styles from './styles';
 interface Props extends TextInputProps {
   placeholder: string;
   editable?: boolean;
+  value?: string;
 }
 
-const EditableInput: React.FC<Props> = ({ placeholder, editable, ...rest }) => {
+const EditableInput: React.FC<Props> = ({
+  placeholder,
+  editable,
+  value,
+  ...rest
+}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{placeholder}</Text>
@@ -21,7 +27,9 @@ const EditableInput: React.FC<Props> = ({ placeholder, editable, ...rest }) => {
         ></TextInput>
       ) : (
         <View style={styles.inputContainer}>
-          <Text style={styles.disabledPlaceholder}>{placeholder}</Text>
+          <Text style={styles.disabledPlaceholder}>
+            {value ? value : placeholder}
+          </Text>
         </View>
       )}
     </View>
