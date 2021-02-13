@@ -5,8 +5,8 @@ import { View, Text, TextInput, TextInputProps } from 'react-native';
 import styles from './styles';
 
 interface Props extends TextInputProps {
-  placeholder: string;
   editable?: boolean;
+  placeholder: string;
   value?: string;
 }
 

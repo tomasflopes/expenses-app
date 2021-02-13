@@ -13,6 +13,7 @@ import theme from '../../styles';
 import api from '../../services/api';
 import generateHeaders from '../../utils/generateAuthHeader';
 import IUser from '../../types/IUser';
+import FinanceAreasInputs from '../../components/FinanceAreasInputs';
 
 const Profile: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -56,9 +57,11 @@ const Profile: React.FC = () => {
     setPhone(data.phone);
     setDefaultCurrency(data.financeSettings.defaultCurrency);
   }
+
   useEffect(() => {
     getUserInfo();
   }, []);
+
   return (
     <View style={styles.container}>
       <Animated.ScrollView
@@ -88,7 +91,7 @@ const Profile: React.FC = () => {
                   }
                 ]}
               >
-                Tomás Lopes
+                {firstName} {lastName}
               </Animated.Text>
               <Animated.Text
                 style={[
@@ -99,7 +102,7 @@ const Profile: React.FC = () => {
                   }
                 ]}
               >
-                Student
+                {occupation}
               </Animated.Text>
             </View>
           </View>
@@ -145,6 +148,8 @@ const Profile: React.FC = () => {
             onChangeText={setDefaultCurrency}
             value={defaultCurrency}
           />
+
+          <FinanceAreasInputs />
         </View>
       </Animated.ScrollView>
     </View>
