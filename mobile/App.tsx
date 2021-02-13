@@ -18,6 +18,7 @@ import {
 
 import {
   Archivo_400Regular,
+  Archivo_600SemiBold,
   Archivo_700Bold
 } from '@expo-google-fonts/archivo';
 
@@ -29,6 +30,7 @@ export default function App() {
     Poppins_600SemiBold,
     Poppins_700Bold,
     Archivo_400Regular,
+    Archivo_600SemiBold,
     Archivo_700Bold
   });
 

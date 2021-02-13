@@ -8,6 +8,7 @@ export default {
   },
   Archivo: {
     regular: 'Archivo_400Regular',
+    semiBold: 'Archivo_600SemiBold',
     bold: 'Archivo_700Bold'
   }
 } as const;
