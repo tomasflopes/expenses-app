@@ -1,13 +1,3 @@
-export type ConstantsType = {
-  DEADZONE_HEIGHT: 235;
-  AVATAR_WIDTH: 120;
-  BUTTON_HEIGHT: 64;
-  DOT_WIDTH: 4;
-  PROFILE_CONTAINER_HEIGHT: 72;
-  LOGO_WIDTH: 350;
-  LOGO_HEIGHT: 320;
-};
-
 export default {
   DEADZONE_HEIGHT: 235,
   AVATAR_WIDTH: 120,
@@ -16,4 +6,4 @@ export default {
   PROFILE_CONTAINER_HEIGHT: 72,
   LOGO_WIDTH: 350,
   LOGO_HEIGHT: 320
-};
+} as const;
