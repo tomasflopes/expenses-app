@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { Feather } from '@expo/vector-icons';
@@ -13,8 +13,14 @@ const FinanceAreasInputs: React.FC<Props> = ({ editable }) => {
   const [newAreaOpen, setNewAreaOpen] = useState(false);
   const [newArea, setNewArea] = useState('');
 
+  const inputRef = useRef<TextInput>(null);
+
   function handleNewAreaOpen() {
     setNewAreaOpen(state => !state);
+  }
+
+  function handleAddNewArea() {
+    console.log(newArea);
   }
 
   const areas = ['Job', 'Food', 'Gifts'];
@@ -37,10 +43,25 @@ const FinanceAreasInputs: React.FC<Props> = ({ editable }) => {
       ))}
 
       {newAreaOpen ? (
-        <TextInput style={styles.inputContainer}>
-          <Text style={styles.disabledPlaceholder}>Type a new area</Text>
-          <Feather name="plus" styles={styles.addNewAreaIcon} />
-        </TextInput>
+        <View style={styles.addNewAreaInputContainer}>
+          <TextInput
+            placeholder="Type a new area"
+            ref={inputRef}
+            autoCapitalize="words"
+            returnKeyType="done"
+            onChangeText={setNewArea}
+            onSubmitEditing={handleAddNewArea}
+            value={newArea}
+            style={styles.input}
+          />
+          <TouchableOpacity onPress={handleAddNewArea}>
+            <Feather
+              name="plus"
+              styles={styles.addNewAreaInputIcon}
+              size={18}
+            />
+          </TouchableOpacity>
+        </View>
       ) : (
         <TouchableOpacity
           onPress={handleNewAreaOpen}

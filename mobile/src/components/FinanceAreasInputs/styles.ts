@@ -30,9 +30,28 @@ const styles = StyleSheet.create({
 
   addNewAreaContainer: {
     flexDirection: 'row',
-
     alignItems: 'center',
     justifyContent: 'center'
+  },
+
+  addNewAreaInputContainer: {
+    backgroundColor: theme.colors.disabledInputBackground,
+    borderWidth: 1,
+    borderColor: theme.colors.secondaryDark,
+    borderRadius: theme.units.borderRadius.sm,
+    padding: theme.units.margin.sm,
+
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+
+  input: {
+    fontFamily: theme.fonts.Archivo.regular,
+    fontSize: theme.units.fontSize.input,
+    color: theme.colors.textBase,
+
+    flex: 1
   },
 
   addNewAreaIcon: {
@@ -40,6 +59,10 @@ const styles = StyleSheet.create({
     color: theme.colors.textBase,
 
     marginRight: theme.units.margin.tiny
+  },
+
+  addNewAreaInputIcon: {
+    color: theme.colors.textBase
   },
 
   addNewAreaText: {
