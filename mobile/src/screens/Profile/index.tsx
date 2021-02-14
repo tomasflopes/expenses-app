@@ -14,6 +14,7 @@ import api from '../../services/api';
 import generateHeaders from '../../utils/generateAuthHeader';
 import IUser from '../../types/IUser';
 import FinanceAreasInputs from '../../components/FinanceAreasInputs';
+import SwitchableButton from '../../components/SwitchableButton';
 
 const Profile: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -24,6 +25,8 @@ const Profile: React.FC = () => {
   const [defaultCurrency, setDefaultCurrency] = useState<string | undefined>(
     ''
   );
+
+  const [editing, setEditing] = useState(false);
 
   const keyboardOpen = useOpenKeyboard();
 
@@ -58,7 +61,9 @@ const Profile: React.FC = () => {
     setDefaultCurrency(data.financeSettings.defaultCurrency);
   }
 
-  function handleEditProfile() {}
+  function handleEditProfile() {
+    setEditing(state => !state);
+  }
 
   useEffect(() => {
     getUserInfo();
@@ -153,9 +158,33 @@ const Profile: React.FC = () => {
 
           <FinanceAreasInputs />
 
-          <TouchableOpacity onPress={handleEditProfile} style={styles.button}>
-            <Text style={styles.buttonText}>Edit Information</Text>
-          </TouchableOpacity>
+          {editing ? (
+            <SwitchableButton
+              active={editing}
+              handleSubmit={handleEditProfile}
+              activeColor="confirm"
+              disabledColor="primary"
+              activeTextColor="secondaryLight"
+              disabledTextColor="secondaryLight"
+              styles={styles.button}
+            >
+              Edit Information
+            </SwitchableButton>
+          ) : (
+            <TouchableOpacity onPress={handleEditProfile}>
+              <SwitchableButton
+                active={editing}
+                handleSubmit={handleEditProfile}
+                activeColor="confirm"
+                disabledColor="primary"
+                activeTextColor="secondaryLight"
+                disabledTextColor="secondaryLight"
+                styles={styles.button}
+              >
+                Edit Information
+              </SwitchableButton>
+            </TouchableOpacity>
+          )}
         </View>
       </Animated.ScrollView>
     </View>

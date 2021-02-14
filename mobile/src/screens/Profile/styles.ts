@@ -87,25 +87,8 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-
-    backgroundColor: theme.colors.primary,
-    width: '100%',
-    height: theme.constants.BUTTON_HEIGHT,
-    borderRadius: theme.units.borderRadius.md,
-
     marginTop: theme.units.margin.md,
     marginBottom: theme.units.margin.xlg
-  },
-
-  buttonText: {
-    fontFamily: theme.fonts.Poppins.semiBold,
-    fontSize: theme.units.fontSize.bigHeader,
-    textTransform: 'capitalize',
-
-    color: theme.colors.secondaryLight
   }
 });
 

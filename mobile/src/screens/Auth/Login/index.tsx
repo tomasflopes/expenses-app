@@ -125,6 +125,10 @@ const Login: React.FC = () => {
           active={buttonEnabled}
           buttonRef={buttonRef}
           handleSubmit={handleSubmitForm}
+          activeColor="confirm"
+          disabledColor="secondary"
+          activeTextColor="secondaryLight"
+          disabledTextColor="secondaryDark"
         >
           login
         </SwitchableButton>

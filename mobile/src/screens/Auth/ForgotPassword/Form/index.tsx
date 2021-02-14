@@ -69,6 +69,10 @@ const Form: React.FC = () => {
           active={buttonEnabled}
           buttonRef={buttonRef}
           handleSubmit={handleSubmit}
+          activeColor="confirm"
+          disabledColor="secondary"
+          activeTextColor="secondaryLight"
+          disabledTextColor="secondaryDark"
         >
           send email
         </SwitchableButton>

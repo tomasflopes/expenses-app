@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
 
-    backgroundColor: theme.colors.confirm,
     width: '100%',
     height: theme.constants.BUTTON_HEIGHT,
     borderRadius: theme.units.borderRadius.md,
@@ -26,7 +25,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
 
-    backgroundColor: theme.colors.secondary,
     width: '100%',
     height: theme.constants.BUTTON_HEIGHT,
     borderRadius: theme.units.borderRadius.md,
@@ -41,8 +39,6 @@ const styles = StyleSheet.create({
 
     textTransform: 'capitalize',
 
-    color: theme.colors.secondaryLight,
-
     position: 'absolute',
     top: theme.constants.BUTTON_HEIGHT / 4
   },
@@ -53,8 +49,6 @@ const styles = StyleSheet.create({
     fontSize: theme.units.fontSize.bigHeader,
 
     textTransform: 'capitalize',
-
-    color: theme.colors.secondaryDark,
 
     position: 'absolute',
     top: theme.constants.BUTTON_HEIGHT / 4
