@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
 
 import EditableInput from '../../components/EditableInput';
@@ -57,6 +57,8 @@ const Profile: React.FC = () => {
     setPhone(data.phone);
     setDefaultCurrency(data.financeSettings.defaultCurrency);
   }
+
+  function handleEditProfile() {}
 
   useEffect(() => {
     getUserInfo();
@@ -150,6 +152,10 @@ const Profile: React.FC = () => {
           />
 
           <FinanceAreasInputs />
+
+          <TouchableOpacity onPress={handleEditProfile} style={styles.button}>
+            <Text style={styles.buttonText}>Edit Information</Text>
+          </TouchableOpacity>
         </View>
       </Animated.ScrollView>
     </View>

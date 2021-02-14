@@ -1,9 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { Feather } from '@expo/vector-icons';
 
+import api from '../../services/api';
+
 import styles from './styles';
+import generateHeaders from '../../utils/generateAuthHeader';
 
 interface Props {
   editable?: boolean;
@@ -13,17 +16,43 @@ const FinanceAreasInputs: React.FC<Props> = ({ editable }) => {
   const [newAreaOpen, setNewAreaOpen] = useState(false);
   const [newArea, setNewArea] = useState('');
 
+  const [areas, setNewAreas] = useState([]);
+
   const inputRef = useRef<TextInput>(null);
 
   function handleNewAreaOpen() {
     setNewAreaOpen(state => !state);
   }
 
-  function handleAddNewArea() {
-    console.log(newArea);
+  async function handleAddNewArea() {
+    const headers = await generateHeaders();
+    const response = await api.post(
+      '/areas',
+      {
+        area: newArea
+      },
+      headers
+    );
+
+    if (!response) {
+      alert('Something went wrong! Please try again later...');
+    }
+
+    setNewAreaOpen(false);
+    setNewArea('');
   }
 
-  const areas = ['Job', 'Food', 'Gifts'];
+  async function getUserAreas() {
+    const headers = await generateHeaders();
+
+    const { data } = await api.get('/areas', headers);
+
+    setNewAreas(data);
+  }
+
+  useEffect(() => {
+    newArea === '' && getUserAreas();
+  }, [newArea]);
 
   return (
     <>

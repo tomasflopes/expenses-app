@@ -55,12 +55,12 @@ const styles = StyleSheet.create({
   personalInfoContainer: {
     width: '80%',
 
-    marginTop: -20,
+    top: -20,
+    marginBottom: theme.units.margin.md,
 
     backgroundColor: theme.colors.secondaryLight,
     borderRadius: theme.units.borderRadius.md,
 
-    paddingBottom: theme.units.margin.lg,
     paddingHorizontal: theme.units.margin.sm
   },
 
@@ -84,6 +84,28 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     marginTop: theme.units.margin.sm
+  },
+
+  button: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    backgroundColor: theme.colors.primary,
+    width: '100%',
+    height: theme.constants.BUTTON_HEIGHT,
+    borderRadius: theme.units.borderRadius.md,
+
+    marginTop: theme.units.margin.md,
+    marginBottom: theme.units.margin.xlg
+  },
+
+  buttonText: {
+    fontFamily: theme.fonts.Poppins.semiBold,
+    fontSize: theme.units.fontSize.bigHeader,
+    textTransform: 'capitalize',
+
+    color: theme.colors.secondaryLight
   }
 });
 
