@@ -10,5 +10,5 @@ export default interface IExpenseSchema extends Document {
   type: 'Expense' | 'Income';
   area: string;
   user: IUser;
-  date: Date;
+  date?: Date;
 }

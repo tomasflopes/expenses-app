@@ -14,9 +14,9 @@ export default {
 
     const userBalance = userExpenses.reduce(
       (acc, expense) =>
-        expense.type === 'expense'
-          ? (acc -= expense.amount)
-          : (acc += expense.amount),
+        expense.type === 'Expense'
+          ? (acc -= expense.value)
+          : (acc += expense.value),
       0
     );
 

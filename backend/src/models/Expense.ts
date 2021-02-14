@@ -29,7 +29,8 @@ const ExpenseSchema = new mongoose.Schema({
     default: 'undefined'
   },
   date: {
-    type: Date
+    type: Date,
+    default: Date.now()
   },
   user: {
     type: (Object as unknown) as IUser,

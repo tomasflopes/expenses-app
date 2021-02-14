@@ -31,8 +31,6 @@ export default {
       capitalizeFirstLetter(area)
     );
 
-    console.log(newArea);
-
     if (oldUserAreas?.indexOf(newArea) !== -1)
       return response.status(400).json({
         Error: 'The user already has this area in his profile settings'
@@ -104,7 +102,7 @@ export default {
       return response.status(400).json({ error: 'Index out of bounds' });
 
     const newAreaArray = userAreas.filter(
-      (area, index) => index !== deletedAreaIndex
+      (_, index) => index !== deletedAreaIndex
     );
 
     await User.findOneAndUpdate(
