@@ -25,6 +25,7 @@ const FinanceAreasInputs: React.FC<Props> = ({ editable }) => {
   }
 
   async function handleAddNewArea() {
+    console.log('object');
     const headers = await generateHeaders();
     const response = await api.post(
       '/areas',

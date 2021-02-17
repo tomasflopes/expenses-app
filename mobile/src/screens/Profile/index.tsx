@@ -159,30 +159,17 @@ const Profile: React.FC = () => {
           <FinanceAreasInputs />
 
           {editing ? (
-            <SwitchableButton
-              active={editing}
-              handleSubmit={handleEditProfile}
-              activeColor="confirm"
-              disabledColor="primary"
-              activeTextColor="secondaryLight"
-              disabledTextColor="secondaryLight"
-              styles={styles.button}
+            <TouchableOpacity
+              onPress={handleEditProfile}
+              style={[styles.button, styles.saveButton]}
             >
-              Edit Information
-            </SwitchableButton>
+              <Text style={styles.buttonText}>Save</Text>
+            </TouchableOpacity>
           ) : (
-            <TouchableOpacity onPress={handleEditProfile}>
-              <SwitchableButton
-                active={editing}
-                handleSubmit={handleEditProfile}
-                activeColor="confirm"
-                disabledColor="primary"
-                activeTextColor="secondaryLight"
-                disabledTextColor="secondaryLight"
-                styles={styles.button}
-              >
-                Edit Information
-              </SwitchableButton>
+            <TouchableOpacity onPress={handleEditProfile} style={styles.button}>
+              <Animated.Text style={[styles.buttonText]}>
+                edit information
+              </Animated.Text>
             </TouchableOpacity>
           )}
         </View>
