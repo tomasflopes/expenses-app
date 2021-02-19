@@ -8,16 +8,33 @@ import { useNavigation } from '@react-navigation/native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
-import theme from '../../styles';
-
 import styles from './styles';
+import { Alert } from 'react-native';
 
 interface Props {
+  confirmMessage?: boolean;
   title?: string;
 }
 
-const Header: React.FC<Props> = ({ title }) => {
+const Header: React.FC<Props> = ({ confirmMessage, title }) => {
   const navigation = useNavigation();
+
+  function handleGoBack() {
+    if (confirmMessage) {
+      Alert.alert(
+        'Go Back?',
+        'By going back you will loose all of your changes!',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel'
+          },
+          { text: 'OK', onPress: () => navigation.goBack() }
+        ],
+        { cancelable: true }
+      );
+    }
+  }
 
   return (
     <LinearGradient
@@ -25,10 +42,7 @@ const Header: React.FC<Props> = ({ title }) => {
       locations={[0.05, 1]}
       style={styles.container}
     >
-      <TouchableOpacity
-        style={styles.backArrowButton}
-        onPress={navigation.goBack}
-      >
+      <TouchableOpacity style={styles.backArrowButton} onPress={handleGoBack}>
         <Feather name="arrow-left" style={styles.arrowIcon} />
       </TouchableOpacity>
 

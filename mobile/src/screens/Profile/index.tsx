@@ -4,17 +4,15 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
 
 import EditableInput from '../../components/EditableInput';
+import FinanceAreasInputs from '../../components/FinanceAreasInputs';
 
 import useOpenKeyboard from '../../hooks/useOpenKeyboard';
-
-import styles from './styles';
-
-import theme from '../../styles';
-import api from '../../services/api';
 import generateHeaders from '../../utils/generateAuthHeader';
 import IUser from '../../types/IUser';
-import FinanceAreasInputs from '../../components/FinanceAreasInputs';
-import SwitchableButton from '../../components/SwitchableButton';
+import api from '../../services/api';
+
+import styles from './styles';
+import theme from '../../styles';
 
 const Profile: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -25,6 +23,9 @@ const Profile: React.FC = () => {
   const [defaultCurrency, setDefaultCurrency] = useState<string | undefined>(
     ''
   );
+
+  const [newArea, setNewArea] = useState('');
+  const [areas, setAreas] = useState([]);
 
   const [editing, setEditing] = useState(false);
 
@@ -61,13 +62,63 @@ const Profile: React.FC = () => {
     setDefaultCurrency(data.financeSettings.defaultCurrency);
   }
 
-  function handleEditProfile() {
+  async function handleEditProfile() {
+    if (editing) {
+      const headers = await generateHeaders();
+
+      const data = {
+        firstName,
+        lastName,
+        occupation,
+        birth,
+        phone,
+        financeSettings: { defaultCurrency }
+      };
+
+      const response = await api.put('/user', data, headers);
+
+      if (response) {
+        alert('User updated with success!');
+      }
+
+      alert('Something went wrong!');
+    }
+
     setEditing(state => !state);
+  }
+
+  async function handleAddNewArea() {
+    const headers = await generateHeaders();
+    const response = await api.post(
+      '/areas',
+      {
+        area: newArea
+      },
+      headers
+    );
+
+    if (!response) {
+      alert('Something went wrong! Please try again later...');
+    }
+
+    setNewArea('');
+  }
+
+  async function getUserAreas() {
+    const headers = await generateHeaders();
+
+    const { data } = await api.get('/areas', headers);
+
+    setAreas(data);
   }
 
   useEffect(() => {
     getUserInfo();
   }, []);
+
+  useEffect(() => {
+    newArea === '' && getUserAreas();
+  }, [newArea]);
 
   return (
     <View style={styles.container}>
@@ -121,26 +172,31 @@ const Profile: React.FC = () => {
           <View style={styles.spacer} />
 
           <EditableInput
+            editable={editing}
             placeholder="First Name"
             onChangeText={setFirstName}
             value={firstName}
           />
           <EditableInput
+            editable={editing}
             placeholder="Last Name"
             onChangeText={setLastName}
             value={lastName}
           />
           <EditableInput
+            editable={editing}
             placeholder="Occupation"
             onChangeText={setOccupation}
             value={occupation}
           />
           <EditableInput
+            editable={editing}
             placeholder="Birth"
             onChangeText={setBirth}
             value={birth}
           />
           <EditableInput
+            editable={editing}
             placeholder="Phone"
             onChangeText={setPhone}
             value={phone}
@@ -151,12 +207,18 @@ const Profile: React.FC = () => {
           <View style={styles.spacer} />
 
           <EditableInput
+            editable={editing}
             placeholder="Default Currency"
             onChangeText={setDefaultCurrency}
             value={defaultCurrency}
           />
 
-          <FinanceAreasInputs />
+          <FinanceAreasInputs
+            areas={areas}
+            newArea={newArea}
+            addNewArea={handleAddNewArea}
+            setNewArea={setNewArea}
+          />
 
           {editing ? (
             <TouchableOpacity

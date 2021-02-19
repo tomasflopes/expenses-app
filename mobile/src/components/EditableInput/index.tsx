@@ -2,7 +2,7 @@ import React from 'react';
 
 import { View, Text, TextInput, TextInputProps } from 'react-native';
 
-import styles from './styles';
+import styles, { placeholderColor } from './styles';
 
 interface Props extends TextInputProps {
   editable?: boolean;
@@ -22,7 +22,9 @@ const EditableInput: React.FC<Props> = ({
       {editable ? (
         <TextInput
           style={styles.input}
+          placeholderTextColor={placeholderColor}
           placeholder={placeholder}
+          value={value}
           {...rest}
         ></TextInput>
       ) : (

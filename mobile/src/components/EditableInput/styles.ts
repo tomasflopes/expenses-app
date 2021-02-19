@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import theme from '../../styles';
+
 const styles = StyleSheet.create({
   container: {
     marginBottom: theme.units.margin.sm
@@ -15,20 +16,26 @@ const styles = StyleSheet.create({
   },
 
   inputContainer: {
-    backgroundColor: theme.colors.disabledInputBackground,
     borderWidth: 1,
     borderColor: theme.colors.secondaryDark,
     borderRadius: theme.units.borderRadius.sm,
-    padding: theme.units.margin.sm
+
+    backgroundColor: theme.colors.disabledInputBackground,
+
+    paddingVertical: theme.units.margin.sm,
+    paddingHorizontal: theme.units.margin.md
   },
 
   input: {
     fontFamily: theme.fonts.Archivo.regular,
-    fontSize: theme.units.fontSize.big,
-    color: theme.colors.textBase,
-    backgroundColor: theme.colors.inputBackground,
+    fontSize: theme.units.fontSize.input,
+
+    backgroundColor: theme.colors.secondaryLight,
+
     borderWidth: 1,
-    borderColor: theme.colors.secondaryDark,
+    borderColor: theme.colors.secondary,
+    borderRadius: theme.units.borderRadius.sm,
+
     paddingVertical: theme.units.margin.sm,
     paddingHorizontal: theme.units.margin.md
   },
@@ -39,5 +46,7 @@ const styles = StyleSheet.create({
     color: theme.colors.textBase
   }
 });
+
+export const placeholderColor = theme.colors.textBase;
 
 export default styles;
