@@ -96,7 +96,7 @@ export default {
       email,
       birth,
       phone,
-      financeSettings: { defaultCurrency }
+      financeSettings: { defaultCurrency, areas }
     } = request.body;
 
     if (email) {
@@ -127,7 +127,8 @@ export default {
           phone: phone || oldUserData.phone,
           financeSettings: {
             defaultCurrency:
-              defaultCurrency || oldUserData.financeSettings.defaultCurrency
+              defaultCurrency || oldUserData.financeSettings.defaultCurrency,
+            areas: areas || oldUserData.financeSettings.areas
           }
         }
       );
