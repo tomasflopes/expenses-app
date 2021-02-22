@@ -77,11 +77,11 @@ const Profile: React.FC = () => {
 
       const response = await api.put('/user', data, headers);
 
-      if (response) {
+      if (!response) {
+        alert('Something went wrong!');
+      } else {
         alert('User updated with success!');
       }
-
-      alert('Something went wrong!');
     }
 
     setEditing(state => !state);
@@ -103,6 +103,7 @@ const Profile: React.FC = () => {
         headers
       )
       .catch(err => {
+        console.log(err);
         alert('Something went wrong! Please try again later...');
       });
 
