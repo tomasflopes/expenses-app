@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
 
 import EditableInput from '../../components/EditableInput';
@@ -72,7 +72,7 @@ const Profile: React.FC = () => {
         occupation,
         birth,
         phone,
-        financeSettings: { defaultCurrency }
+        financeSettings: { defaultCurrency, areas }
       };
 
       const response = await api.put('/user', data, headers);
@@ -88,18 +88,23 @@ const Profile: React.FC = () => {
   }
 
   async function handleAddNewArea() {
-    const headers = await generateHeaders();
-    const response = await api.post(
-      '/areas',
-      {
-        area: newArea
-      },
-      headers
-    );
-
-    if (!response) {
-      alert('Something went wrong! Please try again later...');
+    if (newArea === '') {
+      Alert.alert('Error', 'The new area must have a name.');
+      return;
     }
+
+    const headers = await generateHeaders();
+    await api
+      .post(
+        '/areas',
+        {
+          area: newArea
+        },
+        headers
+      )
+      .catch(err => {
+        alert('Something went wrong! Please try again later...');
+      });
 
     setNewArea('');
   }
