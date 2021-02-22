@@ -19,13 +19,38 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.colors.secondaryDark,
     borderRadius: theme.units.borderRadius.sm,
-    padding: theme.units.margin.sm
+    padding: theme.units.margin.sm,
+
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+
+  iconsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+
+  icon: {
+    marginRight: theme.units.margin.xsm,
+
+    color: theme.colors.textBase,
+
+    fontSize: 18
+  },
+
+  cancelIcon: {
+    fontSize: 18,
+    color: theme.colors.cancel
   },
 
   disabledPlaceholder: {
     fontFamily: theme.fonts.Archivo.regular,
     fontSize: theme.units.fontSize.input,
-    color: theme.colors.textBase
+    color: theme.colors.textBase,
+
+    flex: 1
   },
 
   addNewAreaContainer: {

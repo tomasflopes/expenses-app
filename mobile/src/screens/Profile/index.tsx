@@ -118,6 +118,18 @@ const Profile: React.FC = () => {
     setAreas(data);
   }
 
+  async function removeArea(index: number) {
+    const headers = await generateHeaders();
+
+    const response = await api
+      .delete(`/areas/${index}`, headers)
+      .catch(err => console.log(err));
+
+    if (response) {
+      await getUserAreas();
+    }
+  }
+
   useEffect(() => {
     getUserInfo();
   }, []);
@@ -220,9 +232,11 @@ const Profile: React.FC = () => {
           />
 
           <FinanceAreasInputs
-            areas={areas}
-            newArea={newArea}
             addNewArea={handleAddNewArea}
+            areas={areas}
+            editable={editing}
+            newArea={newArea}
+            removeArea={removeArea}
             setNewArea={setNewArea}
           />
 

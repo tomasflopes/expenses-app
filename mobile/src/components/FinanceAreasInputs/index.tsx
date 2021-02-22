@@ -9,19 +9,21 @@ import styles from './styles';
 import generateHeaders from '../../utils/generateAuthHeader';
 
 interface Props {
+  addNewArea: () => Promise<void>;
   areas: string[];
   editable?: boolean;
   newArea: string;
+  removeArea: (index: number) => Promise<void>;
   setNewArea: Dispatch<SetStateAction<string>>;
-  addNewArea: () => Promise<void>;
 }
 
 const FinanceAreasInputs: React.FC<Props> = ({
+  addNewArea,
   areas,
   editable,
   newArea,
-  setNewArea,
-  addNewArea
+  removeArea,
+  setNewArea
 }) => {
   const [newAreaOpen, setNewAreaOpen] = useState(false);
 
@@ -44,10 +46,15 @@ const FinanceAreasInputs: React.FC<Props> = ({
           <View style={styles.inputContainer}>
             <Text style={styles.disabledPlaceholder}>{area}</Text>
             {editable && (
-              <>
-                <Feather name="edit" size={18} />
-                <Feather name="x" size={18} />
-              </>
+              <View style={styles.iconsContainer}>
+                <TouchableOpacity>
+                  <Feather name="edit" style={styles.icon} />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => removeArea(index)}>
+                  <Feather name="x" style={styles.cancelIcon} />
+                </TouchableOpacity>
+              </View>
             )}
           </View>
         </View>
