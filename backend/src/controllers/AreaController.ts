@@ -19,6 +19,9 @@ export default {
   async store(request: Request, response: Response) {
     const { area } = request.body;
 
+    if (area === '')
+      return response.status(400).json({ error: 'Invalid area.' });
+
     const newArea = capitalizeFirstLetter(area);
 
     const _id = await DecodeJWTToken(request);
