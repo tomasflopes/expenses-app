@@ -29,9 +29,14 @@
     "node": true
   },
   "rules": {
-     "react/jsx-filename-extension": [
+    "react/jsx-filename-extension": [
       2,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
         ]
       }
     ],
@@ -44,6 +49,8 @@
     "@typescript-eslint/member-delimiter-style": 0,
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-use-before-define": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "arrow-parens": "off",
     "@typescript-eslint/ban-ts-ignore": [
       "off"
