@@ -42,7 +42,6 @@
     ],
     "react/react-in-jsx-scope": 0,
     "react/display-name": 0,
-    "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/explicit-member-accessibility": 0,
     "@typescript-eslint/indent": 0,
@@ -52,11 +51,16 @@
     "@typescript-eslint/no-use-before-define": 0,
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "object-curly-newline": 0,
+    "import/extensions": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/prop-types": "off",
+    "space-before-function-paren": "off",
     "arrow-parens": "off",
+    "import/no-unresolved": 0,
     "@typescript-eslint/ban-ts-ignore": [
       "off"
     ],
-    "@typescript-eslint/no-unescaped-entities": 0,
     "react/no-unescaped-entities": 0,
     "quotes": [
       "error",
