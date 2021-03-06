@@ -20,7 +20,7 @@ routes.put('/user', authMiddleware, UserController.update);
 
 routes.get('/areas', authMiddleware, AreaController.index);
 routes.post('/areas', authMiddleware, AreaController.store);
-routes.put('/areas/:oldArea', authMiddleware, AreaController.update);
+routes.put('/areas/:oldAreaIndex', authMiddleware, AreaController.update);
 routes.delete('/areas/:index', authMiddleware, AreaController.delete);
 
 export default routes;

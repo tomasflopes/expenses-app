@@ -52,9 +52,11 @@ export default {
   },
 
   async update(request: Request, response: Response) {
-    const { oldArea } = request.params;
+    const { oldAreaIndex } = request.params;
 
     const { area } = request.body;
+
+    const index = parseInt(oldAreaIndex);
 
     const newArea = capitalizeFirstLetter(area);
 
@@ -64,14 +66,25 @@ export default {
 
     if (!user) return response.status(400).json({ error: 'User not found' });
 
-    if (!user.financeSettings.areas?.includes(capitalizeFirstLetter(oldArea)))
+    if (!user.financeSettings.areas)
+      return response.status(400).json({ error: 'User has no areas' });
+
+    const oldArea = user.financeSettings.areas[index];
+
+    if (oldArea === newArea) {
       return response
         .status(400)
-        .json({ error: 'User does not have this area' });
+        .json({ error: 'New area matches the old one' });
+    }
 
-    const newAreas = user.financeSettings.areas.map(area =>
-      area.toLowerCase() === oldArea.toLowerCase() ? newArea : area
-    );
+    if (user.financeSettings.areas.includes(newArea))
+      return response.status(400).json({ error: 'Area already exists' });
+    const newAreas = user.financeSettings.areas;
+
+    console.log(newArea, index);
+    newAreas[index] = newArea;
+
+    console.log(newAreas);
 
     await User.findOneAndUpdate(
       { _id },
