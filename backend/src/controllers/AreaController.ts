@@ -81,10 +81,7 @@ export default {
       return response.status(400).json({ error: 'Area already exists' });
     const newAreas = user.financeSettings.areas;
 
-    console.log(newArea, index);
     newAreas[index] = newArea;
-
-    console.log(newAreas);
 
     await User.findOneAndUpdate(
       { _id },
