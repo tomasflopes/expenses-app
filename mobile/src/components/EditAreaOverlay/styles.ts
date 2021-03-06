@@ -3,21 +3,18 @@ import { StyleSheet } from 'react-native';
 import theme from '../../styles';
 
 const styles = StyleSheet.create({
-  modal: {
-    flex: 1,
-
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
   container: {
     flex: 1,
+
+    marginHorizontal: theme.units.margin.sm,
+
     justifyContent: 'center',
     alignItems: 'center'
   },
 
   contentContainer: {
-    height: 360,
+    elevation: 16,
+    height: 280,
     width: '90%',
 
     justifyContent: 'center',
@@ -27,7 +24,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
 
     paddingHorizontal: theme.units.margin.md,
-    paddingVertical: theme.units.margin.lg
+    paddingVertical: theme.units.margin.md
   },
 
   inputContainer: {
@@ -43,7 +40,10 @@ const styles = StyleSheet.create({
   },
 
   closeIconContainer: {
-    alignSelf: 'flex-end',
+    position: 'absolute',
+    right: 0,
+    top: theme.units.margin.md,
+
     marginBottom: theme.units.margin.sm,
     marginRight: theme.units.margin.md
   },
@@ -59,6 +59,28 @@ const styles = StyleSheet.create({
     color: theme.colors.inputText,
 
     flex: 1
+  },
+
+  confirmButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    height: theme.constants.BUTTON_HEIGHT,
+    borderRadius: theme.units.borderRadius.md,
+
+    marginTop: theme.units.margin.lg,
+
+    backgroundColor: theme.colors.confirm
+  },
+
+  confirmButtonText: {
+    fontFamily: theme.fonts.Poppins.semiBold,
+
+    fontSize: theme.units.fontSize.bigHeader,
+
+    textTransform: 'capitalize',
+
+    color: theme.colors.secondaryLight
   }
 });
 

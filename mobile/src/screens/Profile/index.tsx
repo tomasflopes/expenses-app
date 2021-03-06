@@ -8,6 +8,7 @@ import FinanceAreasInputs from '../../components/FinanceAreasInputs';
 
 import useOpenKeyboard from '../../hooks/useOpenKeyboard';
 import generateHeaders from '../../utils/generateAuthHeader';
+import Header from '../../components/Header';
 import api from '../../services/api';
 
 import styles from './styles';
@@ -141,6 +142,8 @@ const Profile: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <Header confirmMessage={editing} title="Profile" />
+
       <Animated.ScrollView
         onScroll={onScroll}
         scrollEventThrottle={16}

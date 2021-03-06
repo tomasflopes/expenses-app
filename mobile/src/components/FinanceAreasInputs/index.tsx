@@ -61,11 +61,9 @@ const FinanceAreasInputs: React.FC<Props> = ({
   async function submitArea(index: number) {
     const headers = await generateHeaders();
 
-    const response = await api.put(
-      `/area/${index}`,
-      { area: editingArea },
-      headers
-    );
+    const response = await api
+      .put(`/areas/${index}`, { area: editingArea }, headers)
+      .catch(err => console.log(err));
 
     if (response.status !== 204) {
       alert('Error');

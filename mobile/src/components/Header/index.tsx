@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Alert } from 'react-native';
 
 import { Feather } from '@expo/vector-icons';
 
@@ -9,7 +9,6 @@ import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import styles from './styles';
-import { Alert } from 'react-native';
 
 interface Props {
   confirmMessage?: boolean;
@@ -33,6 +32,8 @@ const Header: React.FC<Props> = ({ confirmMessage, title }) => {
         ],
         { cancelable: true }
       );
+    } else {
+      navigation.goBack();
     }
   }
 

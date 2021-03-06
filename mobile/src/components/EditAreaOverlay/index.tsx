@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { Modal, TextInput, TouchableOpacity, View } from 'react-native';
+import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { Feather } from '@expo/vector-icons';
 
@@ -27,13 +27,7 @@ const EditAreaOverlay: React.FC<Props> = ({
   }
 
   return (
-    <Modal
-      animationType="slide"
-      transparent
-      visible={visible}
-      collapsable
-      style={styles.modal}
-    >
+    <Modal animationType="slide" transparent visible={visible} collapsable>
       <View style={styles.container}>
         <View style={styles.contentContainer}>
           <TouchableOpacity
@@ -54,6 +48,9 @@ const EditAreaOverlay: React.FC<Props> = ({
               style={styles.input}
             />
           </View>
+          <TouchableOpacity onPress={submitEdit} style={styles.confirmButton}>
+            <Text style={styles.confirmButtonText}>Confirm</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
