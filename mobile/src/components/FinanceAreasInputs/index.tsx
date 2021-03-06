@@ -3,10 +3,12 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { Feather } from '@expo/vector-icons';
 
+import EditAreaOverlay from '../EditAreaOverlay';
+
+import generateHeaders from '../../utils/generateAuthHeader';
 import api from '../../services/api';
 
 import styles from './styles';
-import generateHeaders from '../../utils/generateAuthHeader';
 
 interface Props {
   addNewArea: () => Promise<void>;
@@ -26,6 +28,12 @@ const FinanceAreasInputs: React.FC<Props> = ({
   setNewArea
 }) => {
   const [newAreaOpen, setNewAreaOpen] = useState(false);
+  const [isEditAreaOverlayVisible, setIsEditAreaOverlayVisible] = useState(
+    false
+  );
+
+  const [editingArea, setEditingArea] = useState('');
+  const [editingAreaIndex, setEditingAreaIndex] = useState(0);
 
   const inputRef = useRef<TextInput>(null);
 
@@ -38,16 +46,42 @@ const FinanceAreasInputs: React.FC<Props> = ({
     setNewAreaOpen(false);
   }
 
+  function editArea(index: number) {
+    setEditingAreaIndex(index);
+    const currentArea = areas[index];
+
+    setEditingArea(currentArea);
+    setIsEditAreaOverlayVisible(true);
+  }
+
+  function closeOverlay() {
+    setIsEditAreaOverlayVisible(false);
+  }
+
+  async function submitArea(index: number) {
+    const headers = await generateHeaders();
+
+    const response = await api.put(
+      `/area/${index}`,
+      { area: editingArea },
+      headers
+    );
+
+    if (response.status !== 204) {
+      alert('Error');
+    }
+  }
+
   return (
     <>
       <Text style={styles.label}>Your Areas</Text>
       {areas.map((area, index) => (
-        <View style={styles.container} key={index}>
+        <View style={styles.container} key={area}>
           <View style={styles.inputContainer}>
             <Text style={styles.disabledPlaceholder}>{area}</Text>
             {editable && (
               <View style={styles.iconsContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => editArea(index)}>
                   <Feather name="edit" style={styles.icon} />
                 </TouchableOpacity>
 
@@ -89,6 +123,15 @@ const FinanceAreasInputs: React.FC<Props> = ({
           <Text style={styles.addNewAreaText}>Click to add a new area</Text>
         </TouchableOpacity>
       )}
+
+      <EditAreaOverlay
+        closeOverlay={closeOverlay}
+        editingArea={editingArea}
+        editingAreaIndex={editingAreaIndex}
+        submitArea={submitArea}
+        setEditingArea={setEditingArea}
+        visible={isEditAreaOverlayVisible}
+      />
     </>
   );
 };

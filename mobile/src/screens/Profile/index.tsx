@@ -8,7 +8,6 @@ import FinanceAreasInputs from '../../components/FinanceAreasInputs';
 
 import useOpenKeyboard from '../../hooks/useOpenKeyboard';
 import generateHeaders from '../../utils/generateAuthHeader';
-import IUser from '../../types/IUser';
 import api from '../../services/api';
 
 import styles from './styles';
@@ -52,7 +51,7 @@ const Profile: React.FC = () => {
     const headers = await generateHeaders();
     const response = await api.get('/user', headers);
 
-    const data: IUser = response.data;
+    const { data } = response;
 
     setFirstName(data.firstName);
     setLastName(data.lastName);
@@ -135,7 +134,9 @@ const Profile: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    newArea === '' && getUserAreas();
+    if (newArea === '') {
+      getUserAreas();
+    }
   }, [newArea]);
 
   return (

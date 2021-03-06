@@ -98,20 +98,20 @@ const Login: React.FC = () => {
             onChangeText={setEmail}
             onSubmitEditing={() => input2Ref.current?.focus()}
             value={email}
-          ></TextInput>
+          />
           <TextInput
             style={[styles.input, styles.secondInput]}
             ref={input2Ref}
             placeholder="Password"
             autoCompleteType="password"
             autoCapitalize="none"
-            secureTextEntry={true}
+            secureTextEntry
             returnKeyType="done"
             textContentType="password"
             onChangeText={setPassword}
             onSubmitEditing={handleSubmitForm}
             value={password}
-          ></TextInput>
+          />
         </View>
 
         <TouchableOpacity
