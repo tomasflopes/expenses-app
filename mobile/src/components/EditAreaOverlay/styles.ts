@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     elevation: 16,
     height: 280,
-    width: '90%',
+    width: '95%',
 
     justifyContent: 'center',
 

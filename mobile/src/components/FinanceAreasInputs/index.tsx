@@ -16,6 +16,7 @@ interface Props {
   editable?: boolean;
   newArea: string;
   removeArea: (index: number) => Promise<void>;
+  setAreaEdited: Dispatch<SetStateAction<boolean>>;
   setNewArea: Dispatch<SetStateAction<string>>;
 }
 
@@ -25,6 +26,7 @@ const FinanceAreasInputs: React.FC<Props> = ({
   editable,
   newArea,
   removeArea,
+  setAreaEdited,
   setNewArea
 }) => {
   const [newAreaOpen, setNewAreaOpen] = useState(false);
@@ -65,9 +67,13 @@ const FinanceAreasInputs: React.FC<Props> = ({
       .put(`/areas/${index}`, { area: editingArea }, headers)
       .catch(err => console.log(err));
 
-    if (response.status !== 204) {
+    if (!response) {
       alert('Error');
+      return;
     }
+
+    setAreaEdited(true); // Used to update all user areas
+    setIsEditAreaOverlayVisible(false);
   }
 
   return (

@@ -28,6 +28,7 @@ const Profile: React.FC = () => {
   const [areas, setAreas] = useState([]);
 
   const [editing, setEditing] = useState(false);
+  const [areaEdited, setAreaEdited] = useState(false);
 
   const keyboardOpen = useOpenKeyboard();
 
@@ -137,8 +138,9 @@ const Profile: React.FC = () => {
   useEffect(() => {
     if (newArea === '') {
       getUserAreas();
+      setAreaEdited(false);
     }
-  }, [newArea]);
+  }, [newArea, areaEdited]);
 
   return (
     <View style={styles.container}>
@@ -242,6 +244,7 @@ const Profile: React.FC = () => {
             newArea={newArea}
             removeArea={removeArea}
             setNewArea={setNewArea}
+            setAreaEdited={setAreaEdited}
           />
 
           {editing ? (
