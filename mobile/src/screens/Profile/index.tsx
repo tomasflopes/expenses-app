@@ -3,16 +3,22 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
 
+import CustomAlert from '../../components/CustomAlert';
 import EditableInput from '../../components/EditableInput';
+import Header from '../../components/Header';
 import FinanceAreasInputs from '../../components/FinanceAreasInputs';
 
+import api from '../../services/api';
 import useOpenKeyboard from '../../hooks/useOpenKeyboard';
 import generateHeaders from '../../utils/generateAuthHeader';
-import Header from '../../components/Header';
-import api from '../../services/api';
 
-import styles from './styles';
 import theme from '../../styles';
+import styles from './styles';
+
+interface AlertProps {
+  type: 'success' | 'warning' | 'undo' | 'error' | '' | undefined;
+  customMessage?: string;
+}
 
 const Profile: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -29,6 +35,10 @@ const Profile: React.FC = () => {
 
   const [editing, setEditing] = useState(false);
   const [areaEdited, setAreaEdited] = useState(false);
+
+  const [alertType, setAlertType] = useState<AlertProps>({
+    type: ''
+  });
 
   const keyboardOpen = useOpenKeyboard();
 
@@ -79,9 +89,12 @@ const Profile: React.FC = () => {
       const response = await api.put('/user', data, headers);
 
       if (!response) {
-        alert('Something went wrong!');
+        setAlertType({ type: 'error' });
       } else {
-        alert('User updated with success!');
+        setAlertType({
+          type: 'success',
+          customMessage: 'User updated with success!'
+        });
       }
     }
 
@@ -90,7 +103,10 @@ const Profile: React.FC = () => {
 
   async function handleAddNewArea() {
     if (newArea === '') {
-      Alert.alert('Error', 'The new area must have a name.');
+      setAlertType({
+        type: 'error',
+        customMessage: 'The new area must have a name.'
+      });
       return;
     }
 
@@ -105,8 +121,10 @@ const Profile: React.FC = () => {
       )
       .catch(err => {
         console.log(err);
-        alert('Something went wrong! Please try again later...');
+        setAlertType({ type: 'warning' });
       });
+
+    setAlertType({ type: 'success', customMessage: 'Area added with success' });
 
     setNewArea('');
   }
@@ -127,6 +145,7 @@ const Profile: React.FC = () => {
       .catch(err => console.log(err));
 
     if (response) {
+      setAlertType({ type: 'undo' });
       await getUserAreas();
     }
   }
@@ -192,9 +211,7 @@ const Profile: React.FC = () => {
 
         <View style={styles.personalInfoContainer}>
           <Text style={styles.headerText}>Personal Info</Text>
-
           <View style={styles.spacer} />
-
           <EditableInput
             editable={editing}
             placeholder="First Name"
@@ -225,18 +242,14 @@ const Profile: React.FC = () => {
             onChangeText={setPhone}
             value={phone}
           />
-
           <Text style={styles.headerText}>Finance Settings</Text>
-
           <View style={styles.spacer} />
-
           <EditableInput
             editable={editing}
             placeholder="Default Currency"
             onChangeText={setDefaultCurrency}
             value={defaultCurrency}
           />
-
           <FinanceAreasInputs
             addNewArea={handleAddNewArea}
             areas={areas}
@@ -263,6 +276,7 @@ const Profile: React.FC = () => {
           )}
         </View>
       </Animated.ScrollView>
+      <CustomAlert props={alertType} />
     </View>
   );
 };
