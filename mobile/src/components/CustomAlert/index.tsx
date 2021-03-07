@@ -3,6 +3,8 @@ import { Modal, Text, TouchableOpacity, View } from 'react-native';
 
 import { Feather } from '@expo/vector-icons';
 
+import configs from '../../configs';
+
 import theme from '../../styles';
 import styles from './styles';
 
@@ -32,20 +34,20 @@ interface Props {
     type: keyof typeof messages | undefined | '';
     customMessage?: string;
   };
+  undoFunction: () => void;
 }
 
-const CustomAlert: React.FC<Props> = ({ props }) => {
+const CustomAlert: React.FC<Props> = ({ props, undoFunction }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   const { type, customMessage } = props;
-  const visibleTime = 3000;
 
   useEffect(() => {
     setIsVisible(true);
 
     setTimeout(() => {
       setIsVisible(false);
-    }, visibleTime);
+    }, configs.alertTime);
   }, [props]);
 
   if (!type) return null;
@@ -64,7 +66,10 @@ const CustomAlert: React.FC<Props> = ({ props }) => {
           </View>
 
           {type === 'undo' && (
-            <TouchableOpacity style={styles.undoButtonContainer}>
+            <TouchableOpacity
+              onPress={undoFunction}
+              style={styles.undoButtonContainer}
+            >
               <Text style={styles.undoButtonText}>Undo</Text>
             </TouchableOpacity>
           )}

@@ -51,6 +51,7 @@
       "warn",
       2
     ],
+    "implicit-arrow-linebreak": "off",
     "@typescript-eslint/member-delimiter-style": 0,
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": 0,

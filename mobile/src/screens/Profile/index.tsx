@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
-
 import CustomAlert from '../../components/CustomAlert';
 import EditableInput from '../../components/EditableInput';
 import Header from '../../components/Header';
@@ -31,7 +30,8 @@ const Profile: React.FC = () => {
   );
 
   const [newArea, setNewArea] = useState('');
-  const [areas, setAreas] = useState([]);
+  const [areas, setAreas] = useState<string[]>([]);
+  const [areasHistory, setAreasHistory] = useState<string[][]>([[]]);
 
   const [editing, setEditing] = useState(false);
   const [areaEdited, setAreaEdited] = useState(false);
@@ -134,20 +134,23 @@ const Profile: React.FC = () => {
 
     const { data } = await api.get('/areas', headers);
 
-    setAreas(data);
+    setAreasHistory([data]);
   }
 
   async function removeArea(index: number) {
-    const headers = await generateHeaders();
+    const tempAreas = areas.filter(
+      (area, areaIndex) => areaIndex !== index && area
+    );
 
-    const response = await api
-      .delete(`/areas/${index}`, headers)
-      .catch(err => console.log(err));
+    setAreasHistory([...areasHistory, tempAreas]); // Remove area visually
 
-    if (response) {
-      setAlertType({ type: 'undo' });
-      await getUserAreas();
-    }
+    setAlertType({ type: 'undo' });
+  }
+
+  function undoRemoveArea() {
+    const undoAreasHistoryArray = areasHistory.slice(0, -1);
+
+    setAreasHistory(undoAreasHistoryArray);
   }
 
   useEffect(() => {
@@ -160,6 +163,10 @@ const Profile: React.FC = () => {
       setAreaEdited(false);
     }
   }, [newArea, areaEdited]);
+
+  useEffect(() => {
+    setAreas(areasHistory[areasHistory.length - 1]);
+  }, [areasHistory]);
 
   return (
     <View style={styles.container}>
@@ -276,7 +283,7 @@ const Profile: React.FC = () => {
           )}
         </View>
       </Animated.ScrollView>
-      <CustomAlert props={alertType} />
+      <CustomAlert props={alertType} undoFunction={undoRemoveArea} />
     </View>
   );
 };
