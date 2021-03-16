@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ImageBackground,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { Feather, Foundation } from '@expo/vector-icons';
@@ -50,14 +56,10 @@ const Home: React.FC = () => {
           ) : (
             <View style={styles.balanceRow}>
               <View style={styles.balanceTextContainer}>
-                <Animated.Text
-                  style={[styles.balanceText, { opacity: opacity }]}
-                >
+                <Animated.Text style={[styles.balanceText, { opacity }]}>
                   1276,50
                 </Animated.Text>
-                <Animated.Text
-                  style={[styles.currencyText, { opacity: opacity }]}
-                >
+                <Animated.Text style={[styles.currencyText, { opacity }]}>
                   EUR
                 </Animated.Text>
               </View>
@@ -119,7 +121,7 @@ const Home: React.FC = () => {
 
         <View style={styles.totalExpensesContainer}>
           <Text style={styles.totalExpensesText}>
-            Total of 87 expenses registered.
+            Total of 91 expenses registered.
           </Text>
         </View>
       </ScrollView>
