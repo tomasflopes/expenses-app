@@ -4,7 +4,7 @@ import theme from '../../styles';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: theme.constants.ALERT_HEIGHT,
     justifyContent: 'flex-end'
   },
 
