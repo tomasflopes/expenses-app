@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-import Animated, { interpolate, eq } from 'react-native-reanimated';
+import Animated, { interpolate, Value, eq } from 'react-native-reanimated';
 
 import { Feather } from '@expo/vector-icons';
 
-import { useDebug, useTimingTransition } from 'react-native-redash';
+import { bin, withTimingTransition } from 'react-native-redash';
 
 import configs from '../../configs';
 
@@ -42,21 +42,17 @@ interface Props {
 }
 const CustomAlert: React.FC<Props> = ({ props, undoFunction }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const animatedVisibleValue = new Value<number>(bin(isVisible));
+
   const { type, customMessage } = props;
 
-  const isContainerVisible = useTimingTransition(isVisible, {
+  const isContainerVisible = withTimingTransition(animatedVisibleValue, {
     duration: configs.alertTime
   });
 
-  const testNode = new Animated.Node<number>({ value: 1 });
-  useDebug({
-    isContainerVisible,
-    testNode
-  });
-
-  /* if (eq(isContainerVisible, new Animated.Node({ value: 1 })) && !isVisible) {
-    setIsVisible(false);
-  } */
+  if (eq(animatedVisibleValue, 1)) {
+    animatedVisibleValue.setValue(0);
+  }
 
   useEffect(() => {
     if (type) {
@@ -90,7 +86,10 @@ const CustomAlert: React.FC<Props> = ({ props, undoFunction }) => {
 
         {type === 'undo' && (
           <TouchableOpacity
-            onPress={undoFunction}
+            onPress={() => {
+              setIsVisible(false);
+              undoFunction();
+            }}
             style={styles.undoButtonContainer}
           >
             <Text style={styles.undoButtonText}>Undo</Text>
