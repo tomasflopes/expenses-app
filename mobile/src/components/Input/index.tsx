@@ -11,7 +11,11 @@ interface Props extends TextInputProps {
 
 const Input: React.FC<Props> = ({ expanded, placeholder, style, ...rest }) => (
   <TextInput
-    style={[style, styles.input]}
+    style={
+      expanded
+        ? [style, styles.input, { textAlignVertical: 'top' }]
+        : [style, styles.input]
+    }
     placeholder={placeholder}
     numberOfLines={expanded ? 8 : 1}
     {...rest}
