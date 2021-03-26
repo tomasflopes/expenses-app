@@ -15,27 +15,23 @@ const EditableInput: React.FC<Props> = ({
   editable,
   value,
   ...rest
-}) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{placeholder}</Text>
-      {editable ? (
-        <TextInput
-          style={styles.input}
-          placeholderTextColor={placeholderColor}
-          placeholder={placeholder}
-          value={value}
-          {...rest}
-        ></TextInput>
-      ) : (
-        <View style={styles.inputContainer}>
-          <Text style={styles.disabledPlaceholder}>
-            {value ? value : placeholder}
-          </Text>
-        </View>
-      )}
-    </View>
-  );
-};
+}) => (
+  <View style={styles.container}>
+    <Text style={styles.label}>{placeholder}</Text>
+    {editable ? (
+      <TextInput
+        style={styles.input}
+        placeholderTextColor={placeholderColor}
+        placeholder={placeholder}
+        value={value}
+        {...rest}
+      />
+    ) : (
+      <View style={styles.inputContainer}>
+        <Text style={styles.disabledPlaceholder}>{value || placeholder}</Text>
+      </View>
+    )}
+  </View>
+);
 
 export default EditableInput;

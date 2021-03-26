@@ -32,6 +32,10 @@ const Home: React.FC = () => {
     navigation.navigate('Profile');
   }
 
+  function handleAddExpense() {
+    navigation.navigate('CreateExpense');
+  }
+
   const opacity = hidden ? 0 : 1;
 
   return (
@@ -108,15 +112,18 @@ const Home: React.FC = () => {
         </TouchableOpacity>
 
         <View style={styles.buttonsContainer}>
-          <View style={styles.addExpenseButton}>
+          <TouchableOpacity
+            style={styles.addExpenseButton}
+            onPress={handleAddExpense}
+          >
             <Foundation name="euro" size={32} color="white" />
             <Text style={styles.buttonText}>add an expense</Text>
-          </View>
+          </TouchableOpacity>
 
-          <View style={styles.manageActivityButton}>
+          <TouchableOpacity style={styles.manageActivityButton}>
             <Feather name="activity" size={18} />
             <Text style={styles.buttonText}>manage activity</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.totalExpensesContainer}>
