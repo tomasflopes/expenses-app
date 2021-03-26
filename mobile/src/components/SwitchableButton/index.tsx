@@ -57,7 +57,11 @@ const SwitchableButton: React.FC<Props> = ({
 
   return (
     <Animated.View style={[styles.buttonOverlay, { ...additionalStyles }]}>
-      <TouchableOpacity ref={buttonRef} onPress={handleSubmit}>
+      <TouchableOpacity
+        ref={buttonRef}
+        onPress={handleSubmit}
+        style={styles.button}
+      >
         <Animated.View style={[styles.button, { backgroundColor }]}>
           <Animated.Text style={[styles.buttonText, { color }]}>
             {children}
