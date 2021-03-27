@@ -6,10 +6,19 @@ import styles from './styles';
 interface Props extends TextInputProps {
   expanded?: boolean;
   placeholder: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  value: string;
   style?: StyleProp<TextStyle>;
 }
 
-const Input: React.FC<Props> = ({ expanded, placeholder, style, ...rest }) => (
+const Input: React.FC<Props> = ({
+  expanded,
+  placeholder,
+  setValue,
+  style,
+  value,
+  ...rest
+}) => (
   <TextInput
     style={
       expanded
@@ -18,6 +27,8 @@ const Input: React.FC<Props> = ({ expanded, placeholder, style, ...rest }) => (
     }
     placeholder={placeholder}
     numberOfLines={expanded ? 8 : 1}
+    onChangeText={setValue}
+    value={value}
     {...rest}
   />
 );

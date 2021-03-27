@@ -33,14 +33,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderTopWidth: 0,
     borderColor: theme.colors.secondary,
-    borderRadius: theme.units.borderRadius.sm,
-    paddingVertical: theme.units.margin.sm,
-    paddingHorizontal: theme.units.margin.md
+    borderRadius: theme.units.borderRadius.sm
   },
 
   dropdownItemContainer: {
-    marginBottom: theme.units.margin.xsm,
-    paddingVertical: theme.units.margin.tiny
+    paddingVertical: theme.units.margin.sm,
+    paddingHorizontal: theme.units.margin.md
   },
 
   dropdownItem: {

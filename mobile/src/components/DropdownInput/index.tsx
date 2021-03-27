@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { StyleProp, Text, TextStyle, TouchableOpacity } from 'react-native';
 
 import Animated, { interpolate } from 'react-native-reanimated';
 import { Feather as Icon } from '@expo/vector-icons';
@@ -11,10 +11,18 @@ import configs from '../../configs';
 interface Props {
   data: string[];
   placeholder: string;
+  setSelected: React.Dispatch<React.SetStateAction<string>>;
+  style?: StyleProp<TextStyle>;
   value?: string;
 }
 
-const DropdownInput: React.FC<Props> = ({ data, placeholder, value }) => {
+const DropdownInput: React.FC<Props> = ({
+  data,
+  placeholder,
+  setSelected,
+  style,
+  value
+}) => {
   const [visible, setVisible] = useState(false);
 
   function handleOpenDropdown() {
@@ -25,26 +33,45 @@ const DropdownInput: React.FC<Props> = ({ data, placeholder, value }) => {
     duration: configs.dropdownAnimationTime
   });
 
+  const opacityTransition = useTimingTransition(visible, {
+    duration: configs.dropdownAnimationTime / 2
+  });
+
   const height = interpolate(isContainerVisible, {
     inputRange: [0, 0.5, 1],
-    outputRange: [0, 120, 100]
+    outputRange: [0, 130, 110]
   });
+
+  const opacity = interpolate(opacityTransition, {
+    inputRange: [0, 1],
+    outputRange: [0, 1]
+  });
+
+  function handleSelect(item: string) {
+    setSelected(item);
+
+    setVisible(false);
+  }
 
   return (
     <>
       <TouchableOpacity style={styles.container} onPress={handleOpenDropdown}>
-        <Text style={styles.placeholder}>{placeholder}</Text>
+        <Text style={styles.placeholder}>{value || placeholder}</Text>
         <Icon name="chevron-down" style={styles.icon} />
       </TouchableOpacity>
-      {visible && (
-        <Animated.ScrollView style={[styles.dropdownContainer, { height }]}>
-          {data.map(item => (
-            <TouchableOpacity style={styles.dropdownItemContainer}>
-              <Text style={styles.dropdownItem}>{item}</Text>
-            </TouchableOpacity>
-          ))}
-        </Animated.ScrollView>
-      )}
+      <Animated.ScrollView
+        style={[style, styles.dropdownContainer, { height, opacity }]}
+      >
+        {data.map(item => (
+          <TouchableOpacity
+            key={item}
+            onPress={() => handleSelect(item)}
+            style={styles.dropdownItemContainer}
+          >
+            <Text style={styles.dropdownItem}>{item}</Text>
+          </TouchableOpacity>
+        ))}
+      </Animated.ScrollView>
     </>
   );
 };
