@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.secondary,
     borderRadius: theme.units.borderRadius.sm,
     paddingVertical: theme.units.margin.sm,
-    paddingHorizontal: theme.units.margin.md
+    paddingHorizontal: theme.units.margin.md,
+    color: theme.colors.secondaryDark
   }
 });
 
