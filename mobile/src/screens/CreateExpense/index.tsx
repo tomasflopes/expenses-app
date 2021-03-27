@@ -46,7 +46,9 @@ const CreateExpense: React.FC = () => {
       setButtonEnabled(false);
     }
   }, [name, description, value, type, area]);
+
   // TODO: Parse value to integer before submit
+  // TODO: Get refs working so enter focus next one
 
   return (
     <ScrollView style={styles.container}>
