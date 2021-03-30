@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import {
   ScrollView,
   Text,
@@ -17,6 +17,7 @@ import styles from './styles';
 const CreateExpense: React.FC = () => {
   const input1Ref = useRef<TextInput>(null);
   const input2Ref = useRef<TextInput>(null);
+  const input3Ref = useRef<TextInput>(null);
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -48,35 +49,36 @@ const CreateExpense: React.FC = () => {
   }, [name, description, value, type, area]);
 
   // TODO: Parse value to integer before submit
-  // TODO: Get refs working so enter focus next one
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.header}>Expense Details</Text>
       <View style={styles.formContainer}>
         <Input
-          editable
           placeholder="Name"
           ref={input1Ref}
-          onSubmitEditing={input2Ref.current?.focus}
+          onSubmitEditing={() => input2Ref.current?.focus()}
+          returnKeyType="next"
           setValue={setName}
           value={name}
           style={styles.input}
         />
         <Input
-          editable
           placeholder="Description"
           expanded
           ref={input2Ref}
+          onSubmitEditing={() => input3Ref.current?.focus()}
+          returnKeyType="next"
           setValue={setDescription}
           value={description}
           style={styles.input}
         />
         <Input
-          editable
           placeholder="Value"
+          ref={input3Ref}
           keyboardType="numeric"
           setValue={setValue}
+          returnKeyType="next"
           value={value}
           style={styles.input}
         />
@@ -92,7 +94,6 @@ const CreateExpense: React.FC = () => {
           placeholder="Area"
           setSelected={setArea}
           value={area}
-          style={styles.input}
         />
       </View>
 
@@ -103,8 +104,9 @@ const CreateExpense: React.FC = () => {
         disabledColor="secondary"
         activeTextColor="secondaryLight"
         disabledTextColor="secondaryDark"
+        style={styles.confirmButton}
       >
-        login
+        save
       </SwitchableButton>
     </ScrollView>
   );

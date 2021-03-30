@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
 
   input: {
     marginBottom: theme.units.margin.sm
+  },
+
+  confirmButton: {
+    marginBottom: theme.units.margin.xlg
   }
 });
 

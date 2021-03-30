@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ColorValue,
+  StyleProp,
   TouchableOpacity,
   TouchableOpacityProps,
   ViewStyle
@@ -21,7 +22,7 @@ interface Props extends TouchableOpacityProps {
   buttonRef?: React.Ref<TouchableOpacity>;
   children: React.ReactNode;
   handleSubmit: () => Promise<void> | void;
-  styles?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
 }
 
 const SwitchableButton: React.FC<Props> = ({
@@ -33,7 +34,7 @@ const SwitchableButton: React.FC<Props> = ({
   activeColor,
   disabledTextColor,
   activeTextColor,
-  styles: additionalStyles
+  style
 }) => {
   const transition = useTimingTransition(active, { duration: 500 });
 
@@ -56,7 +57,7 @@ const SwitchableButton: React.FC<Props> = ({
   });
 
   return (
-    <Animated.View style={[styles.buttonOverlay, { ...additionalStyles }]}>
+    <Animated.View style={[styles.buttonOverlay, style]}>
       <TouchableOpacity
         ref={buttonRef}
         onPress={handleSubmit}

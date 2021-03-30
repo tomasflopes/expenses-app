@@ -39,7 +39,7 @@ const Routes: React.FC = () => {
   }
 
   useEffect(() => {
-    //clearStorage();
+    // clearStorage();
     checkFirstTime();
     checkLogin();
   }, []);
