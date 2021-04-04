@@ -1,11 +1,5 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import {
-  ScrollView,
-  Text,
-  TextInput,
-  TextInputProps,
-  View
-} from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { ScrollView, Text, TextInput, View } from 'react-native';
 
 import DropdownInput from '../../components/DropdownInput';
 import SwitchableButton from '../../components/SwitchableButton';
@@ -81,7 +75,9 @@ const CreateExpense: React.FC = () => {
           returnKeyType="next"
           value={value}
           style={styles.input}
-        />
+        >
+          <Text style={{ position: 'absolute' }}>€</Text>
+        </Input>
         <DropdownInput
           data={['Expense', 'Income']}
           placeholder="Type"
