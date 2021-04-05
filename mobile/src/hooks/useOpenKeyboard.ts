@@ -2,26 +2,23 @@ import { useState, useEffect } from 'react';
 
 import { Keyboard } from 'react-native';
 
-const useOpenKeyboard = () => {
+const useOpenKeyboard = (): boolean => {
   const [keyboardOpen, setKeyboardOpen] = useState(false);
 
   useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', () => {
-      setKeyboardOpen(true);
-    });
-    Keyboard.addListener('keyboardDidHide', () => {
-      setKeyboardOpen(false);
-    });
+    const keyboardShowListener = Keyboard.addListener('keyboardDidShow', () =>
+      setKeyboardOpen(true)
+    );
+
+    const keyboardHideListener = Keyboard.addListener('keyboardDidHide', () =>
+      setKeyboardOpen(false)
+    );
 
     return () => {
-      Keyboard.removeListener('keyboardDidShow', () => {
-        setKeyboardOpen(true);
-      });
-      Keyboard.removeListener('keyboardDidHide', () => {
-        setKeyboardOpen(false);
-      });
+      keyboardShowListener.remove();
+      keyboardHideListener.remove();
     };
-  }, []);
+  });
 
   return keyboardOpen;
 };

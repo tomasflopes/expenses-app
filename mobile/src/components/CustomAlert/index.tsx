@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+
+import Animated, { interpolate, Value, eq } from 'react-native-reanimated';
 
 import { Feather } from '@expo/vector-icons';
+
+import { bin, withTimingTransition } from 'react-native-redash';
 
 import configs from '../../configs';
 
@@ -36,19 +40,25 @@ interface Props {
   };
   undoFunction: () => void;
 }
-
 const CustomAlert: React.FC<Props> = ({ props, undoFunction }) => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+  const animatedVisibleValue = new Value<number>(bin(isVisible));
 
   const { type, customMessage } = props;
 
-  useEffect(() => {
-    setIsVisible(true);
+  const isContainerVisible = withTimingTransition(animatedVisibleValue, {
+    duration: configs.alertTime
+  });
 
-    setTimeout(() => {
-      setIsVisible(false);
-    }, configs.alertTime);
-  }, [props]);
+  if (eq(animatedVisibleValue, 1)) {
+    animatedVisibleValue.setValue(0);
+  }
+
+  useEffect(() => {
+    if (type) {
+      setIsVisible(true);
+    }
+  }, [type]);
 
   if (!type) return null;
 
@@ -56,26 +66,37 @@ const CustomAlert: React.FC<Props> = ({ props, undoFunction }) => {
   const iconName = iconNames[type];
   const backgroundColor = backgroundColors[type];
 
-  return (
-    <Modal animationType="slide" transparent visible={isVisible}>
-      <View style={styles.container}>
-        <View style={[styles.contentContainer, { backgroundColor }]}>
-          <View style={styles.messageContainer}>
-            <Feather name={iconName} style={styles.messageIcon} />
-            <Text style={styles.messageText}>{customMessage || message}</Text>
-          </View>
+  const translateY = interpolate(isContainerVisible, {
+    inputRange: [0, 0.2, 0.8, 1],
+    outputRange: [
+      theme.constants.ALERT_HEIGHT + 30,
+      0,
+      0,
+      theme.constants.ALERT_HEIGHT + 30
+    ]
+  });
 
-          {type === 'undo' && (
-            <TouchableOpacity
-              onPress={undoFunction}
-              style={styles.undoButtonContainer}
-            >
-              <Text style={styles.undoButtonText}>Undo</Text>
-            </TouchableOpacity>
-          )}
+  return (
+    <Animated.View style={[styles.container, { translateY }]}>
+      <View style={[styles.contentContainer, { backgroundColor }]}>
+        <View style={styles.messageContainer}>
+          <Feather name={iconName} style={styles.messageIcon} />
+          <Text style={styles.messageText}>{customMessage || message}</Text>
         </View>
+
+        {type === 'undo' && (
+          <TouchableOpacity
+            onPress={() => {
+              setIsVisible(false);
+              undoFunction();
+            }}
+            style={styles.undoButtonContainer}
+          >
+            <Text style={styles.undoButtonText}>Undo</Text>
+          </TouchableOpacity>
+        )}
       </View>
-    </Modal>
+    </Animated.View>
   );
 };
 

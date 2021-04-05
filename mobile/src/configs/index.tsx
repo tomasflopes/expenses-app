@@ -1,3 +1,4 @@
 export default {
-  alertTime: 2000
+  alertTime: 3000,
+  dropdownAnimationTime: 300
 };

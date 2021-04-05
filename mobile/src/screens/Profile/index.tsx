@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
+
 import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
 
@@ -8,6 +9,7 @@ import CustomAlert from '../../components/CustomAlert';
 import EditableInput from '../../components/EditableInput';
 import Header from '../../components/Header';
 import FinanceAreasInputs from '../../components/FinanceAreasInputs';
+import SwitchableButton from '../../components/SwitchableButton';
 
 import api from '../../services/api';
 import useOpenKeyboard from '../../hooks/useOpenKeyboard';
@@ -285,20 +287,16 @@ const Profile: React.FC = () => {
             setAreaEdited={setAreaEdited}
           />
 
-          {editing ? (
-            <TouchableOpacity
-              onPress={handleEditProfile}
-              style={[styles.button, styles.saveButton]}
-            >
-              <Text style={styles.buttonText}>Save</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity onPress={handleEditProfile} style={styles.button}>
-              <Animated.Text style={[styles.buttonText]}>
-                edit information
-              </Animated.Text>
-            </TouchableOpacity>
-          )}
+          <SwitchableButton
+            active={editing}
+            activeColor="confirm"
+            activeTextColor="secondaryLight"
+            disabledTextColor="secondaryLight"
+            disabledColor="primary"
+            handleSubmit={handleEditProfile}
+          >
+            {editing ? 'confirm' : 'edit information'}
+          </SwitchableButton>
         </View>
       </Animated.ScrollView>
       <CustomAlert props={alertType} undoFunction={undoRemoveArea} />

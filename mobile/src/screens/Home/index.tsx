@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ImageBackground,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { Feather, Foundation } from '@expo/vector-icons';
@@ -26,6 +32,10 @@ const Home: React.FC = () => {
     navigation.navigate('Profile');
   }
 
+  function handleAddExpense() {
+    navigation.navigate('CreateExpense');
+  }
+
   const opacity = hidden ? 0 : 1;
 
   return (
@@ -50,14 +60,10 @@ const Home: React.FC = () => {
           ) : (
             <View style={styles.balanceRow}>
               <View style={styles.balanceTextContainer}>
-                <Animated.Text
-                  style={[styles.balanceText, { opacity: opacity }]}
-                >
+                <Animated.Text style={[styles.balanceText, { opacity }]}>
                   1276,50
                 </Animated.Text>
-                <Animated.Text
-                  style={[styles.currencyText, { opacity: opacity }]}
-                >
+                <Animated.Text style={[styles.currencyText, { opacity }]}>
                   EUR
                 </Animated.Text>
               </View>
@@ -106,20 +112,23 @@ const Home: React.FC = () => {
         </TouchableOpacity>
 
         <View style={styles.buttonsContainer}>
-          <View style={styles.addExpenseButton}>
+          <TouchableOpacity
+            style={styles.addExpenseButton}
+            onPress={handleAddExpense}
+          >
             <Foundation name="euro" size={32} color="white" />
             <Text style={styles.buttonText}>add an expense</Text>
-          </View>
+          </TouchableOpacity>
 
-          <View style={styles.manageActivityButton}>
+          <TouchableOpacity style={styles.manageActivityButton}>
             <Feather name="activity" size={18} />
             <Text style={styles.buttonText}>manage activity</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.totalExpensesContainer}>
           <Text style={styles.totalExpensesText}>
-            Total of 87 expenses registered.
+            Total of 91 expenses registered.
           </Text>
         </View>
       </ScrollView>
