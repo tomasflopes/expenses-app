@@ -194,10 +194,7 @@ const Profile: React.FC = () => {
               />
             </ShimmerPlaceholder>
             <View style={styles.userInformationContainer}>
-              <ShimmerPlaceholder
-                visible={isDataFetched}
-                style={{ width: 150, marginBottom: 8 }}
-              >
+              <ShimmerPlaceholder visible={isDataFetched}>
                 <Animated.Text
                   style={[
                     styles.username,
@@ -211,10 +208,7 @@ const Profile: React.FC = () => {
                 </Animated.Text>
               </ShimmerPlaceholder>
 
-              <ShimmerPlaceholder
-                visible={isDataFetched}
-                style={{ width: 100 }}
-              >
+              <ShimmerPlaceholder visible={isDataFetched}>
                 <Animated.Text
                   style={[
                     styles.occupation,
@@ -235,6 +229,7 @@ const Profile: React.FC = () => {
           <Text style={styles.headerText}>Personal Info</Text>
           <EditableInput
             editable={editing}
+            isDataFetched={isDataFetched}
             placeholder="First Name"
             onChangeText={setFirstName}
             value={firstName}
@@ -242,6 +237,7 @@ const Profile: React.FC = () => {
 
           <EditableInput
             editable={editing}
+            isDataFetched={isDataFetched}
             placeholder="Last Name"
             onChangeText={setLastName}
             value={lastName}
@@ -249,6 +245,7 @@ const Profile: React.FC = () => {
 
           <EditableInput
             editable={editing}
+            isDataFetched={isDataFetched}
             placeholder="Occupation"
             onChangeText={setOccupation}
             value={occupation}
@@ -256,6 +253,7 @@ const Profile: React.FC = () => {
 
           <EditableInput
             editable={editing}
+            isDataFetched={isDataFetched}
             placeholder="Birth"
             onChangeText={setBirth}
             value={birth}
@@ -263,6 +261,7 @@ const Profile: React.FC = () => {
 
           <EditableInput
             editable={editing}
+            isDataFetched={isDataFetched}
             placeholder="Phone"
             onChangeText={setPhone}
             value={phone}
@@ -272,6 +271,7 @@ const Profile: React.FC = () => {
           <View style={styles.spacer} />
           <EditableInput
             editable={editing}
+            isDataFetched={isDataFetched}
             placeholder="Default Currency"
             onChangeText={setDefaultCurrency}
             value={defaultCurrency}
