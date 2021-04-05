@@ -27,6 +27,15 @@ const styles = StyleSheet.create({
 
   confirmButton: {
     marginBottom: theme.units.margin.xlg
+  },
+
+  currencyText: {
+    fontSize: theme.units.fontSize.big,
+    position: 'absolute',
+    right: theme.units.margin.md,
+    top: theme.units.margin.sm + theme.units.margin.tiny,
+
+    color: theme.colors.secondaryDark
   }
 });
 

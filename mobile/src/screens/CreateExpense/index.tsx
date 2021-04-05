@@ -76,7 +76,7 @@ const CreateExpense: React.FC = () => {
           value={value}
           style={styles.input}
         >
-          <Text style={{ position: 'absolute' }}>€</Text>
+          <Text style={styles.currencyText}>€</Text>
         </Input>
         <DropdownInput
           data={['Expense', 'Income']}

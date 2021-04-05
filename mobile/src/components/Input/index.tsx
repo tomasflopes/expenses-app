@@ -12,6 +12,7 @@ import styles from './styles';
 type Ref = TextInput;
 
 interface Props extends TextInputProps {
+  children?: React.ReactNode;
   expanded?: boolean;
   placeholder: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
