@@ -1,6 +1,7 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TextInputProps } from 'react-native';
+
+import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
 
 import styles, { placeholderColor } from './styles';
 
@@ -16,6 +17,12 @@ const EditableInput: React.FC<Props> = ({
   value,
   ...rest
 }) => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (value) setVisible(true);
+  }, [value]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{placeholder}</Text>
@@ -26,12 +33,14 @@ const EditableInput: React.FC<Props> = ({
           placeholder={placeholder}
           value={value}
           {...rest}
-        ></TextInput>
+        />
       ) : (
         <View style={styles.inputContainer}>
-          <Text style={styles.disabledPlaceholder}>
-            {value ? value : placeholder}
-          </Text>
+          <ShimmerPlaceholder visible={visible}>
+            <Text style={styles.disabledPlaceholder}>
+              {value || placeholder}
+            </Text>
+          </ShimmerPlaceholder>
         </View>
       )}
     </View>

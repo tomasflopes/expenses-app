@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
 
-    marginTop: theme.units.margin.sm
+    marginVertical: theme.units.margin.sm
   },
 
   username: {
