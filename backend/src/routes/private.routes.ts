@@ -11,9 +11,9 @@ const routes = Router();
 
 routes.get('/balance', authMiddleware, BalanceController.index);
 
-routes.get('/expenses', authMiddleware, ExpensesController.index);
-routes.get('/expenses/:id', authMiddleware, ExpensesController.show); // Detail expense
-routes.post('/expenses', authMiddleware, ExpensesController.store);
+routes.get('/expense', authMiddleware, ExpensesController.index);
+routes.get('/expense/:id', authMiddleware, ExpensesController.show); // Detail expense
+routes.post('/expense', authMiddleware, ExpensesController.store);
 
 routes.get('/user', authMiddleware, UserController.index);
 routes.put('/user', authMiddleware, UserController.update);

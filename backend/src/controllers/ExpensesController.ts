@@ -46,7 +46,7 @@ export default {
 
     if (!user) return response.status(400).json({ error: 'No user found' });
 
-    if (type !== 'Expense' || type !== 'Income')
+    if (type !== 'Expense' && type !== 'Income')
       return response.status(400).json({ error: 'Bad formatted expense' });
 
     try {

@@ -3,8 +3,10 @@ import { ScrollView, Text, TextInput, View } from 'react-native';
 
 import DropdownInput from '../../components/DropdownInput';
 import SwitchableButton from '../../components/SwitchableButton';
-
 import Input from '../../components/Input';
+
+import api from '../../services/api';
+import generateHeaders from '../../utils/generateAuthHeader';
 
 import styles from './styles';
 
@@ -12,6 +14,8 @@ const CreateExpense: React.FC = () => {
   const input1Ref = useRef<TextInput>(null);
   const input2Ref = useRef<TextInput>(null);
   const input3Ref = useRef<TextInput>(null);
+
+  const [userAreas, setUserAreas] = useState([]);
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -22,7 +26,15 @@ const CreateExpense: React.FC = () => {
 
   const [buttonEnabled, setButtonEnabled] = useState(false);
 
-  function handleSubmitForm() {
+  async function getUserAreas() {
+    const headers = await generateHeaders();
+
+    const { data } = await api.get('/areas', headers);
+
+    setUserAreas(data);
+  }
+
+  async function handleSubmitForm() {
     const data = {
       name,
       description,
@@ -32,6 +44,13 @@ const CreateExpense: React.FC = () => {
     };
 
     console.log(data);
+
+    const headers = await generateHeaders();
+
+    const response = await api.post('/expense', data, headers);
+    if (!response) {
+      console.log('Error');
+    }
   }
 
   useEffect(() => {
@@ -42,7 +61,9 @@ const CreateExpense: React.FC = () => {
     }
   }, [name, description, value, type, area]);
 
-  // TODO: Parse value to integer before submit
+  useEffect(() => {
+    getUserAreas();
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
@@ -86,7 +107,7 @@ const CreateExpense: React.FC = () => {
           style={styles.input}
         />
         <DropdownInput
-          data={['Job', 'Food', 'Stuff']}
+          data={userAreas}
           placeholder="Area"
           setSelected={setArea}
           value={area}
