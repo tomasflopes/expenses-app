@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, TextInput, View } from 'react-native';
+import IAlert from 'src/types/IAlert';
 
+import CustomAlert from '../../components/CustomAlert';
 import DropdownInput from '../../components/DropdownInput';
-import SwitchableButton from '../../components/SwitchableButton';
 import Input from '../../components/Input';
+import SwitchableButton from '../../components/SwitchableButton';
 
 import api from '../../services/api';
 import generateHeaders from '../../utils/generateAuthHeader';
@@ -14,6 +16,8 @@ const CreateExpense: React.FC = () => {
   const input1Ref = useRef<TextInput>(null);
   const input2Ref = useRef<TextInput>(null);
   const input3Ref = useRef<TextInput>(null);
+
+  const [alertType, setAlertType] = useState<IAlert>('');
 
   const [userAreas, setUserAreas] = useState([]);
 
@@ -49,7 +53,7 @@ const CreateExpense: React.FC = () => {
 
     const response = await api.post('/expense', data, headers);
     if (!response) {
-      console.log('Error');
+      setAlertType('error');
     }
   }
 
@@ -125,6 +129,8 @@ const CreateExpense: React.FC = () => {
       >
         save
       </SwitchableButton>
+
+      <CustomAlert props={{ type: alertType }} />
     </ScrollView>
   );
 };

@@ -14,14 +14,10 @@ import SwitchableButton from '../../components/SwitchableButton';
 import api from '../../services/api';
 import useOpenKeyboard from '../../hooks/useOpenKeyboard';
 import generateHeaders from '../../utils/generateAuthHeader';
+import IAlert from '../../types/IAlert';
 
 import theme from '../../styles';
 import styles from './styles';
-
-interface AlertProps {
-  type: 'success' | 'warning' | 'undo' | 'error' | '' | undefined;
-  customMessage?: string;
-}
 
 const Profile: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -42,7 +38,7 @@ const Profile: React.FC = () => {
   const [editing, setEditing] = useState(false);
   const [areaEdited, setAreaEdited] = useState(false);
 
-  const [alertType, setAlertType] = useState<AlertProps>({
+  const [alertType, setAlertType] = useState<IAlert>({
     type: ''
   });
 
