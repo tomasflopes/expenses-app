@@ -38,7 +38,7 @@ interface Props {
     type: keyof typeof messages | undefined | '';
     customMessage?: string;
   };
-  undoFunction: () => void;
+  undoFunction?: () => void;
 }
 const CustomAlert: React.FC<Props> = ({ props, undoFunction }) => {
   const [isVisible, setIsVisible] = useState(false);

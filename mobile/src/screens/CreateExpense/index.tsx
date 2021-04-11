@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, TextInput, View } from 'react-native';
-import IAlert from 'src/types/IAlert';
+
+import { useNavigation } from '@react-navigation/native';
 
 import CustomAlert from '../../components/CustomAlert';
 import DropdownInput from '../../components/DropdownInput';
@@ -8,6 +9,7 @@ import Input from '../../components/Input';
 import SwitchableButton from '../../components/SwitchableButton';
 
 import api from '../../services/api';
+import IAlert from '../../types/IAlert';
 import generateHeaders from '../../utils/generateAuthHeader';
 
 import styles from './styles';
@@ -17,7 +19,7 @@ const CreateExpense: React.FC = () => {
   const input2Ref = useRef<TextInput>(null);
   const input3Ref = useRef<TextInput>(null);
 
-  const [alertType, setAlertType] = useState<IAlert>('');
+  const [alertType, setAlertType] = useState<IAlert>({ type: '' });
 
   const [userAreas, setUserAreas] = useState([]);
 
@@ -30,10 +32,18 @@ const CreateExpense: React.FC = () => {
 
   const [buttonEnabled, setButtonEnabled] = useState(false);
 
+  const navigation = useNavigation();
+
   async function getUserAreas() {
     const headers = await generateHeaders();
 
     const { data } = await api.get('/areas', headers);
+
+    if (!data)
+      setAlertType({
+        type: 'error',
+        customMessage: 'An error occurred adding your expense.'
+      });
 
     setUserAreas(data);
   }
@@ -52,9 +62,14 @@ const CreateExpense: React.FC = () => {
     const headers = await generateHeaders();
 
     const response = await api.post('/expense', data, headers);
-    if (!response) {
-      setAlertType('error');
-    }
+
+    if (!response)
+      setAlertType({
+        type: 'error',
+        customMessage: 'An error occurred adding your expense.'
+      });
+
+    navigation.navigate('Home');
   }
 
   useEffect(() => {
@@ -130,7 +145,7 @@ const CreateExpense: React.FC = () => {
         save
       </SwitchableButton>
 
-      <CustomAlert props={{ type: alertType }} />
+      <CustomAlert props={alertType} />
     </ScrollView>
   );
 };
