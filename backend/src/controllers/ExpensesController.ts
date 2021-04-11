@@ -9,12 +9,18 @@ import DecodeJWTToken from '../utils/DecodeJWTToken';
 export default {
   async index(request: Request, response: Response) {
     const id = await DecodeJWTToken(request);
+    
+    const { page } = request.query;
+
+    const nOfPage = Number(page) || 0;
+
+    const expensesPerPage = 3;
 
     const expenses = await Expense.find();
 
     const userExpenses = expenses.filter(expense => expense.user._id == id);
 
-    return response.json(userExpenses);
+    return response.json(userExpenses.slice(0, nOfPage * expensesPerPage + expensesPerPage));
   },
 
   async show(request: Request, response: Response) {
