@@ -12,18 +12,23 @@ const styles = StyleSheet.create({
   },
 
   expenseTitle: {
+    flex: 1,
     color: theme.colors.textHeaders,
     fontSize: theme.units.fontSize.md,
     fontFamily: theme.fonts.Archivo.regular
   },
 
   expenseDate: {
+    flex: 1,
+    textAlign: 'center',
     fontFamily: theme.fonts.Archivo.regular,
     color: theme.colors.secondaryDark,
     fontSize: theme.units.fontSize.xsm
   },
 
   incomeAmount: {
+    textAlign: 'right',
+    flex: 1,
     fontFamily: theme.fonts.Poppins.bold,
     color: theme.colors.confirm,
     fontSize: theme.units.fontSize.md

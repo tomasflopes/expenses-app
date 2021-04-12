@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ImageBackground,
   ScrollView,
@@ -6,17 +6,23 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import Animated from 'react-native-reanimated';
 
-import { Feather, Foundation } from '@expo/vector-icons';
+import Animated from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
+import { Feather, Foundation } from '@expo/vector-icons';
 
 import Expense from '../../components/Expense';
+import generateHeaders from '../../utils/generateAuthHeader';
+import IExpense from '../../types/IExpense';
+import api from '../../services/api';
+
 import styles from './styles';
 
 const Home: React.FC = () => {
   const [hidden, setHidden] = useState(true);
   const [avatarFocused, setAvatarFocused] = useState(false);
+
+  const [userExpenses, setUserExpenses] = useState<IExpense[]>([]);
 
   const navigation = useNavigation();
 
@@ -36,7 +42,24 @@ const Home: React.FC = () => {
     navigation.navigate('CreateExpense');
   }
 
-  const opacity = hidden ? 0 : 1;
+  async function getUserExpenses() {
+    const headers = await generateHeaders();
+
+    const { data } = await api.get('/expense', headers);
+
+    if (!data) {
+      alert('Raia'); //TODO: Implement custom alert
+      return;
+    }
+
+    setUserExpenses(data.expenses);
+  }
+
+  useEffect(() => {
+    getUserExpenses();
+  }, []);
+
+  const opacity = hidden ? 0 : 1; // TODO: Animate this value
 
   return (
     <View style={styles.container}>
@@ -102,10 +125,14 @@ const Home: React.FC = () => {
       <ScrollView style={styles.mainContainer}>
         <Text style={styles.header}>your last expenses</Text>
 
-        <Expense name="Salary" date="20/10/2020" amount={800.8} />
-        <Expense name="Salary" date="20/10/2020" amount={-500.8} />
-        <Expense name="Salary" date="20/10/2020" amount={800} />
-        <Expense name="Salary" date="20/10/2020" amount={800.8} />
+        {userExpenses.map(expense => (
+          <Expense
+            key={expense._id}
+            name={expense.name}
+            date={expense.date}
+            amount={expense.value}
+          />
+        ))}
 
         <TouchableOpacity style={styles.moreButton}>
           <Text style={styles.moreButtonText}>+ More</Text>

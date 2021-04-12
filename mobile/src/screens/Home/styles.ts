@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     height: theme.constants.AVATAR_WIDTH,
     width: theme.constants.AVATAR_WIDTH
   },
+
   avatarOverlay: {
     width: theme.constants.AVATAR_WIDTH,
     height: theme.constants.AVATAR_WIDTH,
