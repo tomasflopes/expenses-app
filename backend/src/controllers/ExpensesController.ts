@@ -6,10 +6,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 import DecodeJWTToken from '../utils/DecodeJWTToken';
 
+function sanitizeDate(date: Date) {
+  return date.toLocaleDateString('pt-PT');
+}
+
 export default {
   async index(request: Request, response: Response) {
     const id = await DecodeJWTToken(request);
-    
+
     const { page } = request.query;
 
     const nOfPage = Number(page) || 0;
@@ -20,7 +24,28 @@ export default {
 
     const userExpenses = expenses.filter(expense => expense.user._id == id);
 
-    return response.json(userExpenses.slice(0, nOfPage * expensesPerPage + expensesPerPage));
+    const sanitizedUserExpenses = userExpenses.map(expense => {
+      const sanitizedExpense = {
+        //? Spread operator doesn't work in this context
+        _id: expense._id,
+        name: expense.name,
+        description: expense.description,
+        value: expense.value,
+        type: expense.type,
+        area: expense.area,
+        user: expense.user,
+        date: sanitizeDate(expense.date)
+      };
+
+      return sanitizedExpense;
+    });
+
+    return response.json(
+      sanitizedUserExpenses.slice(
+        0,
+        nOfPage * expensesPerPage + expensesPerPage
+      )
+    );
   },
 
   async show(request: Request, response: Response) {
@@ -63,7 +88,8 @@ export default {
         description,
         type,
         value,
-        user
+        user,
+        date: new Date()
       });
 
       return response.status(201).json(newExpense);
