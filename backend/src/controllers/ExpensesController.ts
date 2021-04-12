@@ -18,7 +18,7 @@ export default {
 
     const nOfPage = Number(page) || 0;
 
-    const expensesPerPage = 3;
+    const expensesPerPage = 5;
 
     const expenses = await Expense.find();
 
@@ -40,12 +40,18 @@ export default {
       return sanitizedExpense;
     });
 
-    return response.json(
-      sanitizedUserExpenses.slice(
-        0,
-        nOfPage * expensesPerPage + expensesPerPage
-      )
+    const nOfDisplayedExpenses = nOfPage * expensesPerPage + expensesPerPage;
+
+    const pageUserExpenses = sanitizedUserExpenses.slice(
+      0,
+      nOfDisplayedExpenses
     );
+
+    return response.json({
+      expenses: pageUserExpenses,
+      totalExpenses: userExpenses.length,
+      nOfDisplayedExpenses: pageUserExpenses.length
+    });
   },
 
   async show(request: Request, response: Response) {
