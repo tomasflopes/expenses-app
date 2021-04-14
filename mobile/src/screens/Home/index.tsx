@@ -34,12 +34,16 @@ const Home: React.FC = () => {
     setAvatarFocused(state => !state);
   }
 
-  function navigateToProfile() {
+  function handleProfileNavigation() {
     navigation.navigate('Profile');
   }
 
   function handleAddExpense() {
     navigation.navigate('CreateExpense');
+  }
+
+  function handleExpandExpensesClick() {
+    navigation.navigate('ListExpenses');
   }
 
   async function getUserExpenses() {
@@ -112,7 +116,7 @@ const Home: React.FC = () => {
               <View style={styles.avatarOverlay}>
                 <TouchableOpacity
                   style={styles.viewProfileTextButton}
-                  onPress={navigateToProfile}
+                  onPress={handleProfileNavigation}
                 >
                   <Text style={styles.viewProfileText}>View Profile</Text>
                 </TouchableOpacity>
@@ -131,10 +135,14 @@ const Home: React.FC = () => {
             name={expense.name}
             date={expense.date}
             amount={expense.value}
+            style={styles.expense}
           />
         ))}
 
-        <TouchableOpacity style={styles.moreButton}>
+        <TouchableOpacity
+          style={styles.moreButton}
+          onPress={handleExpandExpensesClick}
+        >
           <Text style={styles.moreButtonText}>+ More</Text>
         </TouchableOpacity>
 

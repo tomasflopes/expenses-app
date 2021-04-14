@@ -163,6 +163,10 @@ const styles = StyleSheet.create({
     marginBottom: theme.units.margin.md
   },
 
+  expense: {
+    marginBottom: theme.units.margin.sm
+  },
+
   buttonsContainer: {
     justifyContent: 'space-between'
   },

@@ -1,17 +1,18 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+import { View, Text, StyleProp, ViewStyle } from 'react-native';
 import styles from './styles';
 
 interface Props {
   name: string;
   date: string;
   amount: number;
+  style?: StyleProp<ViewStyle>;
 }
 
-const Expense: React.FC<Props> = ({ name, date, amount }) => {
+const Expense: React.FC<Props> = ({ name, date, amount, style }) => {
   return (
-    <View style={styles.container}>
+    <View style={[style, styles.container]}>
       <Text style={styles.expenseTitle}>{name}</Text>
       <Text style={styles.expenseDate}>{date}</Text>
       {amount > 0 ? (
