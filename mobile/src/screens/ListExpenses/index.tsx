@@ -35,11 +35,11 @@ const ListExpenses: React.FC = () => {
         <Text style={styles.title}>Expenses Details</Text>
 
         {userExpenses.map(expense => (
-          <View style={styles.expenseContainer}>
+          <View key={expense._id} style={styles.expenseContainer}>
             <Expense
-              key={expense._id}
               name={expense.name}
               date={expense.date}
+              type={expense.type}
               amount={expense.value}
             />
             <View style={styles.expandDetailsContainer}>

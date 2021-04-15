@@ -37,9 +37,13 @@ const DropdownInput: React.FC<Props> = ({
     duration: configs.dropdownAnimationTime / 2
   });
 
+  const HEIGHT_PER_ITEM = 55;
+  const ANIMATION_HEIGHT_THRESHOLD = 20;
+  const maxHeight = data.length * HEIGHT_PER_ITEM;
+
   const height = interpolate(isContainerVisible, {
     inputRange: [0, 0.5, 1],
-    outputRange: [0, 130, 110]
+    outputRange: [0, maxHeight + ANIMATION_HEIGHT_THRESHOLD, maxHeight]
   });
 
   const opacity = interpolate(opacityTransition, {
@@ -59,7 +63,7 @@ const DropdownInput: React.FC<Props> = ({
         <Text style={styles.placeholder}>{value || placeholder}</Text>
         <Icon name="chevron-down" style={styles.icon} />
       </TouchableOpacity>
-      <Animated.ScrollView
+      <Animated.View
         style={[style, styles.dropdownContainer, { height, opacity }]}
       >
         {data.map(item => (
@@ -71,7 +75,7 @@ const DropdownInput: React.FC<Props> = ({
             <Text style={styles.dropdownItem}>{item}</Text>
           </TouchableOpacity>
         ))}
-      </Animated.ScrollView>
+      </Animated.View>
     </>
   );
 };

@@ -133,6 +133,7 @@ const Home: React.FC = () => {
           <Expense
             key={expense._id}
             name={expense.name}
+            type={expense.type}
             date={expense.date}
             amount={expense.value}
             style={styles.expense}

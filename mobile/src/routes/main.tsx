@@ -33,7 +33,7 @@ const MainRoutes = () => {
         component={ListExpensesScreen}
         options={{
           headerShown: true,
-          header: () => <Header confirmMessage title="Create Expense" />
+          header: () => <Header title="Expense Details" />
         }}
       />
     </Stack.Navigator>

@@ -25,18 +25,19 @@ const styles = StyleSheet.create({
     fontSize: theme.units.fontSize.xsm
   },
 
-  incomeAmount: {
-    textAlign: 'right',
+  amount: {
     flex: 1,
+    textAlign: 'right',
     fontFamily: theme.fonts.Poppins.bold,
-    color: theme.colors.confirm,
     fontSize: theme.units.fontSize.md
   },
 
-  expenseAmount: {
-    fontFamily: theme.fonts.Poppins.bold,
-    color: theme.colors.cancel,
-    fontSize: theme.units.fontSize.md
+  income: {
+    color: theme.colors.confirm
+  },
+
+  expense: {
+    color: theme.colors.cancel
   }
 });
 
