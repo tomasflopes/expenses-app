@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.Poppins.bold,
     fontSize: theme.units.fontSize.big,
 
-    paddingBottom: theme.units.margin.sm,
+    marginBottom: theme.units.margin.sm,
 
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.secondary,

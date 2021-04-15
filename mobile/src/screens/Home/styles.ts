@@ -143,6 +143,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.units.margin.lg
   },
 
+  expensesContainer: {
+    width: '100%'
+  },
+
   header: {
     textTransform: 'capitalize',
     color: theme.colors.textHeaders,

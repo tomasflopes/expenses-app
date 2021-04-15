@@ -37,13 +37,11 @@ const DropdownInput: React.FC<Props> = ({
     duration: configs.dropdownAnimationTime / 2
   });
 
-  const HEIGHT_PER_ITEM = 55;
-  const ANIMATION_HEIGHT_THRESHOLD = 20;
-  const maxHeight = data.length * HEIGHT_PER_ITEM;
+  const maxHeight = data.length * configs.HEIGHT_PER_ITEM;
 
   const height = interpolate(isContainerVisible, {
     inputRange: [0, 0.5, 1],
-    outputRange: [0, maxHeight + ANIMATION_HEIGHT_THRESHOLD, maxHeight]
+    outputRange: [0, maxHeight + configs.ANIMATION_HEIGHT_THRESHOLD, maxHeight]
   });
 
   const opacity = interpolate(opacityTransition, {

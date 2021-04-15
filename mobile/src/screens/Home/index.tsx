@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import Animated from 'react-native-reanimated';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { Feather, Foundation } from '@expo/vector-icons';
 
 import Expense from '../../components/Expense';
@@ -25,6 +25,7 @@ const Home: React.FC = () => {
   const [userExpenses, setUserExpenses] = useState<IExpense[]>([]);
 
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   function toggleHidden() {
     setHidden(state => !state);
@@ -49,7 +50,7 @@ const Home: React.FC = () => {
   async function getUserExpenses() {
     const headers = await generateHeaders();
 
-    const { data } = await api.get('/expense', headers);
+    const { data } = await api.get('/expense?perPage=5', headers);
 
     if (!data) {
       alert('Raia'); //TODO: Implement custom alert
@@ -61,7 +62,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     getUserExpenses();
-  }, []);
+  }, [isFocused]);
 
   const opacity = hidden ? 0 : 1; // TODO: Animate this value
 

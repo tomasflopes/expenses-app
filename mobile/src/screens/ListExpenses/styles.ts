@@ -51,6 +51,21 @@ const styles = StyleSheet.create({
     color: theme.colors.black,
 
     fontFamily: theme.fonts.Poppins.light
+  },
+
+  totalExpenses: {
+    color: theme.colors.secondaryDark,
+    fontFamily: theme.fonts.Archivo.regular,
+
+    fontSize: theme.units.fontSize.sm
+  },
+
+  footerSeparator: {
+    width: '100%',
+    borderTopWidth: 1,
+    paddingVertical: theme.units.margin.md,
+    marginBottom: theme.units.margin.xsm,
+    borderColor: theme.colors.secondary
   }
 });
 
