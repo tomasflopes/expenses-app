@@ -20,11 +20,15 @@ export default {
 
     const expensesPerPage = 5;
 
-    const expenses = await Expense.find();
+    const nOfDisplayedExpenses = nOfPage * expensesPerPage + expensesPerPage;
 
-    const userExpenses = expenses.filter(expense => expense.user._id == id);
+    if (!id) return response.status(400).json({ error: 'User is undefined' });
 
-    const sanitizedUserExpenses = userExpenses.map(expense => {
+    const expenses = await Expense.find({ 'user._id': id })
+      .limit(nOfDisplayedExpenses)
+      .sort({ date: -1 });
+
+    const sanitizedUserExpenses = expenses.map(expense => {
       const sanitizedExpense = {
         //? Spread operator doesn't work in this context
         _id: expense._id,
@@ -40,17 +44,9 @@ export default {
       return sanitizedExpense;
     });
 
-    const nOfDisplayedExpenses = nOfPage * expensesPerPage + expensesPerPage;
-
-    const pageUserExpenses = sanitizedUserExpenses.slice(
-      0,
-      nOfDisplayedExpenses
-    );
-
     return response.json({
-      expenses: pageUserExpenses,
-      totalExpenses: userExpenses.length,
-      nOfDisplayedExpenses: pageUserExpenses.length
+      expenses: sanitizedUserExpenses,
+      nOfDisplayedExpenses: sanitizedUserExpenses.length
     });
   },
 
