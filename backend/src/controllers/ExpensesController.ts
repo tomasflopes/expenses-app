@@ -14,18 +14,14 @@ export default {
   async index(request: Request, response: Response) {
     const id = await DecodeJWTToken(request);
 
-    const { page } = request.query;
+    const { page, perPage } = request.query;
 
     const nOfPage = Number(page) || 0;
 
-    const expensesPerPage = 5;
-
-    const nOfDisplayedExpenses = nOfPage * expensesPerPage + expensesPerPage;
-
-    if (!id) return response.status(400).json({ error: 'User is undefined' });
+    const expensesPerPage = Number(perPage) || 10;
 
     const expenses = await Expense.find({ 'user._id': id })
-      .limit(nOfDisplayedExpenses)
+      .limit(nOfPage * expensesPerPage + expensesPerPage)
       .sort({ date: -1 });
 
     const sanitizedUserExpenses = expenses.map(expense => {
@@ -46,7 +42,7 @@ export default {
 
     return response.json({
       expenses: sanitizedUserExpenses,
-      nOfDisplayedExpenses: sanitizedUserExpenses.length
+      nOfExpenses: sanitizedUserExpenses.length
     });
   },
 
