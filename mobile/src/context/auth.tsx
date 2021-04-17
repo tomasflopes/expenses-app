@@ -15,7 +15,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     setSigned(true);
   }
 
-  function SignOut() {
+  async function SignOut() {
+    await AsyncStorage.removeItem('jwt');
     setSigned(false);
   }
 

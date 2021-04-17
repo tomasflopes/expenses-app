@@ -22,7 +22,7 @@ const Header: React.FC<Props> = ({ confirmMessage, title }) => {
     if (confirmMessage) {
       Alert.alert(
         'Go Back?',
-        'By going back you will loose all of your changes!',
+        'By going back you will lose all of your changes!',
         [
           {
             text: 'Cancel',

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 
 import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
@@ -12,12 +12,14 @@ import FinanceAreasInputs from '../../components/FinanceAreasInputs';
 import SwitchableButton from '../../components/SwitchableButton';
 
 import api from '../../services/api';
+import IAlert from '../../types/IAlert';
 import useOpenKeyboard from '../../hooks/useOpenKeyboard';
 import generateHeaders from '../../utils/generateAuthHeader';
-import IAlert from '../../types/IAlert';
+import AuthContext from '../../context/auth';
 
 import theme from '../../styles';
 import styles from './styles';
+import { Feather } from '@expo/vector-icons';
 
 const Profile: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -41,6 +43,8 @@ const Profile: React.FC = () => {
   const [alertType, setAlertType] = useState<IAlert>({
     type: ''
   });
+
+  const { SignOut } = useContext(AuthContext);
 
   const keyboardOpen = useOpenKeyboard();
 
@@ -151,6 +155,21 @@ const Profile: React.FC = () => {
     setAreasHistory(undoAreasHistoryArray);
   }
 
+  function handleLogout() {
+    Alert.alert(
+      'Logout...',
+      'Are you sure you want to logout? We hope you come back!',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel'
+        },
+        { text: 'OK', onPress: () => SignOut() }
+      ],
+      { cancelable: true }
+    );
+  }
+
   useEffect(() => {
     getUserInfo();
   }, []);
@@ -180,6 +199,13 @@ const Profile: React.FC = () => {
       >
         {!keyboardOpen && (
           <View style={styles.scrollContent}>
+            <TouchableOpacity
+              style={styles.logoutContainer}
+              onPress={handleLogout}
+            >
+              <Feather name="log-out" style={styles.logoutIcon} />
+              <Text style={styles.logoutText}>Logout</Text>
+            </TouchableOpacity>
             <ShimmerPlaceholder visible={isDataFetched} style={styles.avatar}>
               <Animated.Image
                 source={{ uri: 'http://www.github.com/tomas050302.png' }}

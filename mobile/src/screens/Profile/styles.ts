@@ -78,6 +78,25 @@ const styles = StyleSheet.create({
     marginTop: theme.units.margin.lg
   },
 
+  logoutContainer: {
+    alignSelf: 'flex-end',
+    flexDirection: 'row',
+
+    marginRight: theme.units.margin.sm,
+    alignItems: 'center'
+  },
+
+  logoutIcon: {
+    fontSize: theme.units.fontSize.input,
+    color: theme.colors.cancel,
+    marginRight: theme.units.margin.xsm
+  },
+
+  logoutText: {
+    fontSize: theme.units.fontSize.input,
+    color: theme.colors.cancel
+  },
+
   spacer: {
     height: theme.units.margin.lg
   },
