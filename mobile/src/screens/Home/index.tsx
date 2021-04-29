@@ -13,7 +13,9 @@ import { Feather, Foundation } from '@expo/vector-icons';
 
 import Expense from '../../components/Expense';
 import generateHeaders from '../../utils/generateAuthHeader';
+import getAgeFromDate from '../../utils/getAgeFromDate';
 import IExpense from '../../types/IExpense';
+import IUser from '../../types/IUser';
 import api from '../../services/api';
 
 import styles from './styles';
@@ -22,6 +24,8 @@ const Home: React.FC = () => {
   const [hidden, setHidden] = useState(true);
   const [avatarFocused, setAvatarFocused] = useState(false);
 
+  const [userInformation, setUserInformation] = useState<IUser>();
+  const [userBalance, setUserBalance] = useState(0.0);
   const [userExpenses, setUserExpenses] = useState<IExpense[]>([]);
 
   const navigation = useNavigation();
@@ -60,6 +64,30 @@ const Home: React.FC = () => {
     setUserExpenses(data.expenses);
   }
 
+  async function getUserInformation() {
+    const headers = await generateHeaders();
+
+    const { data } = await api.get('/user', headers);
+
+    setUserInformation(data);
+  }
+
+  async function getUserBalance() {
+    const headers = await generateHeaders();
+
+    const { data } = await api.get('/balance', headers);
+
+    setUserBalance(data);
+  }
+
+  useEffect(() => {
+    getUserInformation();
+  }, []);
+
+  useEffect(() => {
+    getUserBalance();
+  }, []);
+
   useEffect(() => {
     getUserExpenses();
   }, [isFocused]);
@@ -71,11 +99,28 @@ const Home: React.FC = () => {
       <View style={styles.deadZone}>
         <View style={styles.profileInfoContainer}>
           <View style={styles.personalInfoRow}>
-            <Text style={styles.informationText}>Tomás Lopes</Text>
-            <View style={styles.dot} />
-            <Text style={styles.informationText}>18 years</Text>
-            <View style={styles.dot} />
-            <Text style={styles.informationText}>Student</Text>
+            <Text style={styles.informationText}>
+              {userInformation?.firstName} {userInformation?.lastName}
+            </Text>
+            {userInformation?.birth && (
+              <>
+                <View style={styles.dot} />
+
+                <Text style={styles.informationText}>
+                  {getAgeFromDate(userInformation?.birth)} years
+                </Text>
+              </>
+            )}
+
+            {userInformation?.occupation && (
+              <>
+                <View style={styles.dot} />
+
+                <Text style={styles.informationText}>
+                  {userInformation?.occupation}
+                </Text>
+              </>
+            )}
           </View>
 
           {hidden ? (
@@ -89,10 +134,10 @@ const Home: React.FC = () => {
             <View style={styles.balanceRow}>
               <View style={styles.balanceTextContainer}>
                 <Animated.Text style={[styles.balanceText, { opacity }]}>
-                  1276,50
+                  {userBalance}
                 </Animated.Text>
                 <Animated.Text style={[styles.currencyText, { opacity }]}>
-                  EUR
+                  {userInformation?.financeSettings.defaultCurrency}
                 </Animated.Text>
               </View>
               <TouchableOpacity onPress={toggleHidden}>

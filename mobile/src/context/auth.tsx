@@ -16,7 +16,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   async function SignOut() {
-    await AsyncStorage.removeItem('jwt');
+    await AsyncStorage.clear(); // Clears as the first time
+    //await AsyncStorage.removeItem('jwt');
     setSigned(false);
   }
 
