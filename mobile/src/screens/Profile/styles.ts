@@ -111,6 +111,12 @@ const styles = StyleSheet.create({
     borderRadius: theme.units.borderRadius.sm
   },
 
+  placeholder: {
+    fontFamily: theme.fonts.Archivo.regular,
+    fontSize: theme.units.fontSize.input,
+    color: theme.colors.black
+  },
+
   disabledPlaceholder: {
     fontFamily: theme.fonts.Archivo.regular,
     fontSize: theme.units.fontSize.input,
@@ -125,7 +131,33 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.disabledInputBackground,
 
     paddingVertical: theme.units.margin.sm,
-    paddingHorizontal: theme.units.margin.md
+    paddingHorizontal: theme.units.margin.md,
+
+    marginBottom: theme.units.margin.sm
+  },
+
+  label: {
+    fontFamily: theme.fonts.Archivo.regular,
+    fontSize: theme.units.fontSize.md,
+    color: theme.colors.secondaryDark,
+
+    marginBottom: theme.units.margin.xsm
+  },
+
+  input: {
+    fontFamily: theme.fonts.Archivo.regular,
+    fontSize: theme.units.fontSize.input,
+
+    backgroundColor: theme.colors.secondaryLight,
+
+    borderWidth: 1,
+    borderColor: theme.colors.secondary,
+    borderRadius: theme.units.borderRadius.sm,
+
+    paddingVertical: theme.units.margin.sm,
+    paddingHorizontal: theme.units.margin.md,
+
+    marginBottom: theme.units.margin.sm
   },
 
   button: {

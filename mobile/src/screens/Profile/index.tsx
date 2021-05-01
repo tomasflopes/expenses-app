@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, Alert } from 'react-native';
 
 import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import CustomAlert from '../../components/CustomAlert';
 import EditableInput from '../../components/EditableInput';
@@ -11,7 +12,6 @@ import Header from '../../components/Header';
 import FinanceAreasInputs from '../../components/FinanceAreasInputs';
 import SwitchableButton from '../../components/SwitchableButton';
 import DropdownInput from '../../components/DropdownInput';
-import DatePicker from '../../components/DatePicker';
 
 import api from '../../services/api';
 import IAlert from '../../types/IAlert';
@@ -27,7 +27,7 @@ const Profile: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [occupation, setOccupation] = useState<string | undefined>('');
-  const [birth, setBirth] = useState<string | undefined>('');
+  const [birth, setBirth] = useState(new Date());
   const [phone, setPhone] = useState<string | undefined>('');
   const [defaultCurrency, setDefaultCurrency] = useState<string | undefined>(
     ''
@@ -41,6 +41,7 @@ const Profile: React.FC = () => {
 
   const [editing, setEditing] = useState(false);
   const [areaEdited, setAreaEdited] = useState(false);
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
   const [alertType, setAlertType] = useState<IAlert>({
     type: ''
@@ -172,6 +173,20 @@ const Profile: React.FC = () => {
     );
   }
 
+  function handleDisplayDatePicker() {
+    setIsDatePickerVisible(true);
+  }
+
+  function handleDateChange(_: Event, selectedDate: Date | undefined) {
+    setBirth(selectedDate || new Date());
+    setIsDatePickerVisible(false);
+  }
+
+  useEffect(() => {
+    console.log(birth);
+    setIsDatePickerVisible(false);
+  }, [birth]);
+
   useEffect(() => {
     getUserInfo();
   }, []);
@@ -275,15 +290,29 @@ const Profile: React.FC = () => {
             value={occupation}
           />
 
-          <EditableInput
-            editable={editing}
-            isDataFetched={isDataFetched}
-            placeholder="Birth"
-            onChangeText={setBirth}
-            value={birth}
-          />
+          <Text style={styles.label}>Birth</Text>
+          <TouchableOpacity
+            style={editing ? styles.input : styles.disabledInputContainer}
+            onPress={editing ? handleDisplayDatePicker : () => {}} //? && operator doesn't work in this context
+          >
+            <Text
+              style={
+                editing ? styles.placeholder : styles.disabledInputPlaceholder
+              }
+            >
+              {birth?.toLocaleDateString('pt_PT') || 'Birth'}
+            </Text>
+          </TouchableOpacity>
 
-          <DatePicker date={birth} setDate={setBirth} />
+          {isDatePickerVisible && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={birth || new Date()}
+              mode="date"
+              display="spinner"
+              onChange={handleDateChange}
+            />
+          )}
 
           <EditableInput
             editable={editing}
@@ -294,6 +323,8 @@ const Profile: React.FC = () => {
           />
 
           <Text style={styles.headerText}>Finance Settings</Text>
+
+          <Text style={styles.label}>Default Currency</Text>
           {editing ? (
             <DropdownInput
               data={['EUR', 'USD', 'KZ', 'GBP', 'COP', 'R$', '¥']}
@@ -311,7 +342,7 @@ const Profile: React.FC = () => {
               </ShimmerPlaceholder>
             </View>
           )}
-          <View style={styles.spacer} />
+
           <FinanceAreasInputs
             addNewArea={handleAddNewArea}
             areas={areas}
