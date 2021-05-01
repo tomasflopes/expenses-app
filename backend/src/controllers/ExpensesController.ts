@@ -20,6 +20,8 @@ export default {
 
     const expensesPerPage = Number(perPage) || 10;
 
+    const nOfExpenses = (await Expense.find({ 'user._id': id })).length;
+
     const expenses = await Expense.find({ 'user._id': id })
       .limit(nOfPage * expensesPerPage + expensesPerPage)
       .sort({ date: -1 });
@@ -42,7 +44,7 @@ export default {
 
     return response.json({
       expenses: sanitizedUserExpenses,
-      nOfExpenses: sanitizedUserExpenses.length
+      nOfExpenses
     });
   },
 
