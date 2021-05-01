@@ -11,7 +11,7 @@ import configs from '../../configs';
 interface Props {
   data: string[];
   placeholder: string;
-  setSelected: React.Dispatch<React.SetStateAction<string>>;
+  setSelected: React.Dispatch<React.SetStateAction<string | undefined>>;
   style?: StyleProp<TextStyle>;
   value?: string;
 }
@@ -57,12 +57,15 @@ const DropdownInput: React.FC<Props> = ({
 
   return (
     <>
-      <TouchableOpacity style={styles.container} onPress={handleOpenDropdown}>
+      <TouchableOpacity
+        style={[styles.container, style]}
+        onPress={handleOpenDropdown}
+      >
         <Text style={styles.placeholder}>{value || placeholder}</Text>
         <Icon name="chevron-down" style={styles.icon} />
       </TouchableOpacity>
       <Animated.View
-        style={[style, styles.dropdownContainer, { height, opacity }]}
+        style={[styles.dropdownContainer, style, { height, opacity }]}
       >
         {data.map(item => (
           <TouchableOpacity

@@ -27,6 +27,7 @@ const Home: React.FC = () => {
   const [userInformation, setUserInformation] = useState<IUser>();
   const [userBalance, setUserBalance] = useState(0.0);
   const [userExpenses, setUserExpenses] = useState<IExpense[]>([]);
+  const [nOfExpenses, setNOfExpenses] = useState(0);
 
   const navigation = useNavigation();
   const isFocused = useIsFocused();
@@ -62,6 +63,7 @@ const Home: React.FC = () => {
     }
 
     setUserExpenses(data.expenses);
+    setNOfExpenses(data.nOfExpenses);
   }
 
   async function getUserInformation() {
@@ -210,7 +212,7 @@ const Home: React.FC = () => {
 
         <View style={styles.totalExpensesContainer}>
           <Text style={styles.totalExpensesText}>
-            Total of 91 expenses registered.
+            Total of {nOfExpenses} expenses registered.
           </Text>
         </View>
       </ScrollView>

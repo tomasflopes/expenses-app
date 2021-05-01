@@ -10,6 +10,8 @@ import EditableInput from '../../components/EditableInput';
 import Header from '../../components/Header';
 import FinanceAreasInputs from '../../components/FinanceAreasInputs';
 import SwitchableButton from '../../components/SwitchableButton';
+import DropdownInput from '../../components/DropdownInput';
+import DatePicker from '../../components/DatePicker';
 
 import api from '../../services/api';
 import IAlert from '../../types/IAlert';
@@ -281,6 +283,8 @@ const Profile: React.FC = () => {
             value={birth}
           />
 
+          <DatePicker date={birth} setDate={setBirth} />
+
           <EditableInput
             editable={editing}
             isDataFetched={isDataFetched}
@@ -290,15 +294,24 @@ const Profile: React.FC = () => {
           />
 
           <Text style={styles.headerText}>Finance Settings</Text>
+          {editing ? (
+            <DropdownInput
+              data={['EUR', 'USD', 'KZ', 'GBP', 'COP', 'R$', '¥']}
+              placeholder="Default Currency"
+              setSelected={setDefaultCurrency}
+              value={defaultCurrency}
+              style={styles.dropdown}
+            />
+          ) : (
+            <View style={styles.disabledInputContainer}>
+              <ShimmerPlaceholder visible={isDataFetched}>
+                <Text style={styles.disabledPlaceholder}>
+                  {defaultCurrency}
+                </Text>
+              </ShimmerPlaceholder>
+            </View>
+          )}
           <View style={styles.spacer} />
-          <EditableInput
-            editable={editing}
-            isDataFetched={isDataFetched}
-            placeholder="Default Currency"
-            onChangeText={setDefaultCurrency}
-            value={defaultCurrency}
-          />
-
           <FinanceAreasInputs
             addNewArea={handleAddNewArea}
             areas={areas}

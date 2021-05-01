@@ -21,7 +21,7 @@ const ListExpenses: React.FC = () => {
   async function getUserExpenses() {
     const headers = await generateHeaders();
     const { data } = await api.get(
-      `/expense?page=${page}&perPage={10}`,
+      `/expense?page=${page}&perPage=${10}`,
       headers
     );
 

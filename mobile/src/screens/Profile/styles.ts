@@ -105,6 +105,29 @@ const styles = StyleSheet.create({
     marginTop: theme.units.margin.sm
   },
 
+  dropdown: {
+    borderWidth: 1,
+    borderColor: theme.colors.secondaryDark,
+    borderRadius: theme.units.borderRadius.sm
+  },
+
+  disabledPlaceholder: {
+    fontFamily: theme.fonts.Archivo.regular,
+    fontSize: theme.units.fontSize.input,
+    color: theme.colors.textBase
+  },
+
+  disabledInputContainer: {
+    borderWidth: 1,
+    borderColor: theme.colors.secondaryDark,
+    borderRadius: theme.units.borderRadius.sm,
+
+    backgroundColor: theme.colors.disabledInputBackground,
+
+    paddingVertical: theme.units.margin.sm,
+    paddingHorizontal: theme.units.margin.md
+  },
+
   button: {
     flex: 1,
     alignItems: 'center',
