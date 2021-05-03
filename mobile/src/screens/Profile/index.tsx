@@ -296,15 +296,13 @@ const Profile: React.FC = () => {
             onPress={editing ? handleDisplayDatePicker : () => {}} //? && operator doesn't work in this context
           >
             <Text
-              style={
-                editing ? styles.placeholder : styles.disabledInputPlaceholder
-              }
+              style={editing ? styles.placeholder : styles.disabledPlaceholder}
             >
               {birth?.toLocaleDateString('pt_PT') || 'Birth'}
             </Text>
           </TouchableOpacity>
 
-          {isDatePickerVisible && (
+          {isDatePickerVisible && ( // TODO: Fix bug where date picker gets displayed in other screens
             <DateTimePicker
               testID="dateTimePicker"
               value={birth || new Date()}

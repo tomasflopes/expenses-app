@@ -65,8 +65,8 @@ export default {
         return response.status(400).json({ Error: 'Email already exists' });
     });
 
-    const salt = await bckrypt.genSaltSync(10);
-    const password_hash = await bckrypt.hashSync(password, salt);
+    const salt = bckrypt.genSaltSync(10);
+    const password_hash = bckrypt.hashSync(password, salt);
 
     try {
       const createdUser = await User.create({
