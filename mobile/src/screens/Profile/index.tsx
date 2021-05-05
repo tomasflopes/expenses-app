@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, SyntheticEvent } from 'react';
 
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, Platform } from 'react-native';
 
 import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
@@ -177,9 +177,13 @@ const Profile: React.FC = () => {
     setIsDatePickerVisible(true);
   }
 
-  function handleDateChange(_: Event, selectedDate: Date | undefined) {
-    setBirth(selectedDate || new Date());
-    setIsDatePickerVisible(false);
+  function handleDateChange(
+    _: SyntheticEvent<Readonly<{ timestamp: number }>, Event>,
+    selectedDate: Date | undefined
+  ) {
+    const currentDate = selectedDate || birth;
+    if (Platform.OS === 'android') setIsDatePickerVisible(false);
+    setBirth(currentDate);
   }
 
   useEffect(() => {
