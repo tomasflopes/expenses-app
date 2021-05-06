@@ -71,7 +71,7 @@ const Profile: React.FC = () => {
     setFirstName(data.firstName);
     setLastName(data.lastName);
     setOccupation(data.occupation);
-    setBirth(data.birth?.toString());
+    setBirth(data.birth);
     setPhone(data.phone);
     setDefaultCurrency(data.financeSettings.defaultCurrency);
 
@@ -187,7 +187,6 @@ const Profile: React.FC = () => {
   }
 
   useEffect(() => {
-    console.log(birth);
     setIsDatePickerVisible(false);
   }, [birth]);
 
@@ -302,7 +301,7 @@ const Profile: React.FC = () => {
             <Text
               style={editing ? styles.placeholder : styles.disabledPlaceholder}
             >
-              {birth?.toLocaleDateString('pt_PT') || 'Birth'}
+              {birth?.toLocaleDateString('pt-PT') || 'Birth'}
             </Text>
           </TouchableOpacity>
 

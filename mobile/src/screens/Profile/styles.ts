@@ -108,7 +108,9 @@ const styles = StyleSheet.create({
   dropdown: {
     borderWidth: 1,
     borderColor: theme.colors.secondaryDark,
-    borderRadius: theme.units.borderRadius.sm
+    borderRadius: theme.units.borderRadius.sm,
+
+    marginBottom: theme.units.margin.xsm
   },
 
   placeholder: {
