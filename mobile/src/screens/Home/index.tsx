@@ -29,6 +29,8 @@ const Home: React.FC = () => {
   const [userExpenses, setUserExpenses] = useState<IExpense[]>([]);
   const [nOfExpenses, setNOfExpenses] = useState(0);
 
+  const [userAge, setUserAge] = useState(0);
+
   const navigation = useNavigation();
   const isFocused = useIsFocused();
 
@@ -87,6 +89,11 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (userInformation?.birth)
+      setUserAge(getAgeFromDate(userInformation.birth));
+  }, [userInformation]);
+
+  useEffect(() => {
     getUserBalance();
   }, []);
 
@@ -108,9 +115,7 @@ const Home: React.FC = () => {
               <>
                 <View style={styles.dot} />
 
-                <Text style={styles.informationText}>
-                  {getAgeFromDate(userInformation?.birth)} years
-                </Text>
+                <Text style={styles.informationText}>{userAge} years</Text>
               </>
             )}
 
